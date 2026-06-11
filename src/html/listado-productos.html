@@ -14,14 +14,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
+    
   </head>
   <body class="bg-secondary-subtle">
+    <base href="../src">
     <header class="mb-4 shadow-sm bg-info-subtle rounded">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container px-4">
-          <a class="navbar-brand h2" href="listado-productos.html">
+          <a class="navbar-brand h2" href="html/index.html">
             <img
-              src="../img/dciccell.png"
+              src="img/dciccell.png"
               alt="imagen logo"
               class="img-fluid"
               style="max-height: 100px"
@@ -40,10 +42,10 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto fs-4">
               <li class="nav-item">
-                <a class="nav-link" href="listado-productos.html">Tienda</a>
+                <a class="nav-link" href="html/listado-productos.html">Tienda</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="perfil-usuario.html">Perfil</a>
+                <a class="nav-link" href="html/perfil-usuario.html">Perfil</a>
               </li>
               <li class="nav-item">
                 <button
@@ -77,7 +79,7 @@
             <div class="row">
               <div class="col-4">
                 <img
-                  src="../img/auriculares-1.jpg"
+                  src="img/auriculares-1.jpg"
                   alt=""
                   class="img-fluid rounded-start"
                 />
@@ -129,7 +131,7 @@
             <div class="row">
               <div class="col-4">
                 <img
-                  src="../img/celular-2.jpg"
+                  src="img/celular-2.jpg"
                   alt=""
                   class="img-fluid rounded-start"
                 />
@@ -181,7 +183,7 @@
             <div class="row">
               <div class="col-4">
                 <img
-                  src="../img/celular-4.jpg"
+                  src="img/celular-4.jpg"
                   class="img-fluid rounded-start"
                   alt=""
                 />
@@ -377,21 +379,20 @@
             </div>
           </div>
         </div>
-        <div class="row px-5 py-4 mx-4 row-gap-4">
+
+        <div class="row px-5 py-4 mx-4 row-gap-4" id="listado-productos">
+
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card shadow-lg">
-              <a href="https://www.google.com"
-                ><img
-                  src="img/celular-1.jpg"
-                  class="card-img-top"
-                  style="height: 250px; object-fit: contain"
-              /></a>
+            <div class="card shadow-lg h-100">
+              <button type="button" class="border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#producto1">
+                <img src="img/celular-1.jpg" class="card-img-top" style="height: 250px; object-fit: contain">
+              </button>
               <div class="card-body">
-                <a
-                  href="https://www.google.com"
-                  class="text-decoration-none link-dark link-opacity-50-hover"
-                  ><h3>Galaxy A26</h3></a
-                >
+                <button type="button" class="border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#producto1">
+                  <h4>
+                    Galaxy A26
+                  </h4>
+                </button>
                 <p>$10.000</p>
                 <a href="" class="btn btn-primary">
                   <svg
@@ -409,10 +410,63 @@
                   Agregar al carrito
                 </a>
               </div>
+              <div class="modal fade" id="producto1" tabindex="-1" aria-labelledby="producto1Label" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12 p-3 ">
+                          <img src="img/celular-1.jpg" class="img-fluid mx-auto d-block">
+                        </div>
+                        <div class="col-md-6 col-sm-12 p-3">
+                          <h3>Galaxy A26</h3>
+                          <h4>$10.000</h4>
+                          <ul>
+                            <li><p>6 cuotas sin interes con banco nacion</p></li>
+                            <li><p>10% de descuento en efectivo</p></li>
+                          </ul>
+                            <button type="button" class="btn btn-primary mt-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path
+                                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+                                />
+                              </svg>
+                                Agregar al carrito
+                            </button>
+                        </div> 
+                        <div class="col-12 p-3 mx-2 border-bottom mb-2">
+                          <h5>Descripcion:</h5>
+                          <p>
+                            El Samsung Galaxy A26 es un excelente celular para el uso cotidiano de su usuario. Es totalmente capaz de soportar
+                            aplicaciones de mensajeria tales como Whatsapp, o aplicaciones varias de redes sociales como Instagram, Facebook o Twitter.
+                          </p>
+                        </div>
+                        <div class="col-12 p-3">
+                          <h5>Componentes</h5>
+                          <ul>
+                            <li>Procesador: Snapdragon algo</li>
+                            <li>Memoria RAM: 5TB</li>
+                          </ul>
+                          <h5>Varios</h5>
+                          <ul>
+                            <li>Pantalla: 6.7 Pulgadas</li>
+                            <li>Taza de refrezco: 120 hz</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
+
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card shadow-lg">
+            <div class="card shadow-lg h-100">
               <a href="https://www.google.com"
                 ><img
                   src="img/celular-2.jpg"
@@ -423,7 +477,7 @@
                 <a
                   href="https://www.google.com"
                   class="text-decoration-none link-dark link-opacity-50-hover"
-                  ><h3>Producto2</h3></a
+                  ><h4>Producto2</h4></a
                 >
                 <p>$10.000</p>
                 <a href="" class="btn btn-primary">
@@ -444,8 +498,9 @@
               </div>
             </div>
           </div>
+
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card shadow-lg">
+            <div class="card shadow-lg h-100">
               <a href="https://www.google.com"
                 ><img
                   src="img/celular-3.jpg"
@@ -456,7 +511,7 @@
                 <a
                   href="https://www.google.com"
                   class="text-decoration-none link-dark link-opacity-50-hover"
-                  ><h3>Redmi 14C</h3></a
+                  ><h4>Redmi 14C</h4></a
                 >
                 <p>$10.000</p>
                 <a href="" class="btn btn-primary">
@@ -477,8 +532,9 @@
               </div>
             </div>
           </div>
+
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card shadow-lg">
+            <div class="card shadow-lg h-100">
               <a href="https://www.google.com"
                 ><img
                   src="img/celular-4.jpg"
@@ -489,7 +545,7 @@
                 <a
                   href="https://www.google.com"
                   class="text-decoration-none link-dark link-opacity-50-hover"
-                  ><h3>Moto G86</h3></a
+                  ><h4>Moto G86</h4></a
                 >
                 <p>$10.000</p>
                 <a href="" class="btn btn-primary">
@@ -510,8 +566,9 @@
               </div>
             </div>
           </div>
+
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card shadow-lg">
+            <div class="card shadow-lg h-100">
               <a href="https://www.google.com"
                 ><img
                   src="img/auriculares-1.jpg"
@@ -522,7 +579,7 @@
                 <a
                   href="https://www.google.com"
                   class="text-decoration-none link-dark link-opacity-50-hover"
-                  ><h3>Auriculares stock</h3></a
+                  ><h4>Auriculares stock</h4></a
                 >
                 <p>$10.000</p>
                 <a href="" class="btn btn-primary">
@@ -543,8 +600,9 @@
               </div>
             </div>
           </div>
+
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card shadow-lg">
+            <div class="card shadow-lg h-100">
               <a href="https://www.google.com"
                 ><img
                   src="img\auriculares-2.jpg"
@@ -555,7 +613,7 @@
                 <a
                   href="https://www.google.com"
                   class="text-decoration-none link-dark link-opacity-50-hover"
-                  ><h3>Auriculares Samsung</h3></a
+                  ><h4>Auriculares Samsung</h4></a
                 >
                 <p>$10.000</p>
                 <a href="" class="btn btn-primary">
@@ -576,8 +634,9 @@
               </div>
             </div>
           </div>
+
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card shadow-lg">
+            <div class="card shadow-lg h-100">
               <a href="https://www.google.com"
                 ><img
                   src="img/auriculares-3.jpg"
@@ -588,7 +647,7 @@
                 <a
                   href="https://www.google.com"
                   class="text-decoration-none link-dark link-opacity-50-hover"
-                  ><h3>Auriculares Soul</h3></a
+                  ><h4>Auriculares Soul</h4></a
                 >
                 <p>$10.000</p>
                 <a href="" class="btn btn-primary">
@@ -609,8 +668,9 @@
               </div>
             </div>
           </div>
+
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card shadow-lg">
+            <div class="card shadow-lg h-100">
               <a href="https://www.google.com"
                 ><img
                   src="img/cargador-1.jpg"
@@ -621,7 +681,7 @@
                 <a
                   href="https://www.google.com"
                   class="text-decoration-none link-dark link-opacity-50-hover"
-                  ><h3>Cargador tipo C</h3></a
+                  ><h4>Cargador tipo C</h4></a
                 >
                 <p>$10.000</p>
                 <a href="" class="btn btn-primary">
@@ -642,9 +702,11 @@
               </div>
             </div>
           </div>
+
         </div>
       </section>
     </main>
+
     <footer id="footer" class="bg-dark text-white py-4 mt-auto">
       <div class="container">
         <div class="row text-center text-md-start">
@@ -657,13 +719,13 @@
             <ul class="list-unstyled">
               <li>
                 <a
-                  href="tienda.html#inicio"
+                  href="html/index.html"
                   class="text-white text-decoration-none"
                   >Inicio</a
                 >
               </li>
               <li>
-                <a href="speakers.html" class="text-white text-decoration-none"
+                <a href="/html/listado-productos.html" class="text-white text-decoration-none"
                   >Tienda</a
                 >
               </li>

@@ -1,0 +1,58 @@
+Cuerpo del MODAL:
+
+	<div class="modal fade" id="(ID DEL MODAL)" tabindex="-1" aria-labelledby="(ID DEL MODAL)Label" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12 p-3 ">
+                          <img src="(IMAGEN DEL PRODUCTO)" class="img-fluid mx-auto d-block">
+                        </div>
+                        <div class="col-md-6 col-sm-12 p-3">
+                          <h3>(NOMBRE DEL PRODUCTO)</h3>
+                          <h4>(PRECIO)</h4>
+                          <ul>
+                            <li>(EJEMPLOS DE METODOS DE PAGO)</li>
+                            <li>(COMO TARJETAS DE CREDITO O DESCUENTOS EFT)</li>
+                          </ul>
+                            <button type="button" class="btn btn-primary mt-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path
+                                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+                                />
+                              </svg>
+                                Agregar al carrito
+                            </button>
+                        </div> 
+                        <div class="col-12 p-3 mx-2 border-bottom mb-2">
+                          <h5>Descripcion:</h5>
+                          <p>
+	                          (ESCRIBIR DESCRIPCION)
+                          </p>
+                        </div>
+                        <div class="col-12 p-3">
+                          <h5>Componentes</h5>
+                          <ul>
+                            <li>Procesador: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+                            <li>Memoria RAM: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+                          </ul>
+                          <h5>Varios</h5>
+                          <ul>
+                            <li>Pantalla: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+                            <li>Taza de refrezco: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+Boton para abrir modal
+
+		<button type="button" class="border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#(ID DEL MODAL)">
+                	(IMAGEN O NOMBRE DEL PRODUCTO)
+		</button>
