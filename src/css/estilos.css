@@ -1,3 +1,26 @@
-.card-body h3{
-        min-height: 5rem;
+.card-body h3 {
+  min-height: 5rem;
+}
+.fondo {
+  /* Reemplaza la URL por la ruta donde guardaste tu imagen */
+  background-image: url("img/Fondo-DCICELL.png") !important;
+
+  /* Asegura que el fondo cubra toda la pantalla sin deformarse */
+  background-size: cover;
+
+  /* Centra la imagen para que la marca de agua quede bien posicionada */
+  background-position: center;
+
+  /* Evita que la imagen se repita como mosaico */
+  background-repeat: no-repeat;
+
+  /* Hace que el fondo se quede fijo al hacer scroll (efecto elegante) */
+  background-attachment: fixed;
+
+  /* Un color de respaldo por si la imagen tarda en cargar */
+  background-color: #0a192f;
+
+  /* Opcional: Asegura que el cuerpo ocupe el alto total de la pantalla */
+  min-height: 100vh;
+  margin: 0;
 }
