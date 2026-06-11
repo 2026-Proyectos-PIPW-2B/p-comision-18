@@ -3,7 +3,7 @@
 }
 .fondo {
   /* Reemplaza la URL por la ruta donde guardaste tu imagen */
-  background-image: url("/src/img/Fondo-DCICELL.jpg.png") !important;
+  background-image: url("img/Fondo-DCICELL.png") !important;
 
   /* Asegura que el fondo cubra toda la pantalla sin deformarse */
   background-size: cover;

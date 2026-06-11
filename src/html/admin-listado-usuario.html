@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>admin Listado-usuario</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="#">Admin Panel</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto fs-4">
+              <li class="nav-item">
+                <a class="nav-link" href="admin-listado-productos.html"
+                  >Listado de Productos</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="admin-listado-usuario.html"
+                  >Agregar Usuario</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+        <section class="container mt-5">
+            <h1 class="mb-4 h2 text-center">Listado de Usuarios pendientes a aprobacion</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Activación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Juan Pérez</td>
+                        <td>juan.perez@example.com</td>
+                        <td>Usuario</td>
+                        <td>
+                            <button class="btn btn-success">Aprobar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="container mt-5">
+            <h1 class="mb-4 h2 text-center">Listado de Usuarios aprobados</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2</td>
+                        <td>María Gómez</td>
+                        <td>maria.gomez@example.com</td>
+                        <td>Usuario</td>
+                        <td>
+                            <button class="btn btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+  </body>
+</html>
+
+    </main>
+
+  </body>
+</html>
