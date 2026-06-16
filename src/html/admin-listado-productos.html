@@ -47,57 +47,172 @@
 
     <main>
       <section class="container mt-5">
-        <form class="container mt-5 shadow p-4 rounded bg-white" action="/admin/productos/agregar" method="POST">
+        <form
+          class="container mt-5 shadow p-4 rounded bg-white"
+          action="/admin/productos/agregar"
+          method="POST"
+        >
           <h1 class="mb-4 h2 text-center">Agregar Nuevo Producto</h1>
           <div class="mb-3">
             <label for="nombre" class="form-label">Nombre del Producto</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required />
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              name="nombre"
+              required
+            />
+            <div id="errorNombre" class="form-text text-danger"></div>
           </div>
           <div class="mb-3">
             <label for="precio" class="form-label">Precio</label>
-            <input type="number" step="0.01" class="form-control" id="precio" name="precio" required />
+            <input
+              type="number"
+              step="0.01"
+              class="form-control"
+              id="precio"
+              name="precio"
+              required
+            />
+            <div id="errorPrecio" class="form-text text-danger"></div>
           </div>
           <div class="mb-3">
             <label for="stock" class="form-label">Stock</label>
-            <input type="number" class="form-control" id="stock" name="stock" required />
+            <input
+              type="number"
+              class="form-control"
+              id="stock"
+              name="stock"
+              required
+            />
+            <div id="errorStock" class="form-text text-danger"></div>
           </div>
-          <button type="submit" class="btn btn-primary w-100">Agregar Producto</button>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea
+              class="form-control"
+              id="descripcion"
+              name="descripcion"
+              rows="3"
+            ></textarea>
+            <div id="errorDescripcion" class="form-text text-danger"></div>
+          </div>
+          <div class="mb-3">
+            <label for="categoriaObligatoria" class="form-label"
+              >Categoría obligatoria</label
+            >
+            <select
+              id="categoriaObligatoria"
+              name="categoria"
+              class="form-select"
+              required
+            >
+              <option value="">Selecciona una categoría</option>
+              <option value="telefono">Telefono</option>
+              <option value="cargador">Cargador</option>
+              <option value="funda">Funda</option>
+              <option value="auriculares">Auriculares</option>
+            </select>
+            <div
+              id="errorCategoriaObligatoria"
+              class="form-text text-danger"
+            ></div>
+          </div>
+          <div class="mb-3">
+            <label for="categoriaOpcional" class="form-label"
+              >Categorías opcionales</label
+            >
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="checkDefault"
+              />
+              <label class="form-check-label" for="checkDefault">
+                acaVanLasCategoriasOpcionales</label
+              >
+            </div>
+          </div>
+          <div class="mb-3">
+            <button
+              type="button"
+              class="btn btn-secondary w-100"
+              id="btnImagenes"
+            >
+              Mostrar imagenes disponibles
+            </button>
+            <input type="hidden" id="imagen" name="imagen" />
+            <div id="imagenesDisponibles" class="mt-3 row"></div>
+
+            <div id="errorImagen" class="form-text text-danger"></div>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary w-100"
+            id="btnAgregarProducto"
+          >
+            Agregar Producto
+          </button>
+          <div id="mensajeError" class="mt-3 text-danger"></div>
         </form>
       </section>
+      <section class="container mt-5">
+        <div class="shadow p-4 rounded bg-white">
+          <h1 class="mb-4 h2 text-center">
+            Creacion de categorias personalizadas
+          </h1>
+          <form id="formCategoriaPersonalizada">
+            <div class="mb-3">
+              <label for="nuevaCategoria" class="form-label"
+                >Nombre de la nueva categoría</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nuevaCategoria"
+                name="nuevaCategoria"
+              />
+              <div id="errorNuevaCategoria" class="form-text"></div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-success"
+              id="btnAgregarCategoria"
+            >
+              Agregar Categoría
+            </button>
+            <div id="mensajeCategoriaOpcional" class="mt-3 text-danger"></div>
+            <div class="mt-3">
+              <ul class="list-group" id="listaCategoria"></ul>
+            </div>
+          </form>
+        </div>
+      </section>
 
-      
-        <section class="container mt-5">
-            <h1 class="mb-4 h2 text-center">Listado de Productos</h1>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Stock</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Producto A</td>
-                        <td>$10.00</td>
-                        <td>50</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary">Editar</button>
-                            <button class="btn btn-sm btn-danger">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Producto B</td>
-                        <td>$20.00</td>
-                        <td>30</td>
-                        <td>
-                            <button class="btn btn-sm btn-primary">Editar</button>
-                            <button class="btn btn-sm btn-danger">Eliminar</button>
-                        </td>
-                    </tr>
+      <section class="container mt-5">
+        <div class="shadow p-4 rounded bg-white">
+          <h1 class="mb-4 h2 text-center">Listado de Productos</h1>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaProductos"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/js-productos.js"></script>
+    <script src="../js/js-categoria-productos.js"></script>
   </body>
 </html>
