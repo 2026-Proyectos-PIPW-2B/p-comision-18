@@ -344,12 +344,18 @@ function botonVer(id) {
   const boton = document.createElement("button");
   boton.className = "btn btn-sm btn-info text-white me-2";
   boton.textContent = "Ver mas";
-  boton.addEventListener("click", () => verMasInfo(id));
+  boton.addEventListener("click", () => verMasInfo(id, boton));
   return boton;
 }
 
-function verMasInfo(id) {
+function verMasInfo(id, boton) {
   const filaDetalle = document.getElementById(`detalle-${id}`);
+  if (boton.textContent === "Ver mas") {
+    boton.textContent = "Ocultar detalles";
+  } else {
+    boton.textContent = "Ver mas";
+  }
+
   if (filaDetalle) {
     if (filaDetalle.style.display === "none") {
       filaDetalle.style.display = "table-row";
