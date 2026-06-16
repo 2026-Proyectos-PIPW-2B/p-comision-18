@@ -360,11 +360,9 @@ function verMasInfo(id) {
 }
 
 function guardarEdicion(id) {
-  // 1. Buscamos el producto en el array
   const producto = listaProductos.find((p) => p.id === id);
   if (!producto) return;
 
-  // 2. Capturamos los elementos de entrada y de error específicos de esta fila
   const inputPrecio = document.getElementById(`edit-precio-${id}`);
   const inputStock = document.getElementById(`edit-stock-${id}`);
   const errorPrecio = document.getElementById(`error-edit-precio-${id}`);
@@ -378,36 +376,27 @@ function guardarEdicion(id) {
 
   let edicionValida = true;
 
-  // 3. Validamos el Precio
-  const nuevoPrecio = parseFloat(inputPrecio.value.trim());
+  const nuevoPrecio = Number(inputPrecio.value.trim());
   if (isNaN(nuevoPrecio) || nuevoPrecio <= 0) {
     errorPrecio.textContent = "El precio debe ser un número positivo.";
     inputPrecio.classList.add("is-invalid");
     edicionValida = false;
-  } else if (nuevoPrecio > 10000000) {
-    errorPrecio.textContent = "El precio no puede exceder $10,000,000.";
-    inputPrecio.classList.add("is-invalid");
-    edicionValida = false;
   }
 
-  // 4. Validamos el Stock
-  const nuevoStock = parseInt(inputStock.value.trim());
+  const nuevoStock = Number(inputStock.value.trim());
   if (isNaN(nuevoStock) || nuevoStock < 0) {
     errorStock.textContent = "El stock no puede ser negativo.";
     inputStock.classList.add("is-invalid");
     edicionValida = false;
   }
-
-  // 5. Si todo está bien, guardamos
   if (edicionValida) {
     producto.precio = nuevoPrecio;
     producto.stock = nuevoStock;
 
-    // Actualizamos LocalStorage y refrescamos la tabla completa
     actualizarLocalStorage();
     mostrarEnTabla();
 
-    // Opcional: dejamos la fila del producto editado abierta para ver el cambio reflejado
+    //la fila del producto editado abierta para ver el cambio reflejado
     const filaNueva = document.getElementById(`detalle-${id}`);
     if (filaNueva) filaNueva.style.display = "table-row";
   }
