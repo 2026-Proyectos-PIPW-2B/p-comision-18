@@ -12,8 +12,7 @@ function inicializar(){
     const botonCerrar = document.getElementById("botonCerrarPerfil");
     botonCerrar.addEventListener("click", cerrarCuenta);
 
-    if (localStorage.getItem("usuario-activo") == "undefined"){
-        console.log("Hola")
+    if (localStorage.getItem("usuario-activo") == undefined){
         window.location.href = "html/ingreso-usuario.html"
     }else mostrarInformacion();
 }
