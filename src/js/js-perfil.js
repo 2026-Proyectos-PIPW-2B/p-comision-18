@@ -30,5 +30,5 @@ function mostrarInformacion(){
 
 function cerrarCuenta(){
     localStorage.setItem("usuario-activo", undefined);
-    window.location.href = "html/index.html"
+    window.location.href = "index.html"
 }

@@ -44,7 +44,7 @@ function getUsuario(username){
 function aceptarIngreso(ingresoValido, usuario){
     document.getElementById(ingresoValido).innerText = "Usuario valido!"
      setTimeout(() => {
-        window.location.href = "html/perfil-usuario.html";
+        window.location.href = "perfil-usuario.html";
     }, 1300);
 }
 
