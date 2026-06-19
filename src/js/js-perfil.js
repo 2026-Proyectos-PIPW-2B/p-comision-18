@@ -13,7 +13,7 @@ function inicializar(){
     botonCerrar.addEventListener("click", cerrarCuenta);
 
     if (localStorage.getItem("usuario-activo") == undefined){
-        window.location.href = "html/ingreso-usuario.html"
+        window.location.href = "ingreso-usuario.html"
     }else mostrarInformacion();
 }
 
