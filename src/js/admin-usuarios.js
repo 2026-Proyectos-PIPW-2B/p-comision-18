@@ -1,10 +1,11 @@
 window.addEventListener("load", function(){
-    inciarTabla();
+    mostrarTabla();
 })
 
 const tabla = document.getElementById("cuerpoTabla");
 
-function inciarTabla(){
+function mostrarTabla(){
+    tabla.innerHTML = ""
     let arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
     if (arregloUsuarios != null || arregloUsuarios != "undefined"){
         for (let user of arregloUsuarios){
@@ -31,7 +32,7 @@ function mostrarUsuario(user){
     td.appendChild(crearBotonDeshabilitar());
     fila.appendChild(td);
     td = document.createElement("td");
-    td.appendChild(crearBotonEliminar());
+    td.appendChild(crearBotonEliminar(user));
     fila.appendChild(td)
     tabla.appendChild(fila);
 }
@@ -43,9 +44,18 @@ function crearBotonDeshabilitar(){
     return boton;
 }
 
-function crearBotonEliminar(){
+function crearBotonEliminar(usuario){
     let boton = document.createElement("button")
     boton.classList.add("btn", "btn-danger");
     boton.innerText = "Eliminar"
+    boton.addEventListener("click", function(){
+        eliminarUsuario(usuario);
+    })
     return boton;
+}
+function eliminarUsuario(usuario){
+    let arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+    arregloUsuarios = arregloUsuarios.filter((user) => user.username != usuario.username);
+    localStorage.setItem("arregloUsuarios", JSON.stringify(arregloUsuarios));
+    mostrarTabla()
 }
