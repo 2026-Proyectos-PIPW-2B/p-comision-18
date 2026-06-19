@@ -13,13 +13,13 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
   </head>
-  <body class="d-flex flex-column min-vh-100 bg-light">
+  <body class="d-flex flex-column min-vh-100 bg-secondary-subtle">
     <header class="mb-4 shadow-sm bg-info-subtle rounded">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container px-4">
-          <a class="navbar-brand h2" href="listado-productos.html">
+          <a class="navbar-brand h2" href="index.html">
             <img
-              src="img/dciccell.png"
+              src="../img/dciccell.png"
               alt="imagen logo"
               class="img-fluid"
               style="max-height: 100px"
@@ -51,74 +51,71 @@
 
     <main class="container mb-5 flex-grow-1">
       <div class="row">
-        <div
-          class="col-12 col-md-8 col-lg-6 mx-auto shadow p-4 rounded bg-white mt-4"
-        >
+        <div class="col-12 col-md-8 col-lg-6 mx-auto shadow p-4 rounded bg-white mt-4">
           <h1 class="mb-4 h2 text-center">Registro de Usuario</h1>
-
-          <form action="/registrar" method="POST">
+          <form id="formularioRegistro" class="needs-validation" novalidate>
             <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre</label>
-              <input
-                type="text"
-                class="form-control"
-                id="nombre"
-                name="nombre"
-                required
-              />
+              <label for="inputNombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="inputNombre" name="nombre" required/>
+              <div class="invalid-feedback" id="errorNombre"></div>
+            </div>
+            <div class="mb-3">
+              <label for="inputApellido" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="inputApellido" name="apellido" required>
+              <div class="invalid-feedback" id="errorApellido"></div>
             </div>
 
             <div class="mb-3">
-              <label for="apellido" class="form-label">Apellido</label>
-              <input
-                type="text"
-                class="form-control"
-                id="apellido"
-                name="apellido"
-                required
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="email" class="form-label">Correo Electrónico</label>
+              <label for="inputTelefono" class="form-label">Telefono</label>
               <div class="input-group">
-                <span class="input-group-text" id="addon-wrapping">@</span>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  required
-                />
+                <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                <input type="tel" class="form-control" id="inputTelefono" name="telefono" required>
+                <div class="invalid-feedback" id="errorTelefono"></div>
               </div>
             </div>
 
             <div class="mb-3">
-              <label for="password" class="form-label">Contraseña</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                name="password"
-                required
-              />
+              <label for="inputDireccion" class="form-label">Telefono</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-house"></i></span>
+                <input type="text" class="form-control" id="inputDireccion" name="direccion" required>
+                <div class="invalid-feedback" id="errorDireccion"></div>
+              </div>
             </div>
 
             <div class="mb-3">
-              <label for="confirmPassword" class="form-label"
-                >Confirmar Contraseña</label
-              >
-              <input
-                type="password"
-                class="form-control"
-                id="confirmPassword"
-                name="confirmPassword"
-                required
-              />
+              <label for="inputCorreo" class="form-label">Correo Electrónico</label>
+              <div class="input-group">
+                <span class="input-group-text" id="addon-wrapping">@</span>
+                <input type="email" class="form-control" id="inputCorreo" name="email" required>
+                <div class="invalid-feedback" id="errorCorreo"></div>
+              </div>
+              
+            </div>
+
+            <div class="mb-3">
+              <label for="inputPassword" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="inputPassword" name="password" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="inputConfirmPassword" class="form-label">Confirmar Contraseña</label>
+              <input type="password" class="form-control" id="inputConfirmPassword" name="confirmPassword" required>
+              <div class="invalid-feedback" id="errorPassword"></div>
+            </div>
+            
+            <div>
+              La contraseña debe tener:
+              <ul>
+                <li id="password1" class="text-secondary">Al menos 10 caracteres</li>
+                <li id="password2" class="text-secondary">Al menos una mayúscula</li>
+                <li id="password3" class="text-secondary">Al menos un carácter especial</li>
+                <li id="password4" class="text-secondary">Al menos un número</li>
+              </ul>
             </div>
 
             <div class="d-grid gap-2 mt-4">
-              <button type="submit" class="btn btn-primary">Registrar</button>
+              <button type="submit" class="btn btn-primary" >Registrar</button>
             </div>
           </form>
         </div>
@@ -173,5 +170,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/js-registro.js"></script>
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
   </body>
 </html>
