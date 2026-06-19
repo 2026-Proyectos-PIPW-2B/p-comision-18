@@ -56,12 +56,12 @@
           <form id="formularioRegistro" class="needs-validation" novalidate>
             <div class="mb-3">
               <label for="inputNombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="inputNombre" name="nombre" required/>
+              <input type="text" class="form-control" id="inputNombre" name="nombre" placeholder="Ingrese su nombre..." required>
               <div class="invalid-feedback" id="errorNombre"></div>
             </div>
             <div class="mb-3">
               <label for="inputApellido" class="form-label">Apellido</label>
-              <input type="text" class="form-control" id="inputApellido" name="apellido" required>
+              <input type="text" class="form-control" id="inputApellido" name="apellido" placeholder="Ingrese su apellido..." required>
               <div class="invalid-feedback" id="errorApellido"></div>
             </div>
 
@@ -69,7 +69,7 @@
               <label for="inputTelefono" class="form-label">Telefono</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                <input type="tel" class="form-control" id="inputTelefono" name="telefono" required>
+                <input type="tel" class="form-control" id="inputTelefono" name="telefono" placeholder="EJ.: 2911234567" required>
                 <div class="invalid-feedback" id="errorTelefono"></div>
               </div>
             </div>
@@ -78,7 +78,7 @@
               <label for="inputDireccion" class="form-label">Telefono</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-house"></i></span>
-                <input type="text" class="form-control" id="inputDireccion" name="direccion" required>
+                <input type="text" class="form-control" id="inputDireccion" name="direccion" placeholder="EJ.: Calle 123, Ciudad" required>
                 <div class="invalid-feedback" id="errorDireccion"></div>
               </div>
             </div>
@@ -87,10 +87,9 @@
               <label for="inputCorreo" class="form-label">Correo Electrónico</label>
               <div class="input-group">
                 <span class="input-group-text" id="addon-wrapping">@</span>
-                <input type="email" class="form-control" id="inputCorreo" name="email" required>
+                <input type="email" class="form-control" id="inputCorreo" name="email" placeholder="EJ.: tunombre@email.com" required>
                 <div class="invalid-feedback" id="errorCorreo"></div>
               </div>
-              
             </div>
 
             <div class="mb-3">
