@@ -113,7 +113,7 @@ function validarPasswords(input1, input2){
         mostrarMensajeError(input2,"errorPassword", "Las contraseñas no coinciden");
         return false;
     }
-    if(!validator.isStrongPassword(input1.value,{minLength: 10, minLowercase: 1, minUppercase: 0, minNumbers: 1, minSymbols: 1})){
+    if(!validator.isStrongPassword(input1.value,{minLength: 10, minLowercase: 0, minUppercase: 1, minNumbers: 1, minSymbols: 1})){
         mostrarMensajeError(input1,"errorPassword", "La contraseña no es segura");
         mostrarMensajeError(input2,"errorPassword", "La contraseña no es segura");
         return false;
