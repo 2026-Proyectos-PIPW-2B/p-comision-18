@@ -1,18 +1,12 @@
-window.addEventListener("load", function(){
-    inicializarUsuarios();
-    inicializar();
-    
-})
+import { limpiarEstados } from "./js-moduloValidacion.js";
+import { mostrarExito } from "./js-moduloValidacion.js";
+import { mostrarMensajeError } from "./js-moduloValidacion.js";
 
-function inicializarUsuarios(){
-    let arregoUsuarios;
-    if (localStorage.getItem("arregloUsuarios") == null){
-        console.log("arreglo inexistente    ")
-        arregloUsuarios = [{username : "juan.perez@example.com", password : "1234",nombre : "Juan" , apellido : "Perez", direccion : "Cale Falsa 123, Ciudad", telefono : "2911234567"},
-             {username : "fulano-de-tal@example.com", password : "Contraseña", nombre : "Fulano", apellido : "De Tal", direccion : "Segurola y Habana 4310", telefono:"291555555"} ];
-        localStorage.setItem("arregloUsuarios", JSON.stringify(arregloUsuarios));
-    }else arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
-}
+let arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+
+window.addEventListener("load", function(){
+    inicializar();    
+})
 
 function inicializar(){
     const formulario = document.getElementById("formularioIngreso");
@@ -33,7 +27,7 @@ function inicializar(){
 }
 function setearUsuarioActivo(username){
     let usuario = getUsuario(username);
-    localStorage.setItem("usuario-activo", JSON.stringify(usuario));
+    localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
 }
 
 function getUsuario(username){
@@ -62,7 +56,7 @@ function validarUsername(username){
         return false;
     }else{
         let usuarioEncontrado = false;
-        for (user of arregloUsuarios){
+        for (let user of arregloUsuarios){
             if (user.username == username.value){
                 mostrarExito(username);
                 usuarioEncontrado = true;
@@ -82,8 +76,8 @@ function validarPassword(password, username){
         mostrarMensajeError(password, "divErrorPassword", "Ingrese una contraseña.");
         return false;
     }else{
-        let passwordCorrecta = false
-        for (user of arregloUsuarios){
+        let passwordCorrecta = false;
+        for(const user of arregloUsuarios){
             if (user.username == username.value && user.password == password.value){
                 mostrarExito(password);
                 passwordCorrecta = true;
@@ -95,20 +89,4 @@ function validarPassword(password, username){
         }else mostrarMensajeError(password, "divErrorPassword", "Contraseña incorrecta.")
         return passwordCorrecta;
     }
-}
-
-function limpiarEstados() {
-    const inputs = document.querySelectorAll(".form-control, .form-select")
-    for (const input of inputs) {
-        input.classList.remove("is-invalid")
-        input.classList.remove("is-valid")
-    }
-}
-
-function mostrarMensajeError(input, idDiv, mensaje){
-    input.classList.add("is-invalid");
-    document.getElementById(idDiv).textContent = mensaje;
-}
-function mostrarExito(input){
-    input.classList.add("is-valid")
 }
