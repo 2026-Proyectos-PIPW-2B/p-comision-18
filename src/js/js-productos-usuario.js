@@ -1,37 +1,8 @@
+js / js - productos.js;
 const contenedorProductos = document.getElementById("listado-productos");
 let listaProductos = JSON.parse(localStorage.getItem("productos")) || [];
 
-document.addEventListener("DOMContentLoaded", function () {
-  agregarListener();
-  renderizarCatalogo();
-});
-
-function agregarListener() {
-  const botonCarrito = document.getElementById("compraCarrito");
-  if (!botonCarrito) return;
-
-  botonCarrito.addEventListener("click", function () {
-    cerrarCarrito();
-    limpiarCarrito();
-    mostrarAviso();
-  });
-}
-
-function cerrarCarrito() {
-  const offcanvasElement = document.getElementById("carritoCompras");
-  const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-  offcanvas.hide();
-}
-function limpiarCarrito() {
-  const productosCarrito = document.getElementById("productosCarrito");
-  productosCarrito.innerText = "";
-}
-function mostrarAviso() {
-  const modal = new bootstrap.Modal(
-    document.getElementById("modalCompraExitosa"),
-  );
-  modal.show();
-}
+renderizarCatalogo();
 
 function renderizarCatalogo() {
   contenedorProductos.innerHTML = "";
@@ -45,11 +16,11 @@ function renderizarCatalogo() {
   }
 
   listaProductos.forEach((producto) => {
-    // cuerpo del producto
+    // 1. Crear la columna de Bootstrap
     const col = document.createElement("div");
     col.classList.add("col-sm-6", "col-md-4", "col-lg-3");
 
-    // creacion de card
+    // 2. Crear la tarjeta contenedora
     const card = document.createElement("div");
     card.className = "card shadow-lg h-100 border-0 rounded-3 overflow-hidden";
 
@@ -69,7 +40,7 @@ function renderizarCatalogo() {
 
     btnImg.appendChild(img); // Metemos la imagen dentro del botón
 
-    // Creamos el cuerpo de la tarjeta
+    // 4. Crear el cuerpo de la tarjeta
     const cardBody = document.createElement("div");
     cardBody.className = "card-body d-flex flex-column justify-content-between";
 
@@ -94,28 +65,33 @@ function renderizarCatalogo() {
     infoContenedor.appendChild(btnTitulo);
     infoContenedor.appendChild(precio);
 
-    // Crear el botón de Agregar al carrito
+    // 5. Crear el botón de Agregar al carrito
     const btnCarrito = document.createElement("button");
     btnCarrito.className =
       "btn btn-primary w-100 mt-2 d-flex align-items-center justify-content-center gap-2";
-    btnCarrito.innerHTML = '<i class="bi bi-cart"></i> ';
+    btnCarrito.innerHTML = '<i class="bi bi-cart"></i> '; // Un mini innerHTML para el ícono es aceptable
 
     if (producto.stock <= 0) {
       btnCarrito.disabled = true;
       btnCarrito.appendChild(document.createTextNode("Sin Stock"));
     } else {
       btnCarrito.appendChild(document.createTextNode("Agregar al carrito"));
+      // 🔥 LA GRAN VENTAJA: El evento se asigna acá, limpio y privado
       btnCarrito.addEventListener("click", () =>
         agregarAlCarritoReal(producto.id),
       );
     }
 
+    // 6. Ensamblar la estructura de la Card (de adentro hacia afuera)
     cardBody.appendChild(infoContenedor);
     cardBody.appendChild(btnCarrito);
+
     card.appendChild(btnImg);
     card.appendChild(cardBody);
+
     col.appendChild(card);
 
+    // 7. Inyectar la columna terminada al contenedor de la página
     contenedorProductos.appendChild(col);
   });
 }
