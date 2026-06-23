@@ -1,11 +1,12 @@
-window.addEventListener("load", function(){
-    inciarTabla();
-})
-
+let arregloUsuarios;
 const tabla = document.getElementById("cuerpoTabla");
 
-function inciarTabla(){
-    let arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+window.addEventListener("load", function(){
+    arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+    iniciarTabla();
+})
+
+function iniciarTabla(){
     if (arregloUsuarios != null || arregloUsuarios != "undefined"){
         for (let user of arregloUsuarios){
             mostrarUsuario(user);
@@ -28,10 +29,10 @@ function mostrarUsuario(user){
     td.innerText = "Usuario";
     fila.appendChild(td);
     td = document.createElement("td");
-    td.appendChild(crearBotonDeshabilitar());
+    td.appendChild(crearBotonDeshabilitar(user));
     fila.appendChild(td);
     td = document.createElement("td");
-    td.appendChild(crearBotonEliminar());
+    td.appendChild(crearBotonEliminar(user));
     fila.appendChild(td)
     tabla.appendChild(fila);
 }
@@ -40,12 +41,29 @@ function crearBotonDeshabilitar(){
     let boton = document.createElement("button");
     boton.classList.add("btn", "btn-info");
     boton.innerText = "Deshabilitar";
+    boton.addEventListener("click", function(){deshabilitarUsuario(user)});
     return boton;
 }
 
-function crearBotonEliminar(){
+function deshabilitarUsuario(user){
+    if (user.activo){
+        user.activo = false;
+    }else user.activo = true;
+    tabla.innerHTML = "";
+    iniciarTabla();
+}
+
+function crearBotonEliminar(user){
     let boton = document.createElement("button")
     boton.classList.add("btn", "btn-danger");
     boton.innerText = "Eliminar"
+    boton.addEventListener("click", function(){eliminarUsuario(user)});
     return boton;
+}
+
+function eliminarUsuario(user){
+    arregloUsuarios = arregloUsuarios.filter(usuario => usuario != user);
+    localStorage.setItem("arregloUsuarios", JSON.stringify(arregloUsuarios))
+    tabla.innerHTML = "";
+    iniciarTabla();
 }

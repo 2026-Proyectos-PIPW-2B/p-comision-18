@@ -163,7 +163,8 @@ function registrarUsuario(){
         apellido : inputApellido.value,
         direccion : inputDireccion.value,
         telefono : inputTelefono.value,
-        admin : false
+        admin : false,
+        activo : true
     }
         let usuarios;
     if(localStorage.getItem("arregloUsuarios") == undefined){

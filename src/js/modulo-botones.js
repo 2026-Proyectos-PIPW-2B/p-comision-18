@@ -24,7 +24,7 @@ function controlIngreso(){
         default:{
             if (JSON.parse(usuarioActivo).admin){
                 window.location.href = "admin-listado-productos.html"
-            }
+            }else window.location.href = "perfil-usuario.html"
             break;
         }
     }
