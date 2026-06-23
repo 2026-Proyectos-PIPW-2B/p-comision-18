@@ -1,7 +1,10 @@
+import { setearBoton } from "./modulo-botones.js";
+
 const contenedorProductos = document.getElementById("listado-productos");
 let listaProductos = JSON.parse(localStorage.getItem("productos")) || [];
 
 document.addEventListener("DOMContentLoaded", function () {
+  setearBoton();
   agregarListener();
   renderizarCatalogo();
 });

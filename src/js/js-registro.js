@@ -1,7 +1,8 @@
-import { limpiarEstados } from "./js-moduloValidacion.js";
-import { mostrarExito } from "./js-moduloValidacion.js";
-import { mostrarMensajeError } from "./js-moduloValidacion.js";
-import { encontrarUsuario } from "./js-moduloValidacion.js";
+import { controlIngreso, limpiarEstados } from "./moduloValidacion.js";
+import { mostrarExito } from "./moduloValidacion.js";
+import { mostrarMensajeError } from "./moduloValidacion.js";
+import { encontrarUsuario } from "./moduloValidacion.js";
+import { setearBoton } from "./modulo-botones.js";
 
 const inputNombre = document.getElementById("inputNombre");
 const inputApellido = document.getElementById("inputApellido");
@@ -12,6 +13,7 @@ const inputPassword = document.getElementById("inputPassword");
 const inputConfirmPassword = document.getElementById("inputConfirmPassword");
 
 window.addEventListener("load", function(){
+    setearBoton();
     inicializar();
 })
 
@@ -160,7 +162,9 @@ function registrarUsuario(){
         nombre : inputNombre.value,
         apellido : inputApellido.value,
         direccion : inputDireccion.value,
-        telefono : inputTelefono.value
+        telefono : inputTelefono.value,
+        admin : false,
+        activo : true
     }
         let usuarios;
     if(localStorage.getItem("arregloUsuarios") == undefined){
