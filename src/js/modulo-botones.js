@@ -37,3 +37,4 @@ export function botonCerrarSesion(){
         window.location.href = "index.html"
     })
 }
+
