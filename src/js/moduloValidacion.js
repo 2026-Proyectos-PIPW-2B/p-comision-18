@@ -28,3 +28,24 @@ export function encontrarUsuario(userName){
     }
     return usuarioRetorno;
 }
+
+export function controlIngreso(){
+    let usuarioActivo = localStorage.getItem("usuarioActivo"); 
+    switch (usuarioActivo) {
+        case null:{
+            localStorage.setItem("usuarioActivo", undefined);        
+            window.location.href = "ingreso-usuario.html"
+            break;
+        }
+        case "undefined":
+            localStorage.setItem("arregloUsuarios", JSON.stringify([{username : "admin@dcicell", password : "admin123", admin:true}]));
+            window.location.href = "ingreso-usuario.html";
+            break;
+        default:{
+            if (JSON.parse(usuarioActivo).admin){
+                window.location.href = "admin-listado-productos.html"
+            }
+            break;
+        }
+    }
+}

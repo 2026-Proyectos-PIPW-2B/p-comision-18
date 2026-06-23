@@ -1,20 +1,31 @@
-import { limpiarEstados } from "./js-moduloValidacion.js";
-import { mostrarExito } from "./js-moduloValidacion.js";
-import { mostrarMensajeError } from "./js-moduloValidacion.js";
+import { limpiarEstados } from "./moduloValidacion.js";
+import { mostrarExito } from "./moduloValidacion.js";
+import { mostrarMensajeError } from "./moduloValidacion.js";
+import { setearBoton } from "./modulo-botones.js";
 
-let arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+let arregloUsuarios;
 
 window.addEventListener("load", function(){
+    setearArreglo();
+    setearBoton();
     inicializar();    
 })
+
+
+function setearArreglo(){
+    arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+    if (arregloUsuarios == undefined){
+       arregloUsuarios = [{"username":"admin@dcicell","password":"admin123","admin":true}];    
+       localStorage.setItem("arregloUsuarios", JSON.stringify(arregloUsuarios));
+    }
+    
+}
 
 function inicializar(){
     const formulario = document.getElementById("formularioIngreso");
     const inputUsername = document.getElementById("inputUsername");
     const inputPassword = document.getElementById("inputPassword");
-    
     limpiarEstados();
-
     formulario.addEventListener("submit", function(event){
         event.preventDefault(); 
         limpiarEstados();
@@ -35,11 +46,17 @@ function getUsuario(username){
     return usuario;
 }
 
-function aceptarIngreso(ingresoValido, usuario){
+function aceptarIngreso(ingresoValido){
     document.getElementById(ingresoValido).innerText = "Usuario valido!"
      setTimeout(() => {
-        window.location.href = "perfil-usuario.html";
+        redirigir(JSON.parse(localStorage.getItem("usuarioActivo")));
     }, 1300);
+}
+
+function redirigir(usuario){
+    if (usuario.admin){
+        window.location.href = "admin-index.html";
+    }else window.location.href = "perfil-usuario.html";    
 }
 
 function validarIngreso(username, password){
