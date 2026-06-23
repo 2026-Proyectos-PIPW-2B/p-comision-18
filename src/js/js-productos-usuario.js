@@ -1,4 +1,5 @@
-js / js - productos.js;
+//js / js - productos.js;
+//crasheo
 const contenedorProductos = document.getElementById("listado-productos");
 let listaProductos = JSON.parse(localStorage.getItem("productos")) || [];
 

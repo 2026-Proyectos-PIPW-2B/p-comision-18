@@ -2,8 +2,8 @@ import { setearBoton } from "./modulo-botones.js";
 import { controlIngreso } from "./moduloValidacion.js";
 
 window.addEventListener("load", function(){
-    setearBoton();
     controlIngreso();
+    setearBoton();    
     inicializar();
 })
 

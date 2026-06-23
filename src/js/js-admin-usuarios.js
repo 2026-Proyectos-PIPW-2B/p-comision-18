@@ -10,7 +10,7 @@ window.addEventListener("load", function(){
 })
 
 function iniciarTabla(){
-    if (arregloUsuarios != null || arregloUsuarios != "undefined"){
+    if (arregloUsuarios != null && arregloUsuarios != "undefined"){
         tabla.innerHTML = "";
         for (let user of arregloUsuarios){
             if (user.username != "admin@dcicell")
