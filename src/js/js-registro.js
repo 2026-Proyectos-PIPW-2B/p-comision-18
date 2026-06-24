@@ -218,3 +218,24 @@ function registrarUsuario() {
   localStorage.setItem("arregloUsuarios", JSON.stringify(usuarios));
   localStorage.setItem("usuarioActivo", JSON.stringify(usuarioNuevo));
 }
+function registrarUsuario() {
+  let usuarioNuevo = {
+    username: inputCorreo.value,
+    password: inputPassword.value,
+    nombre: inputNombre.value,
+    apellido: inputApellido.value,
+    direccion: inputDireccion.value,
+    telefono: inputTelefono.value,
+    admin: false,
+    activo: true,
+  };
+  let usuarios;
+  if (localStorage.getItem("arregloUsuarios") == undefined) {
+    usuarios = [usuarioNuevo];
+  } else {
+    usuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+    usuarios.push(usuarioNuevo);
+  }
+  localStorage.setItem("arregloUsuarios", JSON.stringify(usuarios));
+  localStorage.setItem("usuarioActivo", JSON.stringify(usuarioNuevo));
+}
