@@ -49,3 +49,9 @@ export function controlIngreso(){
         }
     }
 }
+
+export function controlIngresoAdmin(){
+    let usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+    if (!usuarioActivo.admin)
+        window.location.href = "index.html"
+}

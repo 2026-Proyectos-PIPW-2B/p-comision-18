@@ -213,8 +213,8 @@ function registrarUsuario() {
     usuarios = [usuarioNuevo];
   } else {
     usuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+    usuarios.push(usuarioNuevo);
   }
-  usuarios.push(usuarioNuevo);
   localStorage.setItem("arregloUsuarios", JSON.stringify(usuarios));
   localStorage.setItem("usuarioActivo", JSON.stringify(usuarioNuevo));
 }
