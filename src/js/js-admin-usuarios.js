@@ -1,16 +1,20 @@
+import { controlIngresoAdmin } from "./moduloValidacion.js";
+
 let arregloUsuarios;
 const tabla = document.getElementById("cuerpoTabla");
 
 window.addEventListener("load", function(){
+    controlIngresoAdmin();
     arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
     iniciarTabla();
 })
 
 function iniciarTabla(){
-    if (arregloUsuarios != null || arregloUsuarios != "undefined"){
+    if (arregloUsuarios != null && arregloUsuarios != "undefined"){
         tabla.innerHTML = "";
         for (let user of arregloUsuarios){
-            mostrarUsuario(user);
+            if (user.username != "admin@dcicell")
+                mostrarUsuario(user);
         }
     }
 }
