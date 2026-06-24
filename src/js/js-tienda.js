@@ -1,12 +1,12 @@
 import { setearBoton } from "./modulo-botones.js";
-
+import { agregarAlCarritoReal } from "./js-tienda-carritoDeCompras.js";
 const contenedorProductos = document.getElementById("listado-productos");
 let listaProductos = JSON.parse(localStorage.getItem("productos")) || [];
 
 document.addEventListener("DOMContentLoaded", function () {
   setearBoton();
   agregarListener();
-  renderizarCatalogo();
+  renderizarCatalogo(listaProductos);
 });
 
 function agregarListener() {
@@ -27,7 +27,24 @@ function cerrarCarrito() {
 }
 function limpiarCarrito() {
   const productosCarrito = document.getElementById("productosCarrito");
-  productosCarrito.innerText = "";
+  if (productosCarrito) {
+    productosCarrito.innerText = "";
+  }
+  const usuarioLogueado =
+    JSON.parse(localStorage.getItem("usuarioActivo")) || null;
+  if (usuarioLogueado) {
+    usuarioLogueado.carritoDeCompras = [];
+    localStorage.setItem("usuarioActivo", JSON.stringify(usuarioLogueado));
+
+    let listaUsuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const index = listaUsuarios.findIndex(
+      (u) => u.email === usuarioLogueado.email || u.id === usuarioLogueado.id,
+    );
+    if (index !== -1) {
+      listaUsuarios[index] = usuarioLogueado;
+      localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
+    }
+  }
 }
 function mostrarAviso() {
   const modal = new bootstrap.Modal(
@@ -36,18 +53,18 @@ function mostrarAviso() {
   modal.show();
 }
 
-function renderizarCatalogo() {
+export function renderizarCatalogo(productosAMostrar) {
   contenedorProductos.innerHTML = "";
 
-  if (listaProductos.length === 0) {
+  if (productosAMostrar.length === 0) {
     const mensaje = document.createElement("h4");
     mensaje.className = "text-muted text-center my-5 w-100";
-    mensaje.textContent = "No hay productos cargados en la tienda actualmente.";
+    mensaje.textContent = "No hay productos para mostrar.";
     contenedorProductos.appendChild(mensaje);
     return;
   }
 
-  listaProductos.forEach((producto) => {
+  productosAMostrar.forEach((producto) => {
     // cuerpo del producto
     const col = document.createElement("div");
     col.classList.add("col-sm-6", "col-md-4", "col-lg-3");
