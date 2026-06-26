@@ -1,14 +1,14 @@
 import { limpiarEstados, redirigir} from "./moduloValidacion.js";
 import { mostrarExito } from "./moduloValidacion.js";
 import { mostrarMensajeError } from "./moduloValidacion.js";
-import { setearBoton } from "./modulo-botones.js";
+import { setearBotonPerfil } from "./modulo-botones.js";
 import { obtenerArregloUsuarios, setArregloUsuarios, setUsuarioActivo } from "./moduloLocalStorage.js";
 
 let arregloUsuarios;
 
 window.addEventListener("load", function(){
     setearArreglo();
-    setearBoton();
+    setearBotonPerfil();
     inicializar();    
 })
 
