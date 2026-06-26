@@ -1,22 +1,24 @@
-import { controlIngresoAdmin } from "./moduloValidacion.js";
+import { obtenerArregloUsuarios, setArregloUsuarios, } from "./moduloLocalStorage.js";
+import { controlIngreso } from "./moduloValidacion.js";
 
 let arregloUsuarios;
 const tabla = document.getElementById("cuerpoTabla");
 
 window.addEventListener("load", function(){
-    controlIngresoAdmin();
-    arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+    controlIngreso();
+    arregloUsuarios = obtenerArregloUsuarios();
     iniciarTabla();
 })
 
 function iniciarTabla(){
-    if (arregloUsuarios != null && arregloUsuarios != "undefined"){
+    if (arregloUsuarios != null){
         tabla.innerHTML = "";
         for (let user of arregloUsuarios){
             if (user.username != "admin@dcicell")
                 mostrarUsuario(user);
         }
     }
+    //aca
 }
 
 function mostrarUsuario(user){
@@ -68,7 +70,7 @@ function deshabilitarUsuario(username){
             break
         }
     }
-    localStorage.setItem("arregloUsuarios", JSON.stringify(arregloUsuarios))
+    setArregloUsuarios(arregloUsuarios);
     iniciarTabla();
 }
 
@@ -82,7 +84,7 @@ function crearBotonEliminar(username){
 
 function eliminarUsuario(identificadorUsuario){
     arregloUsuarios = arregloUsuarios.filter(usuario => usuario.username != identificadorUsuario);
-    localStorage.setItem("arregloUsuarios", JSON.stringify(arregloUsuarios))
+    setArregloUsuarios(arregloUsuarios);
     iniciarTabla();
 }
 
@@ -101,6 +103,6 @@ function crearSelectorAdmin(user){
 
 function permisosDeAdmin(user, selector){
     user.admin = selector.checked;
-    localStorage.setItem("arregloUsuarios",JSON.stringify(arregloUsuarios));
+    setArregloUsuarios(arregloUsuarios)
     iniciarTabla();
 }

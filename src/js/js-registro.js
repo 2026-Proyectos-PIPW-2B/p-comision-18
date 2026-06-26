@@ -1,4 +1,4 @@
-import { controlIngreso, limpiarEstados } from "./moduloValidacion.js";
+import { controlIngreso, limpiarEstados, obtenerArregloUsuarios, setArregloUsuarios, setUsuarioActivo } from "./moduloValidacion.js";
 import { mostrarExito } from "./moduloValidacion.js";
 import { mostrarMensajeError } from "./moduloValidacion.js";
 import { encontrarUsuario } from "./moduloValidacion.js";
@@ -208,34 +208,13 @@ function registrarUsuario() {
     admin: false,
     activo: true,
   };
-  let usuarios;
-  if (localStorage.getItem("arregloUsuarios") == undefined) {
+  let usuarios = obtenerArregloUsuarios();
+  if (usuarios == null) {
     usuarios = [usuarioNuevo];
   } else {
-    usuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+    usuarios = obtenerArregloUsuarios();
     usuarios.push(usuarioNuevo);
   }
-  localStorage.setItem("arregloUsuarios", JSON.stringify(usuarios));
-  localStorage.setItem("usuarioActivo", JSON.stringify(usuarioNuevo));
-}
-function registrarUsuario() {
-  let usuarioNuevo = {
-    username: inputCorreo.value,
-    password: inputPassword.value,
-    nombre: inputNombre.value,
-    apellido: inputApellido.value,
-    direccion: inputDireccion.value,
-    telefono: inputTelefono.value,
-    admin: false,
-    activo: true,
-  };
-  let usuarios;
-  if (localStorage.getItem("arregloUsuarios") == undefined) {
-    usuarios = [usuarioNuevo];
-  } else {
-    usuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
-    usuarios.push(usuarioNuevo);
-  }
-  localStorage.setItem("arregloUsuarios", JSON.stringify(usuarios));
-  localStorage.setItem("usuarioActivo", JSON.stringify(usuarioNuevo));
+  setArregloUsuarios(usuarios);
+  setUsuarioActivo(usuarioNuevo);
 }

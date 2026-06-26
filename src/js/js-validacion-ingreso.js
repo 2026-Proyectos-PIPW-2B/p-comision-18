@@ -1,7 +1,8 @@
-import { limpiarEstados } from "./moduloValidacion.js";
+import { limpiarEstados, redirigir} from "./moduloValidacion.js";
 import { mostrarExito } from "./moduloValidacion.js";
 import { mostrarMensajeError } from "./moduloValidacion.js";
 import { setearBoton } from "./modulo-botones.js";
+import { obtenerArregloUsuarios, setArregloUsuarios, setUsuarioActivo } from "./moduloLocalStorage.js";
 
 let arregloUsuarios;
 
@@ -13,10 +14,10 @@ window.addEventListener("load", function(){
 
 
 function setearArreglo(){
-    arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
-    if (arregloUsuarios == undefined){
+    arregloUsuarios = obtenerArregloUsuarios();
+    if (arregloUsuarios == null){
        arregloUsuarios = [{"username":"admin@dcicell","password":"admin123","admin":true}];    
-       localStorage.setItem("arregloUsuarios", JSON.stringify(arregloUsuarios));
+       setArregloUsuarios(arregloUsuarios);
     }
     
 }
@@ -30,33 +31,24 @@ function inicializar(){
         event.preventDefault(); 
         limpiarEstados();
         if (validarIngreso(inputUsername, inputPassword)){
-            setearUsuarioActivo(inputUsername)
+            let user = getUsuario(inputUsername);
+            setUsuarioActivo(user);
             aceptarIngreso("ingresoValido");
         }
     })
 
 }
-function setearUsuarioActivo(username){
-    let usuario = getUsuario(username);
-    localStorage.setItem("usuarioActivo", JSON.stringify(usuario));
-}
 
-function getUsuario(username){
-    let usuario = arregloUsuarios.find(user => user.username == username.value );
+function getUsuario(inputUsername){
+    let usuario = arregloUsuarios.find(user => user.username == inputUsername.value );
     return usuario;
 }
 
 function aceptarIngreso(ingresoValido){
     document.getElementById(ingresoValido).innerText = "Usuario valido!"
      setTimeout(() => {
-        redirigir(JSON.parse(localStorage.getItem("usuarioActivo")));
+        redirigir();
     }, 1300);
-}
-
-function redirigir(usuario){
-    if (usuario.admin){
-        window.location.href = "admin-index.html";
-    }else window.location.href = "perfil-usuario.html";    
 }
 
 function validarIngreso(username, password){

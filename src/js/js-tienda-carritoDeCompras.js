@@ -1,3 +1,5 @@
+import { obtenerUsuarioActivo } from "./moduloValidacion.js";
+
 // Contenedor del HTML donde se renderizan los productos dentro del Offcanvas
 const contenedorCarrito = document.getElementById("productosCarrito");
 
@@ -8,14 +10,6 @@ function carritoInicializar() {
   if (miCarrito) {
     miCarrito.addEventListener("show.bs.offcanvas", visualizarCarrito);
   }
-}
-
-function obtenerUsuarioActivo() {
-  const usuario = localStorage.getItem("usuarioActivo");
-  if (!usuario || usuario === "undefined") {
-    return null;
-  }
-  return JSON.parse(usuario);
 }
 
 function guardarUsuarioActivo(usuario) {

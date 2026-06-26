@@ -1,3 +1,6 @@
+import { obtenerArregloUsuarios, obtenerUsuarioActivo } from "./moduloLocalStorage.js";
+
+
 export function limpiarEstados() {
     const inputs = document.querySelectorAll(".form-control, .form-select")
     for (const input of inputs) {
@@ -16,9 +19,9 @@ export function mostrarExito(input){
 }
 
 export function encontrarUsuario(userName){
-    let arregloUsuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+    let arregloUsuarios = obtenerArregloUsuarios();
     let usuarioRetorno;
-    if (arregloUsuarios != undefined){
+    if (arregloUsuarios != null){
         for (let user of arregloUsuarios){
             if (validator.equals(userName, user.username)){
                 usuarioRetorno = user;
@@ -30,28 +33,46 @@ export function encontrarUsuario(userName){
 }
 
 export function controlIngreso(){
-    let usuarioActivo = localStorage.getItem("usuarioActivo"); 
+    const usuarioActivo = obtenerUsuarioActivo();
+    let paginaActual = getPaginaActual();
     switch (usuarioActivo) {
-        case null:{
-            localStorage.setItem("usuarioActivo", undefined);        
+        case null:{      
             window.location.href = "ingreso-usuario.html"
             break;
         }
-        case "undefined":
-            localStorage.setItem("arregloUsuarios", JSON.stringify([{username : "admin@dcicell", password : "admin123", admin:true}]));
-            window.location.href = "ingreso-usuario.html";
-            break;
-        default:{
-            if (JSON.parse(usuarioActivo).admin){
-                window.location.href = "admin-listado-productos.html"
-            }
+        default : {
+            if (!usuarioActivo.admin && paginaActual.includes("admin"))
+                window.location.href = "index.html";
             break;
         }
     }
 }
 
-export function controlIngresoAdmin(){
-    let usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
-    if (!usuarioActivo.admin)
-        window.location.href = "index.html"
+export function redirigir(){
+    const usuarioActivo = obtenerUsuarioActivo();
+    switch(usuarioActivo){
+    case null:{
+        window.location.href = "ingreso-usuario.html";
+        break;
+    }
+    default:
+      if(usuarioActivo.admin){
+        window.location.href = "admin-index.html";
+      }else 
+        window.location.href = "perfil-usuario.html"
+  } 
+}
+
+function getPaginaActual(){
+    return window.location.pathname;
+}
+
+
+
+export function setBotonCerrarSesion() {
+  let boton = document.getElementById("botonCerrarSesion");
+  boton.addEventListener("click", function () {
+    localStorage.removeItem("usuarioActivo");
+    window.location.href = "index.html"
+  });
 }

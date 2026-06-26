@@ -1,5 +1,6 @@
 import { setearBoton } from "./modulo-botones.js";
 import { agregarAlCarritoReal } from "./js-tienda-carritoDeCompras.js";
+import { obtenerArregloUsuarios, obtenerUsuarioActivo, setArregloUsuarios, setUsuarioActivo } from "./moduloValidacion.js";
 const contenedorProductos = document.getElementById("listado-productos");
 let listaProductos = JSON.parse(localStorage.getItem("productos")) || [];
 
@@ -30,19 +31,17 @@ function limpiarCarrito() {
   if (productosCarrito) {
     productosCarrito.innerText = "";
   }
-  const usuarioLogueado =
-    JSON.parse(localStorage.getItem("usuarioActivo")) || null;
-  if (usuarioLogueado) {
-    usuarioLogueado.carritoDeCompras = [];
-    localStorage.setItem("usuarioActivo", JSON.stringify(usuarioLogueado));
-
-    let listaUsuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-    const index = listaUsuarios.findIndex(
-      (u) => u.email === usuarioLogueado.email || u.id === usuarioLogueado.id,
+  const usuarioActivo = obtenerUsuarioActivo();
+  if (usuarioActivo) {
+    usuarioActivo.carritoDeCompras = [];
+    setUsuarioActivo(usuarioActivo);
+    let arregloUsuarios = obtenerArregloUsuarios();
+    const index = arregloUsuarios.findIndex(
+      (u) => u.email === usuarioActivo.email || u.id === usuarioActivo.id,
     );
     if (index !== -1) {
-      listaUsuarios[index] = usuarioLogueado;
-      localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
+      arregloUsuarios[index] = usuarioActivo;
+      setArregloUsuarios(arregloUsuarios);
     }
   }
 }
