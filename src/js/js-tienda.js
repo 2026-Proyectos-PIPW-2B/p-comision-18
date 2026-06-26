@@ -1,11 +1,8 @@
 
-<<<<<<< HEAD
-=======
 import { crearCardProductoCarrito, crearProducto } from "./moduloCrearCards.js";
 import { setearBotonPerfil } from "./modulo-botones.js"
 import { obtenerListadoProductos, obtenerUsuarioActivo, obtenerCarritoCompras, setUsuarioActivo, obtenerArregloUsuarios, setArregloUsuarios } from "./moduloLocalStorage.js";
 
->>>>>>> 8639e03 (merge fallido, correccion)
 let listadoProductos;
 let carritoDeCompras;
 
