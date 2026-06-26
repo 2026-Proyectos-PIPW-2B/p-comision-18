@@ -342,3 +342,26 @@ export function agregarAlCarrito(producto){
     mostrarConfirmacionCarrito(producto);
 
 }
+
+export function agregarAlCarrito(producto){
+    const usuario = obtenerUsuarioActivo();
+    if (usuario == null){
+        alertaLoginRequerido();
+        return;
+    }
+    if (productoEstaEnCarrito(producto)){
+        let productoEnCarrito = getItemCarrito(producto);
+        productoEnCarrito.cantidad++;
+    }else{
+        console.log(usuario)
+        console.log(carritoDeCompras)
+        carritoDeCompras.push({
+            ...producto,
+            cantidad: 1
+        });
+        
+    }
+    actualizarCarrito();
+    mostrarConfirmacionCarrito(producto);
+
+}

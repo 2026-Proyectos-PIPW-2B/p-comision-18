@@ -13,7 +13,8 @@ function crearCol(producto){
 }
 function crearCard(producto){
     let card = document.createElement("div");
-    card.className = "card shadow-lg h-100 border-0 rounded-3 overflow-hidden";
+    card.className = "card bg-dark bg-opacity-75 text-light shadow-lg h-100 border border-secondary border-opacity-25 rounded-3 overflow-hidden";
+    card.style.transition = "transform 0.3s ease, box-shadow 0.3s ease";
     const botonImagen = crearBotonImagen(producto);
     const cardBody = crearCardBody(producto);
     card.appendChild(botonImagen);
@@ -23,7 +24,7 @@ function crearCard(producto){
 function crearBotonImagen(producto){
     const boton = document.createElement("button");
     boton.type = "button";
-    boton.classList.add("border-0", "bg-transparent", "p-3", "text-center");
+    boton.className = "border-0 bg-transparent p-3 text-center w-100";
     boton.setAttribute("data-bs-toggle", "modal");
     boton.setAttribute("data-bs-target", `#modal-mostrar`);
     boton.addEventListener("click", function(){
@@ -36,7 +37,7 @@ function crearBotonImagen(producto){
 function crearImagen(producto){
     const imagen = document.createElement("img");
     imagen.src = producto.imagen;
-    imagen.classList.add("card-img-top");
+    imagen.className = "card-img-top img-fluid";
     imagen.style.height = "220px";
     imagen.style.objectFit = "contain";
     imagen.alt = producto.nombre;
@@ -44,7 +45,7 @@ function crearImagen(producto){
 }
 function crearCardBody(producto){
     const cardBody = document.createElement("div");
-    cardBody.classList.add("card-body", "d-flex", "flex-column", "justify-content-between");
+    cardBody.className = "card-body d-flex flex-column justify-content-between pt-0";
     let infoContenedor = crearInfoContenedor(producto);
     let botonCarrito = crearBotonCarrito(producto);
     cardBody.appendChild(infoContenedor);
@@ -62,7 +63,7 @@ function crearInfoContenedor(producto){
 function crearBotonTitulo(producto){
     const botonTitulo = document.createElement("button");
     botonTitulo.type = "button";
-    botonTitulo.className = "border-0 bg-transparent text-start p-0 mb-2";
+    botonTitulo.className = "border-0 bg-transparent text-start p-0 mb-2 w-100";
     botonTitulo.setAttribute("data-bs-toggle", "modal");
     botonTitulo.setAttribute("data-bs-target", `#modal-${producto.id}`);
     let titulo = crearTitulo(producto);
@@ -71,30 +72,34 @@ function crearBotonTitulo(producto){
 }
 function crearTitulo(producto){
     const titulo = document.createElement("h4");
-    titulo.className = "card-title text-dark fw-bold m-0";
+    titulo.className = "card-title text-white fw-bold m-0 fs-5";
     titulo.textContent = producto.nombre;
     return titulo;
 }
 function crearPrecio(producto){
     const precio = document.createElement("p");
-    precio.className = "fs-5 text-primary fw-bold mb-2";
+    precio.className = "fs-4 text-info fw-bold mb-2";
     precio.textContent = `$${producto.precio.toFixed(2)}`;
     return precio;
 }
 function crearBotonCarrito(producto){
     const botonCarrito = document.createElement("button");
-    botonCarrito.className = "btn btn-primary w-100 mt-2 d-flex align-items-center justify-content-center gap-2";
+    botonCarrito.className = "btn w-100 mt-2 d-flex align-items-center justify-content-center gap-2 fw-semibold";
     botonCarrito.innerHTML = '<i class="bi bi-cart"></i> ';
     configurarBotonCarrito(botonCarrito, producto);
     return botonCarrito;
 }
 function configurarBotonCarrito(boton, producto){
     if (producto.stock > 0){
-        boton.appendChild(document.createTextNode("Agregar al carrito."));
+        boton.className += " btn-info text-dark";
+        boton.innerHTML = '<i class="bi bi-cart-plus-fill"></i> Agregar al carrito';
+       //boton.appendChild(document.createTextNode("Agregar al carrito."));
+       //por que?
         setListeners(boton,producto);
     }else{
-        boton.disable = true;
-        boton.appendChild(document.createTextNode("Sin Stock"));
+        boton.className += " btn-outline-secondary text-muted";
+        boton.disabled = true;
+        boton.innerHTML = '<i class="bi bi-x-circle"></i> Sin Stock';
     }
 }
 
