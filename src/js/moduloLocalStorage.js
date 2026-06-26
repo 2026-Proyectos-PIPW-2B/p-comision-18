@@ -16,17 +16,6 @@ export function obtenerUsuarioActivo(){
     }else return null;
 }
 
-export function setUsuarioActivo(user){
-    localStorage.setItem("usuarioActivo", JSON.stringify(user));
-}
-
-export function obtenerListadoProductos(){
-    const listado = localStorage.getItem("productos");
-    if (listado != null){
-        return JSON.parse(listado);
-    }  
-    return null;
-}
 
 export function setUsuarioActivo(user){
     localStorage.setItem("usuarioActivo", JSON.stringify(user));

@@ -1,24 +1,11 @@
+
 import { crearCardProductoCarrito, crearProducto } from "./moduloCrearCards.js";
 import { setearBotonPerfil } from "./modulo-botones.js"
 import { obtenerListadoProductos, obtenerUsuarioActivo, obtenerCarritoCompras, setUsuarioActivo, obtenerArregloUsuarios, setArregloUsuarios } from "./moduloLocalStorage.js";
 
 let listadoProductos;
 let carritoDeCompras;
-import { crearCardProductoCarrito, crearProducto } from "./moduloCrearCards.js";
-import { setearBotonPerfil } from "./modulo-botones.js"
-import { obtenerListadoProductos, obtenerUsuarioActivo, obtenerCarritoCompras, setUsuarioActivo, obtenerArregloUsuarios, setArregloUsuarios } from "./moduloLocalStorage.js";
 
-let listadoProductos;
-let carritoDeCompras;
-
-window.addEventListener("load", function(){
-    setearBotonPerfil();
-    agregarListeners();
-    listadoProductos = obtenerListadoProductos();
-    carritoDeCompras = obtenerCarritoCompras();
-    inicializarCarrito();
-    mostrarCatalogo();
-    inicializarFiltros();
 window.addEventListener("load", function(){
     setearBotonPerfil();
     agregarListeners();
@@ -29,18 +16,6 @@ window.addEventListener("load", function(){
     inicializarFiltros();
 });
 
-function agregarListeners(){
-    agregarListenerCompra();
-}
-
-function agregarListenerCompra(){
-    const botonCompra = document.getElementById("compraCarrito");
-    botonCompra.addEventListener("click", function () {
-    confirmarCompra();
-  });
-}
-
-function confirmarCompra(){
 function agregarListeners(){
     agregarListenerCompra();
 }
@@ -66,18 +41,9 @@ function cerrarCarrito() {
   offcanvas.hide();
 }
 
-
 function limpiarCarrito() {
-    const productosCarrito = document.getElementById("productosCarrito");
-    const productosCarrito = document.getElementById("productosCarrito");
+    const productosCarrito = document.getElementById("productosCarrito");   
     productosCarrito.innerText = "";
-}
-
-function registrarCompra(){
-    //IMPLEMENTAR
-    console.log("Aca hay que implementar registrarCompra en el historial");
-}
-
 }
 
 function registrarCompra(){
@@ -112,31 +78,9 @@ function limpiarListadoProductos(){
     contenedorProductos.innerHTML = "";
 }
 function mostrarMensajeSinProductos(){
-function inicializarCarrito(){
-    const carrito = document.getElementById("carritoCompras");
-    carrito.addEventListener("show.bs.offcanvas",  visualizarCarrito);
-}
-
-function mostrarCatalogo(){
-    limpiarListadoProductos();
-    if (listadoProductos.length === 0){
-        mostrarMensajeSinProductos();
-    }else{
-       for (let producto of listadoProductos) {
-        mostrarProducto(producto);
-       }
-    }
-}
-
-function limpiarListadoProductos(){
-    let contenedorProductos = obtenerContenedorProductos();
-    contenedorProductos.innerHTML = "";
-}
-function mostrarMensajeSinProductos(){
     const mensaje = document.createElement("h4");
     mensaje.className = "text-muted text-center my-5 w-100";
     mensaje.textContent = "No hay productos para mostrar.";
-    let contenedorProductos = obtenerContenedorProductos();
     let contenedorProductos = obtenerContenedorProductos();
     contenedorProductos.appendChild(mensaje);
 }
@@ -152,27 +96,6 @@ function obtenerContenedorProductos(){
     return contenedorProductos;
 }
 
-export function agregarAlCarrito(producto){
-    const usuario = obtenerUsuarioActivo();
-    if (usuario == null){
-        alertaLoginRequerido();
-        return;
-    }
-    let productoEnCarrito = getItemCarrito(producto);
-    console.log(productoEnCarrito)
-    if (productoEnCarrito == null){
-        carritoDeCompras.push({
-            ...producto,
-            cantidad: 1
-        });
-        
-    }else{
-        productoEnCarrito.cantidad++;
-    }
-    actualizarCarrito();
-    mostrarConfirmacionCarrito(producto);
-
-}
 function actualizarCarrito(){
     let usuarioActualizado = obtenerUsuarioActivo();
     usuarioActualizado.carrito = carritoDeCompras;
@@ -398,17 +321,6 @@ function cerrarModalProducto(){
     }
 }
 
-function mostrarProducto(producto){
-    let productoCreado = crearProducto(producto);
-    let contenedorProductos = obtenerContenedorProductos();
-    contenedorProductos.appendChild(productoCreado);
-}
-
-function obtenerContenedorProductos(){
-    let contenedorProductos = document.getElementById("listado-productos");
-    return contenedorProductos;
-}
-
 export function agregarAlCarrito(producto){
     const usuario = obtenerUsuarioActivo();
     if (usuario == null){
@@ -429,228 +341,4 @@ export function agregarAlCarrito(producto){
     actualizarCarrito();
     mostrarConfirmacionCarrito(producto);
 
-}
-function actualizarCarrito(){
-    let usuarioActualizado = obtenerUsuarioActivo();
-    usuarioActualizado.carrito = carritoDeCompras;
-    setUsuarioActivo(usuarioActualizado);
-   
-    let arregloUsuariosActualizado = obtenerArregloUsuarios();
-    const indice = arregloUsuariosActualizado.findIndex(
-    user => user.username === usuarioActualizado.username
-    );    
-    arregloUsuariosActualizado[indice] = usuarioActualizado;
-    setArregloUsuarios(arregloUsuariosActualizado);
-}
-
-function alertaLoginRequerido(){
-    const modalLogin = new bootstrap.Modal(document.getElementById("modalLoginRequerido"));
-    modalLogin.show();
-}
-function productoEstaEnCarrito(producto){
-    return carritoDeCompras.some((item) => item.id === producto.id);
-}
-function getItemCarrito(producto){
-    let productoEnCarrito = carritoDeCompras.find((item) => item.id === producto.id);
-    if (productoEnCarrito){
-        return productoEnCarrito;
-    }else return null;
-}
-function mostrarConfirmacionCarrito(producto){
-    const textoModal = document.getElementById("textoProductoAgregado");
-    textoModal.textContent = `"${producto.nombre}" se sumó a tu carrito correctamente.`;
-    const modalExito = new bootstrap.Modal(
-    document.getElementById("modalProductoAgregado"),
-    );
-    modalExito.show();
-}
-
-function visualizarCarrito(){
-    limpiarCarrito();
-    const botonCompra = document.getElementById("compraCarrito");
-    botonCompra.classList.remove("disabled");
-    const contenedorCarrito = document.getElementById("productosCarrito");
-    if (obtenerUsuarioActivo() == null){
-        //aca escribo que inicie sesion
-        return;
-    }
-    if (obtenerCarritoCompras().length > 0){
-        crearCarrito(contenedorCarrito);
-    }else{
-        
-        botonCompra.classList.add("disabled");
-        mostrarMensajeCarritoVacio(contenedorCarrito);
-        return;
-    }
-}
-
-function mostrarMensajeCarritoVacio(contenedorCarrito){
-    let p = document.createElement("p");
-    p.className = "text-muted text-center my-3";
-    p.textContent = "El carrito esta vacio."
-    contenedorCarrito.appendChild(p);
-}
-function crearCarrito(contenedorCarrito){
-    let carrito = obtenerCarritoCompras();
-    for (let producto of carrito){
-        let cardProducto = crearCardProductoCarrito(producto);
-        contenedorCarrito.appendChild(cardProducto);
-    }
-}
-
-export function eliminarDelCarrito(producto){
-    const usuario = obtenerUsuarioActivo();
-    let indice = carritoDeCompras.findIndex(
-    item => item.id === producto.id
-    );
-    carritoDeCompras.splice(indice, 1)
-    actualizarCarrito();
-    visualizarCarrito();
-}
-
-function inicializarFiltros() {
-    const botonAplicarFiltro = document.getElementById("btnAplicarFiltros");
-    const botonBorraFiltros = document.getElementById("btnBorrarFiltros");
-    if (botonAplicarFiltro) {
-        botonAplicarFiltro.addEventListener("click", function(){
-            aplicarFiltrosYOrden()
-        });
-    }
-    if (botonBorraFiltros) {
-        botonBorraFiltros.addEventListener("click", borrarFiltros);
-    }
-}
-
-function aplicarFiltrosYOrden(){
-    listadoProductos = obtenerListadoProductos();
-    listadoProductos = filtrarPorPrecio(listadoProductos);
-    listadoProductos = filtrarPorCategoria(listadoProductos);
-    listadoProductos =  ordenar(listadoProductos);
-    mostrarCatalogo();
-    cerrarOffCanvasFiltros();
-}
-function filtrarPorPrecio(){
-    const inputMin = document.getElementById("inputPrecioMinimo");
-    const inputMax = document.getElementById("inputPrecioMaximo");
-    let resultado = listadoProductos;
-    if (inputMin && inputMin.value.trim() !== "") {
-        const valorMin = inputMin.value.trim();
-        if (validator.isFloat(valorMin, { min: 0 })) {
-          resultado = resultado.filter((p) => p.precio >= Number(valorMin));
-        } else {
-          console.warn("Precio mínimo inválido.");
-        }
-      }
-    
-      // Validación con validator.js para Precio Máximo
-      if (inputMax && inputMax.value.trim() !== "") {
-        const valorMax = inputMax.value.trim();
-        if (validator.isFloat(valorMax, { min: 0 })) {
-          resultado = resultado.filter((p) => p.precio <= Number(valorMax));
-        } else {
-          console.warn("Precio máximo inválido.");
-        }
-      }
-    
-      return resultado;
-}
-function filtrarPorCategoria(){
-    const radioCelulares = document.getElementById("inputCelulares");
-    const radioAuriculares = document.getElementById("inputAuriculares");
-    const radioCargadores = document.getElementById("inputCargadores");
-    const radioFundas = document.getElementById("inputFundas");
-
-    if (
-        (!radioCelulares || !radioCelulares.checked) &&
-        (!radioAuriculares || !radioAuriculares.checked) &&
-        (!radioCargadores || !radioCargadores.checked) &&
-        (!radioFundas || !radioFundas.checked)
-    ) {
-    return listadoProductos;
-    }
-    let resultado = [];
-    if (radioCelulares && radioCelulares.checked) {
-    resultado = listadoProductos.filter(
-      (p) => p.categoriaObligatoria.toLowerCase() === "telefono",
-    );
-  } else if (radioAuriculares && radioAuriculares.checked) {
-    resultado = listadoProductos.filter(
-      (p) => p.categoriaObligatoria.toLowerCase() === "auriculares",
-    );
-  } else if (radioCargadores && radioCargadores.checked) {
-    resultado = listadoProductos.filter(
-      (p) => p.categoriaObligatoria.toLowerCase() === "cargadores",
-    );
-  } else if (radioFundas && radioFundas.checked) {
-    resultado = listadoProductos.filter(
-      (p) => p.categoriaObligatoria.toLowerCase() === "fundas",
-    );
-  }
-  return resultado;    
-}
-function ordenar(){
-    const selectOrdenar = document.getElementById("inputOrdenar");
-    let resultado = listadoProductos;
-
-    if (selectOrdenar && selectOrdenar.value !== "vacio") {
-        if (selectOrdenar.value === "menorPrecio") {
-            resultado.sort((a, b) => a.precio - b.precio);
-        } else if (selectOrdenar.value === "mayorPrecio") {
-            resultado.sort((a, b) => b.precio - a.precio);
-        }
-    }
-  return resultado;
-}
-function borrarFiltros(){
-    limpiarInputsFiltros();
-    listadoProductos = obtenerListadoProductos();
-    mostrarCatalogo();
-    cerrarOffCanvasFiltros();
-}
-function limpiarInputsFiltros(){
-    const inputMin = document.getElementById("inputPrecioMinimo");
-    const inputMax = document.getElementById("inputPrecioMaximo");
-    if (inputMin) inputMin.value = "";
-    if (inputMax) inputMax.value = "";
-    const selectOrdenar = document.getElementById("inputOrdenar");
-    if (selectOrdenar) selectOrdenar.value = "vacio";
-
-    const radiosCategorias = document.querySelectorAll(
-    'input[name="radioFiltro"]',
-    );
-    radiosCategorias.forEach((radio) => {
-    radio.checked = false;
-    });
-}
-function cerrarOffCanvasFiltros(){
-    const offcanvasElement = document.getElementById("formularioFiltros");
-    if (offcanvasElement) {
-        let offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-        if (!offcanvas) {
-        offcanvas = new bootstrap.Offcanvas(offcanvasElement);
-    }
-    offcanvas.hide();
-    }
-}
-
-export function crearModal(producto){
-    let imagenProducto = document.getElementById("fotoModal");
-    imagenProducto.src = producto.imagen;
-    let modalNombreProducto = document.getElementById("modalNombreProducto");
-    modalNombreProducto.innerText = producto.nombre;
-    let modalPrecio = document.getElementById("modalPrecio");
-    modalPrecio.innerText = "$"+producto.precio; //dar formato
-    let modalDescripcion = document.getElementById("modalDescripcion")
-    modalDescripcion.innerText = producto.descripcion;
-    let botonCarritoModal = document.getElementById("botonCarritoModal");
-     botonCarritoModal.onclick = function(){
-            cerrarModalProducto();
-            agregarAlCarrito(producto);
-        };
-}
-function cerrarModalProducto(){
-    const modal = bootstrap.Modal.getInstance(document.getElementById("modal-mostrar"));
-    if (modal) {
-        modal.hide();
-    }
 }
