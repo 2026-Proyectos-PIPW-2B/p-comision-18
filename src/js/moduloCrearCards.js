@@ -1,4 +1,4 @@
-import { agregarAlCarrito, eliminarDelCarrito } from "./js-tienda.js";
+import { agregarAlCarrito, crearModal, eliminarDelCarrito } from "./js-tienda.js";
 
 export function crearProducto(producto){
     const cardProducto = crearCol(producto);
@@ -25,7 +25,10 @@ function crearBotonImagen(producto){
     boton.type = "button";
     boton.classList.add("border-0", "bg-transparent", "p-3", "text-center");
     boton.setAttribute("data-bs-toggle", "modal");
-    boton.setAttribute("data-bs-target", `#modal-${producto.id}`);
+    boton.setAttribute("data-bs-target", `#modal-mostrar`);
+    boton.addEventListener("click", function(){
+        crearModal(producto);
+    });
     const imagen = crearImagen(producto);
     boton.appendChild(imagen);
     return boton
