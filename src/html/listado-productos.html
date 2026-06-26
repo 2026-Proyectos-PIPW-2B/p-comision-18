@@ -421,121 +421,121 @@
           </button>
         </div>
 
-            <div
-              class="offcanvas offcanvas-start"
-              tabindex="-1"
-              id="formularioFiltros"
-              aria-labelledby="formularioFiltrosLabel"
-            >
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="formularioFiltrosLabel">
-                  Filtros
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="offcanvas"
-                  aria-label="Close"
-                ></button>
+        <div
+          class="offcanvas offcanvas-start"            
+          tabindex="-1"
+          id="formularioFiltros"
+          aria-labelledby="formularioFiltrosLabel"
+        >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="formularioFiltrosLabel">
+            Filtros
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <div>
+            <form class="bg-secondary-subtle rounded p-2">
+              <div
+                class="container border-2 border-secondary border-bottom pb-3"
+              >
+                <label for="inputOrdenar">Ordenar por:</label><br />
+                <select
+                  name="ordenar"
+                  id="inputOrdenar"
+                  class="form-select"
+                >
+                  <option value="mayorPrecio">Mayor Precio</option>
+                  <option value="menorPrecio">Menor Precio</option>
+                  <option value="vacio" selected disabled>
+                    Seleccione una opcion...
+                  </option>
+                </select>
               </div>
-              <div class="offcanvas-body">
-                <div>
-                  <form class="bg-secondary-subtle rounded p-2">
-                    <div
-                      class="container border-2 border-secondary border-bottom pb-3"
-                    >
-                      <label for="inputOrdenar">Ordenar por:</label><br />
-                      <select
-                        name="ordenar"
-                        id="inputOrdenar"
-                        class="form-select"
-                      >
-                        <option value="mayorPrecio">Mayor Precio</option>
-                        <option value="menorPrecio">Menor Precio</option>
-                        <option value="vacio" selected disabled>
-                          Seleccione una opcion...
-                        </option>
-                      </select>
-                    </div>
-                    <div
-                      class="container border-2 border-secondary border-bottom py-3"
-                    >
-                      <label for="rangoPrecioMax">Precio:</label><br />
-                      <div
-                        class="d-flex align-items-center gap-2 justify-content-evenly"
-                      >
-                        <input
-                          type="number"
-                          name="precioMinino"
-                          id="inputPrecioMinimo"
-                          placeholder="0$"
-                          class="form-control-sm col-5 text-center"
-                        />
-                        <span> a </span>
-                        <input
-                          type="number"
-                          name="precioMaximo"
-                          id="inputPrecioMaximo"
-                          placeholder="(aca ponemos el precio mas caro)"
-                          class="form-control-sm col-5 text-center"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="container border-2 border-secondary border-bottom py-3"
-                    >
-                      <div class="form-check">
-                        <input
-                          type="radio"
-                          class="form-check-input"
-                          name="radioFiltro"
-                          id="inputCelulares"
-                        />
-                        <label for="inputCelulares" class="formm-check-label"
-                          >Celulares</label
-                        >
-                      </div>
-                      <div class="form-check">
-                        <input
-                          type="radio"
-                          class="form-check-input"
-                          name="radioFiltro"
-                          id="inputAuriculares"
-                        />
-                        <label for="inputAuriculares" class="formm-check-label"
-                          >Auriculares</label
-                        >
-                      </div>
-                      <div class="form-check">
-                        <input
-                          type="radio"
-                          class="form-check-input"
-                          name="radioFiltro"
-                          id="inputCargadores"
-                        />
-                        <label for="inputCargadores" class="formm-check-label"
-                          >Cargadores</label
-                        >
-                      </div>
-                      <div class="form-check">
-                        <input
-                          type="radio"
-                          class="form-check-input"
-                          name="radioFiltro"
-                          id="inputFundas"
-                        />
-                        <label for="inputFundas" class="formm-check-label"
-                          >Fundas</label
-                        >
-                      </div>
-                    </div>
-                    <div class="d-flex justify-content-center mt-2 gap-4">
-                      <button type="button" class="btn btn-primary" id="btnAplicarFiltros">Aplicar Filtros</button>
-                      <button type="button" class="btn btn-outline-danger" id="btnBorrarFiltros">Borrar Filtros</button>
-                    </div>
-                  </form>
+              <div
+                class="container border-2 border-secondary border-bottom py-3"
+              >
+                <label for="rangoPrecioMax">Precio:</label><br />
+                <div
+                  class="d-flex align-items-center gap-2 justify-content-evenly"
+                >
+                  <input
+                    type="number"
+                    name="precioMinino"
+                    id="inputPrecioMinimo"
+                    placeholder="0$"
+                    class="form-control-sm col-5 text-center"
+                  />
+                  <span> a </span>
+                  <input
+                    type="number"
+                    name="precioMaximo"
+                    id="inputPrecioMaximo"
+                    placeholder="(aca ponemos el precio mas caro)"
+                    class="form-control-sm col-5 text-center"
+                  />
                 </div>
               </div>
+              <div
+                class="container border-2 border-secondary border-bottom py-3"
+              >
+                <div class="form-check">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    name="radioFiltro"
+                    id="inputCelulares"
+                  />
+                  <label for="inputCelulares" class="formm-check-label"
+                    >Celulares</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    name="radioFiltro"
+                    id="inputAuriculares"
+                  />
+                  <label for="inputAuriculares" class="formm-check-label"
+                    >Auriculares</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    name="radioFiltro"
+                    id="inputCargadores"
+                  />
+                  <label for="inputCargadores" class="formm-check-label"
+                    >Cargadores</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    name="radioFiltro"
+                    id="inputFundas"
+                  />
+                  <label for="inputFundas" class="formm-check-label"
+                    >Fundas</label
+                  >
+                </div>
+              </div>
+              <div class="d-flex justify-content-center mt-2 gap-4">
+                <button type="button" class="btn btn-primary" id="btnAplicarFiltros">Aplicar Filtros</button>
+                <button type="button" class="btn btn-outline-danger" id="btnBorrarFiltros">Borrar Filtros</button>
+              </div>
+            </form>
+          </div>
+        </div>
 
               <div class="mt-auto d-flex gap-2 pt-3 border-top bg-white">
                 <button
@@ -554,9 +554,55 @@
                 </button>
               </div>
             </form>
-          </div>
         </div>
 
+        <div class="modal fade" id="modal-mostrar" tabindex="-1" aria-labelledby="modal-mostrarLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12 p-3 ">
+                          <img src="" class="img-fluid " id="fotoModal">
+                        </div>
+                        <div class="col-md-6 col-sm-12 p-3">
+                          <h3 id="modalNombreProducto"></h3>
+                          <h4 id="modalPrecio"></h4>
+                          <ul>
+                            <li>(EJEMPLOS DE METODOS DE PAGO)</li>
+                            <li>(COMO TARJETAS DE CREDITO O DESCUENTOS EFT)</li>
+                          </ul>
+                            <button type="button" class="btn btn-primary mt-2" id="botonCarritoModal">
+                              <i class="bi bi-cart"></i>
+                                Agregar al carrito
+                            </button>
+                        </div> 
+                        <div class="col-12 p-3 mx-2 border-bottom mb-2">
+                          <h5>Descripcion:</h5>
+                          <p id="modalDescripcion">
+	                          
+                          </p>
+                        </div>
+                        <div class="col-12 p-3">
+                          <h5>Componentes</h5>
+                          <ul>
+                            <li>Procesador: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+                            <li>Memoria RAM: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+                          </ul>
+                          <h5>Varios</h5>
+                          <ul>
+                            <li>Pantalla: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+                            <li>Taza de refrezco: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        
         <div
           class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"
           id="listado-productos"

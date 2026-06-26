@@ -101,18 +101,18 @@ export function agregarAlCarrito(producto){
         alertaLoginRequerido();
         return;
     }
-    if (productoEstaEnCarrito(producto)){
-        let productoEnCarrito = getItemCarrito(producto);
-        productoEnCarrito.cantidad++;
-    }else{
-        console.log(usuario)
-        console.log(carritoDeCompras)
+    let productoEnCarrito = getItemCarrito(producto);
+    console.log(productoEnCarrito)
+    if (productoEnCarrito == null){
         carritoDeCompras.push({
             ...producto,
             cantidad: 1
         });
-        actualizarCarrito();
+        
+    }else{
+        productoEnCarrito.cantidad++;
     }
+    actualizarCarrito();
     mostrarConfirmacionCarrito(producto);
 
 }
@@ -134,11 +134,13 @@ function alertaLoginRequerido(){
     modalLogin.show();
 }
 function productoEstaEnCarrito(producto){
-    return carritoDeCompras.indexOf(producto) != -1;
+    return carritoDeCompras.some((item) => item.id === producto.id);
 }
 function getItemCarrito(producto){
     let productoEnCarrito = carritoDeCompras.find((item) => item.id === producto.id);
-    return productoEnCarrito;
+    if (productoEnCarrito){
+        return productoEnCarrito;
+    }else return null;
 }
 function mostrarConfirmacionCarrito(producto){
     const textoModal = document.getElementById("textoProductoAgregado");
@@ -314,5 +316,27 @@ function cerrarOffCanvasFiltros(){
         offcanvas = new bootstrap.Offcanvas(offcanvasElement);
     }
     offcanvas.hide();
+    }
+}
+
+export function crearModal(producto){
+    let imagenProducto = document.getElementById("fotoModal");
+    imagenProducto.src = producto.imagen;
+    let modalNombreProducto = document.getElementById("modalNombreProducto");
+    modalNombreProducto.innerText = producto.nombre;
+    let modalPrecio = document.getElementById("modalPrecio");
+    modalPrecio.innerText = "$"+producto.precio; //dar formato
+    let modalDescripcion = document.getElementById("modalDescripcion")
+    modalDescripcion.innerText = producto.descripcion;
+    let botonCarritoModal = document.getElementById("botonCarritoModal");
+     botonCarritoModal.onclick = function(){
+            cerrarModalProducto();
+            agregarAlCarrito(producto);
+        };
+}
+function cerrarModalProducto(){
+    const modal = bootstrap.Modal.getInstance(document.getElementById("modal-mostrar"));
+    if (modal) {
+        modal.hide();
     }
 }
