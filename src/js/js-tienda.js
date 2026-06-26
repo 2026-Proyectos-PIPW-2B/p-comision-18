@@ -1,6 +1,11 @@
 import { setearBoton } from "./modulo-botones.js";
 import { agregarAlCarritoReal } from "./js-tienda-carritoDeCompras.js";
-import { obtenerArregloUsuarios, obtenerUsuarioActivo, setArregloUsuarios, setUsuarioActivo } from "./moduloValidacion.js";
+import {
+  obtenerArregloUsuarios,
+  obtenerUsuarioActivo,
+  setArregloUsuarios,
+  setUsuarioActivo,
+} from "./moduloLocalStorage.js";
 const contenedorProductos = document.getElementById("listado-productos");
 let listaProductos = JSON.parse(localStorage.getItem("productos")) || [];
 

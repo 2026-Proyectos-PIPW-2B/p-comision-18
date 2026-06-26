@@ -1,5 +1,7 @@
-import { obtenerUsuarioActivo } from "./moduloValidacion.js";
-
+import {
+  obtenerUsuarioActivo,
+  setUsuarioActivo,
+} from "./moduloLocalStorage.js";
 // Contenedor del HTML donde se renderizan los productos dentro del Offcanvas
 const contenedorCarrito = document.getElementById("productosCarrito");
 
