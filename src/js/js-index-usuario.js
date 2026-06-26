@@ -1,5 +1,5 @@
-import { setearBoton } from "./modulo-botones.js";
+import { setearBotonPerfil } from "./modulo-botones.js";
 
 window.addEventListener("load", function(){
-    setearBoton();
+    setearBotonPerfil();
 })

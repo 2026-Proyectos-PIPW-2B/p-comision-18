@@ -322,8 +322,9 @@
                         >
                       </div>
                     </div>
-                    <div class="d-flex justify-content-center mt-2">
-                      <div class="btn btn-primary">Aplicar Filtros</div>
+                    <div class="d-flex justify-content-center mt-2 gap-4">
+                      <button type="button" class="btn btn-primary" id="btnAplicarFiltros">Aplicar Filtros</button>
+                      <button type="button" class="btn btn-outline-danger" id="btnBorrarFiltros">Borrar Filtros</button>
                     </div>
                   </form>
                 </div>
@@ -333,14 +334,14 @@
                 <button
                   type="button"
                   class="btn btn-primary flex-grow-1 py-2 fw-semibold"
-                  id="btnAplicarFiltros"
+                  id=""
                 >
                   Aplicar
                 </button>
                 <button
                   type="button"
                   class="btn btn-outline-secondary flex-grow-1 py-2 fw-semibold"
-                  id="btnBorrarFiltros"
+                  id=""
                 >
                   Borrar
                 </button>
@@ -404,7 +405,6 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/js-tienda.js"></script>
-    <script type="module" src="../js/js-tienda-carritoDeCompras.js"></script>
-    <script type="module" src="../js/js-tienda-filtrosOrdenarPor.js"></script>
+    
   </body>
 </html>

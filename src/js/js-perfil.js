@@ -1,10 +1,10 @@
-import { setearBoton } from "./modulo-botones.js";
+import { setearBotonPerfil } from "./modulo-botones.js";
 import { obtenerUsuarioActivo } from "./moduloLocalStorage.js";
 import { controlIngreso, setBotonCerrarSesion } from "./moduloValidacion.js";
 
 window.addEventListener("load", function(){
     controlIngreso();
-    setearBoton();    
+    setearBotonPerfil();    
     inicializar();
 })
 
