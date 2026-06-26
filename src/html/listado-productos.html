@@ -7,28 +7,30 @@
     <link rel="stylesheet" href="../css/estilos.css" />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     />
-    <!-- Bootstrap Icons -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
   </head>
-  <body class="bg-secondary-subtle">
-    <header class="mb-4 shadow-sm bg-info-subtle rounded">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container px-4">
-          <a class="navbar-brand h2" href="index.html">
+  <body class="bg-dark text-light d-flex flex-column min-vh-100 fondo">
+    <header
+      class="mb-4 shadow border-bottom border-secondary border-opacity-25 sticky-top bg-dark bg-opacity-75"
+      style="backdrop-filter: blur(10px)"
+    >
+      <nav class="navbar navbar-expand-lg navbar-dark py-2">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
             <img
-              src="../img/dciccell.png"
               src="../img/dciccell.png"
               alt="imagen logo"
               class="img-fluid"
-              style="max-height: 100px"
-          /></a>
+              style="max-height: 80px"
+            />
+          </a>
           <button
-            class="navbar-toggler"
+            class="navbar-toggler border-secondary"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -39,23 +41,19 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto fs-4">
+            <ul class="navbar-nav ms-auto gap-2">
               <li class="nav-item">
-                <a class="nav-link" href="listado-productos.html">Tienda</a>
-              </li>
-              <li class="nav-item">
-                <button
-                  type="button"
-                  class="nav-link"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#carritoCompras"
-                  aria-controls="carritoCompras"
+                <a
+                  class="nav-link fw-semibold text-info active"
+                  href="listado-productos.html"
+                  >Tienda</a
                 >
-                  Carrito
-                </button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="botonPerfil" href="perfil-usuario.html"
+                <a
+                  class="nav-link fw-semibold text-light-50"
+                  id="botonPerfil"
+                  href="perfil-usuario.html"
                   >Perfil</a
                 >
               </li>
@@ -65,58 +63,261 @@
       </nav>
     </header>
 
-    <div class="offcanvas offcanvas-end" id="carritoCompras">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title">Carrito de compras.</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-        ></button>
-      </div>
-      <div class="offcanvas-body d-flex flex-column justify-content-between">
+    <main class="flex-shrink-0 my-4 position-relative">
+      <section class="container">
         <div
-          class="row px-2 overflow-y-auto flex-grow-1"
-          id="productosCarrito"
-        ></div>
-        <div class="p-2 border-top">
-          <button class="col-12 btn btn-primary" id="compraCarrito">
-            Confirmar compra
+          class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary border-opacity-50"
+        >
+          <h2 class="fw-bold m-0 fs-3 text-white">Catálogo de Productos</h2>
+          <button
+            type="button"
+            class="btn btn-outline-info d-flex align-items-center gap-2 shadow-sm fw-semibold"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#formularioFiltros"
+            aria-controls="formularioFiltros"
+          >
+            <i class="bi bi-funnel"></i>
+            Filtrar y Ordenar
           </button>
         </div>
-      </div>
-    </div>
 
-    <div class="modal fade" id="modalCompraExitosa">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Compra realizada!</h5>
+        <div
+          class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"
+          id="listado-productos"
+        ></div>
+      </section>
+
+      <div class="position-fixed bottom-0 end-0 m-4" style="z-index: 1050">
+        <button
+          type="button"
+          class="btn btn-info rounded-circle p-3 shadow-lg d-flex align-items-center justify-content-center text-dark"
+          style="width: 60px; height: 60px"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#carritoCompras"
+          aria-controls="carritoCompras"
+          title="Ver Carrito"
+        >
+          <i class="bi bi-cart3 fs-3"></i>
+        </button>
+      </div>
+
+      <div
+        class="offcanvas offcanvas-end bg-dark text-light border-start border-secondary border-opacity-25"
+        id="carritoCompras"
+      >
+        <div
+          class="offcanvas-header border-bottom border-secondary border-opacity-50"
+        >
+          <h5 class="offcanvas-title fw-bold text-info">Carrito de compras</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+          <div
+            class="row px-2 overflow-y-auto flex-grow-1"
+            id="productosCarrito"
+          ></div>
+          <div class="p-2 border-top border-secondary border-opacity-50">
+            <button
+              class="w-100 btn btn-info py-2 fw-bold text-dark"
+              id="compraCarrito"
+            >
+              Confirmar compra
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="offcanvas offcanvas-start bg-dark text-light border-end border-secondary border-opacity-25"
+        tabindex="-1"
+        id="formularioFiltros"
+        aria-labelledby="formularioFiltrosLabel"
+      >
+        <div
+          class="offcanvas-header border-bottom border-secondary border-opacity-50"
+        >
+          <h5
+            class="offcanvas-title fw-bold text-info"
+            id="formularioFiltrosLabel"
+          >
+            Filtros
+          </h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+          <form
+            class="bg-secondary bg-opacity-10 rounded p-3 flex-grow-1 border border-secondary border-opacity-25"
+          >
+            <div
+              class="mb-4 pb-3 border-bottom border-secondary border-opacity-25"
+            >
+              <label
+                for="inputOrdenar"
+                class="form-label fw-semibold text-white"
+                >Ordenar por:</label
+              >
+              <select
+                name="ordenar"
+                id="inputOrdenar"
+                class="form-select bg-dark text-light border-secondary"
+              >
+                <option value="vacio" selected disabled>
+                  Seleccione una opción...
+                </option>
+                <option value="mayorPrecio">Mayor Precio</option>
+                <option value="menorPrecio">Menor Precio</option>
+              </select>
+            </div>
+            <div
+              class="mb-4 pb-3 border-bottom border-secondary border-opacity-25"
+            >
+              <label class="form-label fw-semibold text-white">Precio:</label>
+              <div class="d-flex align-items-center gap-2">
+                <input
+                  type="number"
+                  name="precioMinino"
+                  id="inputPrecioMinimo"
+                  placeholder="Min $"
+                  class="form-control text-center bg-dark text-light border-secondary"
+                />
+                <span class="text-muted">a</span>
+                <input
+                  type="number"
+                  name="precioMaximo"
+                  id="inputPrecioMaximo"
+                  placeholder="Max $"
+                  class="form-control text-center bg-dark text-light border-secondary"
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold text-white"
+                >Categorías:</label
+              >
+              <div class="form-check mb-2">
+                <input
+                  type="radio"
+                  class="form-check-input bg-dark border-secondary"
+                  name="radioFiltro"
+                  id="inputCelulares"
+                />
+                <label
+                  for="inputCelulares"
+                  class="form-check-label text-light-50"
+                  >Celulares</label
+                >
+              </div>
+              <div class="form-check mb-2">
+                <input
+                  type="radio"
+                  class="form-check-input bg-dark border-secondary"
+                  name="radioFiltro"
+                  id="inputAuriculares"
+                />
+                <label
+                  for="inputAuriculares"
+                  class="form-check-label text-light-50"
+                  >Auriculares</label
+                >
+              </div>
+              <div class="form-check mb-2">
+                <input
+                  type="radio"
+                  class="form-check-input bg-dark border-secondary"
+                  name="radioFiltro"
+                  id="inputCargadores"
+                />
+                <label
+                  for="inputCargadores"
+                  class="form-check-label text-light-50"
+                  >Cargadores</label
+                >
+              </div>
+              <div class="form-check mb-2">
+                <input
+                  type="radio"
+                  class="form-check-input bg-dark border-secondary"
+                  name="radioFiltro"
+                  id="inputFundas"
+                />
+                <label for="inputFundas" class="form-check-label text-light-50"
+                  >Fundas</label
+                >
+              </div>
+            </div>
+          </form>
+          <div
+            class="d-flex gap-2 pt-3 border-top border-secondary border-opacity-50 bg-dark"
+          >
             <button
               type="button"
-              class="btn-close"
+              class="btn btn-info flex-grow-1 py-2 fw-semibold text-dark"
+              id="btnAplicarFiltros"
+            >
+              Aplicar
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary text-light flex-grow-1 py-2 fw-semibold"
+              id="btnBorrarFiltros"
+            >
+              Borrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      class="modal fade"
+      id="modalCompraExitosa"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div
+          class="modal-content bg-dark text-light border border-secondary border-opacity-50 shadow-lg"
+        >
+          <div
+            class="modal-header border-bottom border-success border-opacity-50 text-success"
+          >
+            <h5 class="modal-title fw-bold">
+              <i class="bi bi-check-circle-fill me-2"></i>¡Compra realizada!
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-            <p>
-              Tu compra ya fue confirmada. En los proximos dias llegara a tu
+          <div class="modal-body text-center py-4">
+            <p class="fs-5 text-light mb-0">
+              Tu compra ya fue confirmada. En los próximos días llegará a tu
               casa.
             </p>
           </div>
-          <div class="modal-footer">
+          <div
+            class="modal-footer border-top border-secondary border-opacity-25 d-flex justify-content-center gap-2"
+          >
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-outline-secondary text-light px-4"
               data-bs-dismiss="modal"
             >
               Cerrar
             </button>
-            <a
-              type="button"
-              class="btn btn-primary"
-              href="historial-compras.html"
+            <a class="btn btn-success px-4" href="historial-compras.html"
               >Ver tu compra</a
             >
           </div>
@@ -131,38 +332,42 @@
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg">
-          <div class="modal-header bg-warning text-dark">
+        <div
+          class="modal-content bg-dark text-light border border-secondary border-opacity-50 shadow-lg"
+        >
+          <div
+            class="modal-header border-bottom border-warning border-opacity-50 text-warning"
+          >
             <h5 class="modal-title fw-bold">
               <i class="bi bi-exclamation-triangle-fill me-2"></i>Inicio de
               sesión requerido
             </h5>
             <button
               type="button"
-              class="btn-close"
+              class="btn-close btn-close-white"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
           <div class="modal-body text-center py-4">
-            <p class="fs-5 text-muted mb-0">
+            <p class="fs-5 text-light-50 mb-0">
               Para poder agregar productos al carrito y realizar una compra,
               necesitás iniciar sesión en tu cuenta.
             </p>
           </div>
           <div
-            class="modal-footer bg-light border-top-0 d-flex justify-content-center gap-2"
+            class="modal-footer border-top border-secondary border-opacity-25 d-flex justify-content-center gap-2"
           >
             <button
               type="button"
-              class="btn btn-outline-secondary px-4"
+              class="btn btn-outline-secondary text-light px-4"
               data-bs-dismiss="modal"
             >
               Seguir navegando
             </button>
-            <a class="btn btn-primary px-4" href="ingreso-usuario.html">
-              Iniciar Sesión
-            </a>
+            <a class="btn btn-info text-dark px-4" href="ingreso-usuario.html"
+              >Iniciar Sesión</a
+            >
           </div>
         </div>
       </div>
@@ -175,18 +380,20 @@
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content border-0 shadow-lg text-center">
+        <div
+          class="modal-content bg-dark text-light border border-secondary border-opacity-50 shadow-lg text-center"
+        >
           <div class="modal-body p-4">
-            <div class="text-success fs-1 mb-2">
+            <div class="text-info fs-1 mb-2">
               <i class="bi bi-check-circle-fill"></i>
             </div>
-            <h5 class="fw-bold text-dark mb-2">¡Producto agregado!</h5>
-            <p class="text-muted small mb-3" id="textoProductoAgregado">
+            <h5 class="fw-bold text-white mb-2">¡Producto agregado!</h5>
+            <p class="text-light-50 small mb-3" id="textoProductoAgregado">
               El producto se sumó a tu carrito correctamente.
             </p>
             <button
               type="button"
-              class="btn btn-primary w-100"
+              class="btn btn-info text-dark w-100 fw-bold"
               data-bs-dismiss="modal"
             >
               Entendido
@@ -196,213 +403,63 @@
       </div>
     </div>
 
-    <main class="flex-shrink-0 my-4">
-      <section class="container">
-        <div
-          class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom"
-        >
-          <h2 class="fw-bold m-0 fs-3 text-dark">Catálogo de Productos</h2>
-          <button
-            type="button"
-            class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-sm fw-semibold"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#formularioFiltros"
-            aria-controls="formularioFiltros"
-          >
-            <i class="bi bi-funnel"></i>
-            Filtrar y Ordenar
-          </button>
-        </div>
-
-            <div
-              class="offcanvas offcanvas-start"
-              tabindex="-1"
-              id="formularioFiltros"
-              aria-labelledby="formularioFiltrosLabel"
-            >
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="formularioFiltrosLabel">
-                  Filtros
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="offcanvas"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="offcanvas-body">
-                <div>
-                  <form class="bg-secondary-subtle rounded p-2">
-                    <div
-                      class="container border-2 border-secondary border-bottom pb-3"
-                    >
-                      <label for="inputOrdenar">Ordenar por:</label><br />
-                      <select
-                        name="ordenar"
-                        id="inputOrdenar"
-                        class="form-select"
-                      >
-                        <option value="mayorPrecio">Mayor Precio</option>
-                        <option value="menorPrecio">Menor Precio</option>
-                        <option value="vacio" selected disabled>
-                          Seleccione una opcion...
-                        </option>
-                      </select>
-                    </div>
-                    <div
-                      class="container border-2 border-secondary border-bottom py-3"
-                    >
-                      <label for="rangoPrecioMax">Precio:</label><br />
-                      <div
-                        class="d-flex align-items-center gap-2 justify-content-evenly"
-                      >
-                        <input
-                          type="number"
-                          name="precioMinino"
-                          id="inputPrecioMinimo"
-                          placeholder="0$"
-                          class="form-control-sm col-5 text-center"
-                        />
-                        <span> a </span>
-                        <input
-                          type="number"
-                          name="precioMaximo"
-                          id="inputPrecioMaximo"
-                          placeholder="(aca ponemos el precio mas caro)"
-                          class="form-control-sm col-5 text-center"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="container border-2 border-secondary border-bottom py-3"
-                    >
-                      <div class="form-check">
-                        <input
-                          type="radio"
-                          class="form-check-input"
-                          name="radioFiltro"
-                          id="inputCelulares"
-                        />
-                        <label for="inputCelulares" class="formm-check-label"
-                          >Celulares</label
-                        >
-                      </div>
-                      <div class="form-check">
-                        <input
-                          type="radio"
-                          class="form-check-input"
-                          name="radioFiltro"
-                          id="inputAuriculares"
-                        />
-                        <label for="inputAuriculares" class="formm-check-label"
-                          >Auriculares</label
-                        >
-                      </div>
-                      <div class="form-check">
-                        <input
-                          type="radio"
-                          class="form-check-input"
-                          name="radioFiltro"
-                          id="inputCargadores"
-                        />
-                        <label for="inputCargadores" class="formm-check-label"
-                          >Cargadores</label
-                        >
-                      </div>
-                      <div class="form-check">
-                        <input
-                          type="radio"
-                          class="form-check-input"
-                          name="radioFiltro"
-                          id="inputFundas"
-                        />
-                        <label for="inputFundas" class="formm-check-label"
-                          >Fundas</label
-                        >
-                      </div>
-                    </div>
-                    <div class="d-flex justify-content-center mt-2">
-                      <div class="btn btn-primary">Aplicar Filtros</div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              <div class="mt-auto d-flex gap-2 pt-3 border-top bg-white">
-                <button
-                  type="button"
-                  class="btn btn-primary flex-grow-1 py-2 fw-semibold"
-                  id="btnAplicarFiltros"
-                >
-                  Aplicar
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary flex-grow-1 py-2 fw-semibold"
-                  id="btnBorrarFiltros"
-                >
-                  Borrar
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <div
-          class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"
-          id="listado-productos"
-        ></div>
-      </section>
-    </main>
-
-    <footer id="footer" class="bg-dark text-white py-4 mt-auto">
+    <footer
+      id="footer"
+      class="bg-black text-white py-4 mt-auto border-top border-secondary border-opacity-25"
+    >
       <div class="container">
         <div class="row text-center text-md-start">
           <div class="col-md-4 mb-3">
-            <h5>DCICCELL</h5>
-            <p>La tienda de celulares mas confiable.</p>
+            <h5 class="fw-bold text-info">DCICCELL</h5>
+            <p class="text-light-50">La tienda de celulares más confiable.</p>
           </div>
           <div class="col-md-4 mb-3">
-            <h5>Links</h5>
+            <h5 class="fw-bold text-white">Links</h5>
             <ul class="list-unstyled">
-              <li>
-                <a href="index.html" class="text-white text-decoration-none"
+              <li class="mb-1">
+                <a href="index.html" class="text-light-50 text-decoration-none"
                   >Inicio</a
                 >
               </li>
-              <li>
+              <li class="mb-1">
                 <a
                   href="listado-productos.html"
-                  class="text-white text-decoration-none"
+                  class="text-info text-decoration-none"
                   >Tienda</a
                 >
               </li>
-              <li>
+              <li class="mb-1">
                 <a
                   href="perfil-usuario.html"
-                  class="text-white text-decoration-none"
+                  class="text-light-50 text-decoration-none"
                   >Perfil</a
                 >
               </li>
             </ul>
           </div>
           <div class="col-md-4">
-            <h5>Redes Sociales</h5>
+            <h5 class="fw-bold text-white">Redes Sociales</h5>
             <div
               class="d-flex gap-3 justify-content-center justify-content-md-start"
             >
-              <i class="bi bi-instagram fs-4"></i>
-              <i class="bi bi-facebook fs-4"></i>
-              <i class="bi bi-twitter-x fs-4"></i>
+              <a href="#" class="text-info"
+                ><i class="bi bi-instagram fs-4"></i
+              ></a>
+              <a href="#" class="text-info"
+                ><i class="bi bi-facebook fs-4"></i
+              ></a>
+              <a href="#" class="text-info"
+                ><i class="bi bi-twitter-x fs-4"></i
+              ></a>
             </div>
           </div>
         </div>
-        <hr />
-        <p class="text-center mb-0">© 2026 DCICCELL</p>
+        <hr class="border-secondary border-opacity-50" />
+        <p class="text-center mb-0 text-light-50">© 2026 DCICCELL</p>
       </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/js-tienda.js"></script>
     <script type="module" src="../js/js-tienda-carritoDeCompras.js"></script>
     <script type="module" src="../js/js-tienda-filtrosOrdenarPor.js"></script>

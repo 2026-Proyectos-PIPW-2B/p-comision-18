@@ -15,18 +15,22 @@
     />
   </head>
   <body class="d-flex flex-column fondo">
-    <header class="mb-4 shadow-sm bg-info-subtle rounded">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container px-4">
-          <a class="navbar-brand h2" href="index.html">
+    <header
+      class="mb-4 shadow border-bottom border-secondary border-opacity-25 sticky-top bg-dark bg-opacity-75"
+      style="backdrop-filter: blur(10px)"
+    >
+      <nav class="navbar navbar-expand-lg navbar-dark py-2">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
             <img
               src="../img/dciccell.png"
               alt="imagen logo"
               class="img-fluid"
-              style="max-height: 100px"
-          /></a>
+              style="max-height: 80px"
+            />
+          </a>
           <button
-            class="navbar-toggler"
+            class="navbar-toggler border-secondary"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -37,12 +41,21 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto fs-4">
+            <ul class="navbar-nav ms-auto gap-2">
               <li class="nav-item">
-                <a class="nav-link" href="listado-productos.html">Tienda</a>
+                <a
+                  class="nav-link fw-semibold text-light-50"
+                  href="listado-productos.html"
+                  >Tienda</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="perfil-usuario.html">Perfil</a>
+                <a
+                  class="nav-link fw-semibold text-info active"
+                  id="botonPerfil"
+                  href="perfil-usuario.html"
+                  >Perfil</a
+                >
               </li>
             </ul>
           </div>
@@ -159,19 +172,23 @@
             <h5>Links</h5>
             <ul class="list-unstyled">
               <li>
-                <a
-                  href="index.html"
-                  class="text-white text-decoration-none"
+                <a href="index.html" class="text-white text-decoration-none"
                   >Inicio</a
                 >
               </li>
               <li>
-                <a href="listado-productos.html" class="text-white text-decoration-none"
+                <a
+                  href="listado-productos.html"
+                  class="text-white text-decoration-none"
                   >Tienda</a
                 >
               </li>
               <li>
-                <a href="perfil-usuario.html" class="text-white text-decoration-none">Perfil</a>
+                <a
+                  href="perfil-usuario.html"
+                  class="text-white text-decoration-none"
+                  >Perfil</a
+                >
               </li>
             </ul>
           </div>
