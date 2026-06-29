@@ -20,3 +20,21 @@ export function obtenerUsuarioActivo() {
 export function setUsuarioActivo(user) {
   localStorage.setItem("usuarioActivo", JSON.stringify(user));
 }
+
+export function obtenerRegistroPedidos() {
+  let registro = JSON.parse(localStorage.getItem("registroPedidos"));
+
+  if (!registro) {
+    registro = {
+      nroPedido: 0,
+      pedidosHistorial: [],
+    };
+    localStorage.setItem("registroPedidos", JSON.stringify(registro));
+  }
+
+  return registro;
+}
+
+export function setRegistroPedidos(registro) {
+  localStorage.setItem("registroPedidos", JSON.stringify(registro));
+}
