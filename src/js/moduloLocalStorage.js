@@ -31,7 +31,10 @@ export function obtenerListadoProductos(){
 
 export function obtenerCarritoCompras(){
     let usuario = obtenerUsuarioActivo();
-    if (usuario != null && usuario.carrito != null){
-        return usuario.carrito;
-    }else return null;
+    if (usuario == null){
+        return null;
+    }
+    if (usuario.carrito != null){
+        return usuario.carrito
+    }else return []
 }

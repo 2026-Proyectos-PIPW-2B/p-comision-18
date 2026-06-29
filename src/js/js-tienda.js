@@ -42,6 +42,8 @@ function cerrarCarrito() {
 
 function limpiarCarrito() {
     const productosCarrito = document.getElementById("productosCarrito");
+    carritoDeCompras = [];
+    actualizarCarrito();
     productosCarrito.innerText = "";
 }
 
@@ -78,7 +80,6 @@ function limpiarListadoProductos(){
 }
 function mostrarMensajeSinProductos(){
     const mensaje = document.createElement("h4");
-    // Cambiado text-muted por text-light-50 para que sea legible sobre el fondo azul
     mensaje.className = "text-light-50 text-center my-5 w-100";
     mensaje.textContent = "No hay productos para mostrar.";
     let contenedorProductos = obtenerContenedorProductos();
@@ -98,15 +99,15 @@ function obtenerContenedorProductos(){
 
 function actualizarCarrito(){
     let usuarioActualizado = obtenerUsuarioActivo();
+    if (usuarioActualizado != null){
     usuarioActualizado.carrito = carritoDeCompras;
     setUsuarioActivo(usuarioActualizado);
-   
     let arregloUsuariosActualizado = obtenerArregloUsuarios();
     const indice = arregloUsuariosActualizado.findIndex(
     user => user.username === usuarioActualizado.username
     );    
     arregloUsuariosActualizado[indice] = usuarioActualizado;
-    setArregloUsuarios(arregloUsuariosActualizado);
+    setArregloUsuarios(arregloUsuariosActualizado);}
 }
 
 function alertaLoginRequerido(){
@@ -137,17 +138,31 @@ function visualizarCarrito(){
     botonCompra.classList.remove("disabled");
     const contenedorCarrito = document.getElementById("productosCarrito");
     if (obtenerUsuarioActivo() == null){
-        //aca escribo que inicie sesion
+        botonCompra.classList.add("disabled")
+        mostrarAvisoSesion();
         return;
     }
     if (obtenerCarritoCompras().length > 0){
         crearCarrito(contenedorCarrito);
     }else{
-        
         botonCompra.classList.add("disabled");
         mostrarMensajeCarritoVacio(contenedorCarrito);
         return;
     }
+}
+function mostrarAvisoSesion(){
+    let contenedor = document.getElementById("carritoSinUsuario");
+    let titulo = document.createElement("h4");
+    let boton = document.createElement("button");
+    let icono = document.createElement("i");
+    titulo.innerText = "Para ver su carrito o agregar productos, inicie sesion."
+    icono.className = "bi bi-person";
+    boton.className = "btn btn-info";
+    boton .appendChild(icono)
+    boton.innerHTML += "Iniciar Sesion";
+    boton.addEventListener("click", function(){window.location.href = "ingreso-usuario.html"})
+    contenedor.appendChild(titulo);
+    contenedor.appendChild(boton);
 }
 
 function mostrarMensajeCarritoVacio(contenedorCarrito){
@@ -169,9 +184,10 @@ export function eliminarDelCarrito(producto){
     let indice = carritoDeCompras.findIndex(
     item => item.id === producto.id
     );
+    if (indice !== -1){
     carritoDeCompras.splice(indice, 1)
     actualizarCarrito();
-    visualizarCarrito();
+    visualizarCarrito();}
 }
 
 function inicializarFiltros() {
@@ -189,9 +205,9 @@ function inicializarFiltros() {
 
 function aplicarFiltrosYOrden(){
     listadoProductos = obtenerListadoProductos();
-    listadoProductos = filtrarPorPrecio(listadoProductos);
-    listadoProductos = filtrarPorCategoria(listadoProductos);
-    listadoProductos =  ordenar(listadoProductos);
+    listadoProductos = filtrarPorPrecio();
+    listadoProductos = filtrarPorCategoria();
+    listadoProductos = ordenar();
     mostrarCatalogo();
     cerrarOffCanvasFiltros();
 }
