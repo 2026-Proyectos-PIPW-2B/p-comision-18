@@ -1,7 +1,7 @@
 import { obtenerUsuarioActivo, setUsuarioActivo } from "./moduloLocalStorage.js";
 import { controlIngreso, redirigir } from "./moduloValidacion.js";
 
-export function setearBoton() {
+export function setearBotonPerfil() {
   let boton = document.getElementById("botonPerfil");
   configurarEstiloBoton(boton);
   boton.addEventListener("click", function(){

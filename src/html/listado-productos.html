@@ -117,10 +117,15 @@
           ></button>
         </div>
         <div class="offcanvas-body d-flex flex-column justify-content-between">
+          <div id="carritoSinUsuario" class="text-center align-middle">
+              
+          </div>
           <div
             class="px-2 overflow-y-auto flex-grow-1 d-flex flex-column justify-content-start"
             id="productosCarrito"
-          ></div>
+          >
+            
+          </div>
           <div class="p-2 border-top border-secondary border-opacity-50">
             <button
               class="w-100 btn btn-info py-2 fw-bold text-dark"
@@ -403,10 +408,57 @@
       </div>
     </div>
 
-    <footer
-      id="footer"
-      class="bg-black text-white py-4 mt-auto border-top border-secondary border-opacity-25"
-    >
+    
+
+  <div class="modal fade" id="modal-mostrar" tabindex="-1" aria-labelledby="modal-mostrarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 p-3 ">
+              <img src="" class="img-fluid " id="fotoModal">
+            </div>
+            <div class="col-md-6 col-sm-12 p-3">
+              <h3 id="modalNombreProducto"></h3>
+              <h4 id="modalPrecio"></h4>
+              <ul>
+                <li>(EJEMPLOS DE METODOS DE PAGO)</li>
+                <li>(COMO TARJETAS DE CREDITO O DESCUENTOS EFT)</li>
+              </ul>
+              <button type="button" class="btn btn-primary mt-2" id="botonCarritoModal">
+                <i class="bi bi-cart"></i>
+                Agregar al carrito
+              </button>
+            </div> 
+            <div class="col-12 p-3 mx-2 border-bottom mb-2">
+              <h5>Descripcion:</h5>
+              <p id="modalDescripcion"></p>
+            </div>
+            <div class="col-12 p-3">
+              <h5>Componentes</h5>
+              <ul>
+                <li>Procesador: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+                <li>Memoria RAM: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+              </ul>
+              <h5>Varios</h5>
+              <ul>
+                <li>Pantalla: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+                <li>Taza de refrezco: (EJEMPLOS DE COMPONENTES Y CARACTERISTICAS)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+        
+        
+    </main>
+
+    <footer id="footer" class="bg-dark text-white py-4 mt-auto">
       <div class="container">
         <div class="row text-center text-md-start">
           <div class="col-md-4 mb-3">
@@ -461,7 +513,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/js-tienda.js"></script>
-    <script type="module" src="../js/js-tienda-carritoDeCompras.js"></script>
-    <script type="module" src="../js/js-tienda-filtrosOrdenarPor.js"></script>
+    
   </body>
 </html>
