@@ -11,51 +11,8 @@ let listaProductos = JSON.parse(localStorage.getItem("productos")) || [];
 
 document.addEventListener("DOMContentLoaded", function () {
   setearBoton();
-  agregarListener();
   renderizarCatalogo(listaProductos);
 });
-
-function agregarListener() {
-  const botonCarrito = document.getElementById("compraCarrito");
-  if (!botonCarrito) return;
-
-  botonCarrito.addEventListener("click", function () {
-    cerrarCarrito();
-    limpiarCarrito();
-    mostrarAviso();
-  });
-}
-
-function cerrarCarrito() {
-  const offcanvasElement = document.getElementById("carritoCompras");
-  const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-  offcanvas.hide();
-}
-function limpiarCarrito() {
-  const productosCarrito = document.getElementById("productosCarrito");
-  if (productosCarrito) {
-    productosCarrito.innerText = "";
-  }
-  const usuarioActivo = obtenerUsuarioActivo();
-  if (usuarioActivo) {
-    usuarioActivo.carritoDeCompras = [];
-    setUsuarioActivo(usuarioActivo);
-    let arregloUsuarios = obtenerArregloUsuarios();
-    const index = arregloUsuarios.findIndex(
-      (u) => u.email === usuarioActivo.email || u.id === usuarioActivo.id,
-    );
-    if (index !== -1) {
-      arregloUsuarios[index] = usuarioActivo;
-      setArregloUsuarios(arregloUsuarios);
-    }
-  }
-}
-function mostrarAviso() {
-  const modal = new bootstrap.Modal(
-    document.getElementById("modalCompraExitosa"),
-  );
-  modal.show();
-}
 
 export function renderizarCatalogo(productosAMostrar) {
   contenedorProductos.innerHTML = "";
