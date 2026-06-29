@@ -31,6 +31,8 @@ function confirmarCompra(){
     cerrarCarrito();
     limpiarCarrito();
     registrarCompra();
+    carritoDeCompras = []
+    actualizarCarrito();
     mostrarAviso();
 }
 
@@ -42,7 +44,6 @@ function cerrarCarrito() {
 
 function limpiarCarrito() {
     const productosCarrito = document.getElementById("productosCarrito");
-    carritoDeCompras = [];
     actualizarCarrito();
     productosCarrito.innerText = "";
 }

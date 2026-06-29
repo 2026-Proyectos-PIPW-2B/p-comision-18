@@ -109,6 +109,7 @@ function setListeners(boton, producto){
     })
 }
 
+
 let productoCarrito;
 export function crearCardProductoCarrito(productoAgregado){
     productoCarrito = productoAgregado;
@@ -118,7 +119,8 @@ export function crearCardProductoCarrito(productoAgregado){
 
 function crearColCarrito(){
     let colCarrito = document.createElement("div");
-    colCarrito.className = "col-12 d-flex align-items-center justify-content-between mb-3 p-2 border-bottom";
+    colCarrito.className = "w-100 d-flex align-items-center justify-content-between mb-3 p-2 bg-secondary bg-opacity-10 border border-secondary border-opacity-25 rounded-3 shadow-sm";
+    colCarrito.style.height = "fit-content";
     let divInfo = crearDivInfo();
     let botonEliminar = crearBotonEliminarCarrito();
     colCarrito.appendChild(divInfo);
@@ -127,7 +129,7 @@ function crearColCarrito(){
 }
 function crearDivInfo(){
     let divInfo = document.createElement("div");
-    divInfo.className = "d-flex align-items-center gap-2";
+    divInfo.className = "d-flex align-items-center gap-3";
     let imagen = crearImagenCarrito();
     let divTextos = crearDivTextosCarrito() ;
     divInfo.appendChild(imagen);
@@ -139,10 +141,11 @@ function crearImagenCarrito(){
     const imagen = document.createElement("img");
     imagen.src = productoCarrito.imagen;
     imagen.alt = productoCarrito.nombre;
-    imagen.style.width = "50px";
-    imagen.style.height = "50px";
+    imagen.style.width = "55px";
+    imagen.style.height = "55px";
     //esto deberia ser dinamico, no tamaños fijos!
     imagen.style.objectFit = "contain";
+    imagen.className = "bg-white p-1 rounded-2"
     return imagen;
 }
 function crearDivTextosCarrito(){
@@ -159,31 +162,33 @@ function crearDivTextosCarrito(){
 }
 function crearTituloCarrito(){
     let titulo = document.createElement("h6");
-    titulo.className = "mb-0 text-truncate";
-    titulo.style.maxWidth = "150px";
+    titulo.className = "mb-0 text-white fw-semibold text-truncate";
+    titulo.style.maxWidth = "140px";
     //esto deberia ser dinamico, no tamaños fijos!
     titulo.textContent = productoCarrito.nombre;
     return titulo;
 }
 function crerPrecioCarrito(){
     let precio = document.createElement("small");
-    PromiseRejectionEvent.className = "text-muted";
+    precio.className = "text-light-50 d-block lh-sm my-1";
     precio.textContent = `Cant: ${productoCarrito.cantidad} x $${productoCarrito.precio.toFixed(2)}`;
     return precio;
 }
 function crearSubtotalCarrito(){
     let span = document.createElement("span");
     let subtotal = productoCarrito.precio * productoCarrito.cantidad;
-    span.className = "text-primary fw-bold";
+    span.className = "text-info fw-bold fs-6";
     span.textContent = `$${subtotal.toFixed(2)}`;
     return span;
 }
 function crearBotonEliminarCarrito(){
     let botonEliminar = document.createElement("button");
-    botonEliminar.className= "btn btn-sm btn-danger";
+    botonEliminar.className= "btn btn-sm btn-danger border-0 p-2 d-flexx align-items-center justify-content-center rounded-circle";
+    botonEliminar.style.width = "35px"
+    botonEliminar.style.height = "35px"
     botonEliminar.addEventListener("click", () => eliminarDelCarrito(productoCarrito));
     let iconoEliminar = document.createElement("i");
-    iconoEliminar.className = "bi bi-trash";
+    iconoEliminar.className = "bi bi-trash fs-5";
     botonEliminar.append(iconoEliminar);
     return botonEliminar;
 }
