@@ -12,34 +12,21 @@ import {
 let listadoProductos;
 let carritoDeCompras;
 
-window.addEventListener("load", function () {
-  setearBotonPerfil();
-  agregarListeners();
-  listadoProductos = obtenerListadoProductos();
-  carritoDeCompras = obtenerCarritoCompras();
-  inicializarCarrito();
-  mostrarCatalogo();
-  inicializarFiltros();
+document.addEventListener("DOMContentLoaded", function () {
+  setearBoton();
+  agregarListener();
+  renderizarCatalogo(listaProductos);
 });
 
-function agregarListeners() {
-  agregarListenerCompra();
-}
+function agregarListener() {
+  const botonCarrito = document.getElementById("compraCarrito");
+  if (!botonCarrito) return;
 
-function agregarListenerCompra() {
-  const botonCompra = document.getElementById("compraCarrito");
-  botonCompra.addEventListener("click", function () {
-    confirmarCompra();
+  botonCarrito.addEventListener("click", function () {
+    cerrarCarrito();
+    limpiarCarrito();
+    mostrarAviso();
   });
-}
-
-function confirmarCompra() {
-  cerrarCarrito();
-  limpiarCarrito();
-  registrarCompra();
-  carritoDeCompras = [];
-  actualizarCarrito();
-  mostrarAviso();
 }
 
 function cerrarCarrito() {
@@ -47,42 +34,33 @@ function cerrarCarrito() {
   const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
   offcanvas.hide();
 }
-
 function limpiarCarrito() {
   const productosCarrito = document.getElementById("productosCarrito");
-  actualizarCarrito();
-  productosCarrito.innerText = "";
+  if (productosCarrito) {
+    productosCarrito.innerText = "";
+  }
+  const usuarioActivo = obtenerUsuarioActivo();
+  if (usuarioActivo) {
+    usuarioActivo.carritoDeCompras = [];
+    setUsuarioActivo(usuarioActivo);
+    let arregloUsuarios = obtenerArregloUsuarios();
+    const index = arregloUsuarios.findIndex(
+      (u) => u.email === usuarioActivo.email || u.id === usuarioActivo.id,
+    );
+    if (index !== -1) {
+      arregloUsuarios[index] = usuarioActivo;
+      setArregloUsuarios(arregloUsuarios);
+    }
+  }
 }
-
-function registrarCompra() {
-  //IMPLEMENTAR
-  console.log("Aca hay que implementar registrarCompra en el historial");
-}
-
 function mostrarAviso() {
   const modal = new bootstrap.Modal(
     document.getElementById("modalCompraExitosa"),
   );
   modal.show();
 }
-function inicializarCarrito() {
-  const carrito = document.getElementById("carritoCompras");
-  carrito.addEventListener("show.bs.offcanvas", visualizarCarrito);
-}
 
-function mostrarCatalogo() {
-  limpiarListadoProductos();
-  if (listadoProductos.length === 0) {
-    mostrarMensajeSinProductos();
-  } else {
-    for (let producto of listadoProductos) {
-      mostrarProducto(producto);
-    }
-  }
-}
-
-function limpiarListadoProductos() {
-  let contenedorProductos = obtenerContenedorProductos();
+export function renderizarCatalogo(productosAMostrar) {
   contenedorProductos.innerHTML = "";
 }
 function mostrarMensajeSinProductos() {
