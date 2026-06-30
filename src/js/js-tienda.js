@@ -46,7 +46,9 @@ function cerrarCarrito() {
 
 function limpiarCarrito() {
     const productosCarrito = document.getElementById("productosCarrito");
+    const totalCarrito = document.getElementById("totalCarrito");
     actualizarCarrito();
+    totalCarrito.innerText = "";
     productosCarrito.innerText = "";
 }
 
@@ -179,11 +181,17 @@ function mostrarMensajeCarritoVacio(contenedorCarrito){
 }
 function crearCarrito(contenedorCarrito){
     let carrito = obtenerCarritoCompras();
+    let costoCarrito = 0;
     for (let producto of carrito){
         let cardProducto = crearCardProductoCarrito(producto);
+        costoCarrito += producto.cantidad * producto.precio;
         contenedorCarrito.appendChild(cardProducto);
     }
+    let totalCarrito = document.getElementById("totalCarrito");
+    totalCarrito.innerText = "Total: $" + costoCarrito.toLocaleString("es-AR");
 }
+
+
 
 export function eliminarDelCarrito(producto){
     const usuario = obtenerUsuarioActivo();
@@ -230,7 +238,6 @@ function filtrarPorPrecio(){
         }
       }
     
-      // Validación con validator.js para Precio Máximo
       if (inputMax && inputMax.value.trim() !== "") {
         const valorMax = inputMax.value.trim();
         if (validator.isFloat(valorMax, { min: 0 })) {
@@ -327,7 +334,7 @@ export function crearModal(producto){
     let modalNombreProducto = document.getElementById("modalNombreProducto");
     modalNombreProducto.innerText = producto.nombre;
     let modalPrecio = document.getElementById("modalPrecio");
-    modalPrecio.innerText = "$"+producto.precio; //dar formato
+    modalPrecio.innerText = "$"+producto.precio.toLocaleString("es-AR")
     let modalDescripcion = document.getElementById("modalDescripcion")
     modalDescripcion.innerText = producto.descripcion;
     let botonCarritoModal = document.getElementById("botonCarritoModal");
@@ -353,8 +360,6 @@ export function agregarAlCarrito(producto){
         let productoEnCarrito = getItemCarrito(producto);
         productoEnCarrito.cantidad++;
     }else{
-        console.log(usuario)
-        console.log(carritoDeCompras)
         carritoDeCompras.push({
             ...producto,
             cantidad: 1
@@ -375,7 +380,6 @@ function registrarCompra(){
     productos : carritoDeCompras,
     montoTotal : monto
   }
-  console.log(pedidoNuevo)
   agregarAlHistorialGeneral(pedidoNuevo);
   
 }
@@ -390,6 +394,5 @@ function CalcularMontoCarrito(){
   for (let producto of carritoDeCompras){
     monto += (producto.precio * producto.cantidad);
   }
-  console.log(monto);
   return monto;
 }
