@@ -22,7 +22,9 @@ function agregarListeners(){
 function agregarListenerCompra(){
     const botonCompra = document.getElementById("compraCarrito");
     botonCompra.addEventListener("click", function () {
-    confirmarCompra()
+    confirmarCompra();
+    listadoProductos = obtenerListadoProductos();
+    mostrarCatalogo();
   });
 }
 
@@ -60,13 +62,10 @@ function obtenerContenedorProductos(){
     return contenedorProductos;
 }
 
-
-function alertaLoginRequerido(){
+export function alertaLoginRequerido(){
     const modalLogin = new bootstrap.Modal(document.getElementById("modalLoginRequerido"));
     modalLogin.show();
 }
-
-
 
 function inicializarFiltros() {
     const botonAplicarFiltro = document.getElementById("btnAplicarFiltros");

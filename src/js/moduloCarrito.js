@@ -1,4 +1,5 @@
-import { obtenerArregloUsuarios, obtenerCarritoCompras, obtenerHistorialDePedidos, obtenerUsuarioActivo, setArregloUsuarios, setHistorialDePedidos, setUsuarioActivo } from "./moduloLocalStorage.js";
+import { alertaLoginRequerido } from "./js-tienda.js";
+import { obtenerArregloUsuarios, obtenerCarritoCompras, obtenerHistorialDePedidos, obtenerListadoProductos, obtenerUsuarioActivo, setArregloUsuarios, setHistorialDePedidos, setListadoProductos, setUsuarioActivo } from "./moduloLocalStorage.js";
 
 let carritoDeCompras;
 export function confirmarCompra(){
@@ -184,7 +185,22 @@ function registrarCompra(){
     productos : carritoDeCompras,
     montoTotal : monto
   }
+  disminuirStock();
   agregarAlHistorialGeneral(pedidoNuevo);
+}
+function disminuirStock(){
+    let productos = obtenerListadoProductos();
+    let productoEnCarrito
+    for (let producto of productos){
+        productoEnCarrito = getItemCarrito(producto);
+        if (productoEnCarrito != null){
+            console.log(producto.stock)
+            producto.stock -= productoEnCarrito.cantidad;
+            console.log(producto.stock)
+        }
+    }
+    setListadoProductos(productos);
+    
 }
 function agregarAlHistorialGeneral(pedido){
   let historialDePedidos = obtenerHistorialDePedidos();

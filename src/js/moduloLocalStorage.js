@@ -30,6 +30,10 @@ export function obtenerListadoProductos(){
     return null;
 }
 
+export function setListadoProductos(listado){
+  localStorage.setItem("productos", JSON.stringify(listado));
+}
+
 export function obtenerCarritoCompras(){
     let usuario = obtenerUsuarioActivo();
     if (usuario == null){
