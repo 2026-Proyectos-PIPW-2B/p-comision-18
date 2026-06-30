@@ -202,7 +202,7 @@ function quitarErrorSucces() {
 
 function registrarUsuario() {
   let usuarioNuevo = {
-    username: inputCorreo.value,
+    username: inputCorreo.value.toLowerCase(),
     password: inputPassword.value,
     nombre: inputNombre.value,
     apellido: inputApellido.value,

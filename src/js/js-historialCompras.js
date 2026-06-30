@@ -5,9 +5,10 @@ const tablaCuerpo = document.getElementById("tablaBody");
 // Capturamos los inputs de ordenamiento
 const selectMonto = document.getElementById("ordenarMonto");
 const selectPedidos = document.getElementById("ordenarPedidos");
+let inputUsername = null;
 
 let usuarioActivo = obtenerUsuarioActivo();
-let historialDelUsuario;
+let historial;
 
 document.addEventListener("DOMContentLoaded", function () {
   inicializarHistorial();
@@ -15,16 +16,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function inicializarHistorial(){
-  historialDelUsuario = obtenerHistorialDePedidos().filter(pedido => pedido.comprador === usuarioActivo.username);
+  historial = obtenerHistorialDePedidos();
+  if (!window.location.href.includes("admin")) {
+  historial = historial.filter(pedido => pedido.comprador === usuarioActivo.username);
+  } else {
+    inputUsername = document.getElementById("filtrarUsuarios")
+  }
 }
 
 function inicializarPagina() {
-  //cargamos tabla segun el filtro puesto
+  
   selectMonto.addEventListener("change", () => {
     if (selectMonto.value !== "sin-ordenar") {
       selectPedidos.value = "recientes";
     }
-    procesarYMostrarTabla(historialDelUsuario);
+    procesarYMostrarTabla(historial);
   });
 
   selectPedidos.addEventListener("change", () => {
@@ -34,10 +40,13 @@ function inicializarPagina() {
     ) {
       selectMonto.value = "sin-ordenar";
     }
-    procesarYMostrarTabla(historialDelUsuario);
+    procesarYMostrarTabla(historial);
   });
+  if(inputUsername !== null){
+    inputUsername.addEventListener("input", () => procesarYMostrarTabla(historial) )
+  }
 
-  procesarYMostrarTabla(historialDelUsuario);
+  procesarYMostrarTabla(historial);
 }
 
 function procesarYMostrarTabla(arreglo) {
@@ -63,7 +72,10 @@ function procesarYMostrarTabla(arreglo) {
     }
     // Si es "antiguos", mantenemos el orden natural ascendente de cómo se guardaron
   }
-
+  if (inputUsername !== null){
+    let busquedaUsuario = inputUsername.value.toLowerCase();
+    pedidosProcesados = pedidosProcesados.filter((pedido) => pedido.comprador.includes(busquedaUsuario))
+  }
   mostrarTabla(pedidosProcesados);
 }
 
@@ -101,10 +113,6 @@ function generarParaFilavacia() {
   return filaVacia;
 }
 
-
-
-
-
 function crearTituloDetalle(pedido){
   const tituloDetalle = document.createElement("h6");
   tituloDetalle.className =
@@ -128,15 +136,25 @@ function crearPedidoDelHistorial(pedido) {
   return { filaPrincipal, filaDetalle };
 }
 function crearFilaPrincipal(pedido){
+  let usuario = obtenerUsuarioActivo();
   const filaPrincipal = document.createElement("tr");
   filaPrincipal.className = "align-middle";
   filaPrincipal.appendChild(crearCeldaDeFecha(pedido.id));
   filaPrincipal.appendChild(crearCeldaDeID(pedido.id));
   filaPrincipal.appendChild(crearCeldaCantidad(pedido));
   filaPrincipal.appendChild(crearCeldaTotal(pedido.montoTotal));
+  if (usuario.admin){
+    filaPrincipal.appendChild(crearCeldaComprador(pedido.comprador));
+  }
   let botonVerMas = crearBotonVerMas();
   filaPrincipal.appendChild(crearCeldaVerMas(botonVerMas));
   return {filaPrincipal, botonVerMas}
+}
+function crearCeldaComprador(comprador){
+  let celdaComprador = document.createElement("td");
+  celdaComprador.innerText = comprador;
+
+  return celdaComprador;
 }
 
 function crearFilaDetalle(pedido){
