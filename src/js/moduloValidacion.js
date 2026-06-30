@@ -55,11 +55,12 @@ export function redirigir(){
         window.location.href = "ingreso-usuario.html";
         break;
     }
-    default:
+    default:{
       if(usuarioActivo.admin){
         window.location.href = "admin-index.html";
-      }else 
-        window.location.href = "perfil-usuario.html"
+      }else{
+        window.location.href = "perfil-usuario.html"}
+    }
   } 
 }
 
