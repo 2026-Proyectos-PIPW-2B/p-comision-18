@@ -1,8 +1,9 @@
 export function obtenerArregloUsuarios() {
+  let admin = [{"username":"admin@dcicell","password":"admin123","admin":true}];
   let usuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
   if (usuarios != null) {
     return usuarios;
-  } else return null;
+  } else return admin;
 }
 
 export function setArregloUsuarios(arregloUsuarios) {

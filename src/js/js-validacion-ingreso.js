@@ -7,20 +7,10 @@ import { obtenerArregloUsuarios, setArregloUsuarios, setUsuarioActivo } from "./
 let arregloUsuarios;
 
 window.addEventListener("load", function(){
-    setearArreglo();
+    arregloUsuarios = obtenerArregloUsuarios();
     setearBotonPerfil();
     inicializar();    
 })
-
-
-function setearArreglo(){
-    arregloUsuarios = obtenerArregloUsuarios();
-    if (arregloUsuarios == null){
-       arregloUsuarios = [{"username":"admin@dcicell","password":"admin123","admin":true}];    
-       setArregloUsuarios(arregloUsuarios);
-    }
-    
-}
 
 function inicializar(){
     const formulario = document.getElementById("formularioIngreso");

@@ -101,11 +101,19 @@ function actualizarCarrito(){
     usuarioActualizado.carrito = carritoDeCompras;
     setUsuarioActivo(usuarioActualizado);
     let arregloUsuariosActualizado = obtenerArregloUsuarios();
+    /*
+    Opcion para verificar que no falle
+
+    let arregloUsuariosActualizado = obtenerArregloUsuarios().filter(usuario => usuario.username != usuarioActualizado.username)
+    arregloUsuariosActualizado.push(usuarioActualizado)
+    */
     const indice = arregloUsuariosActualizado.findIndex(
     user => user.username === usuarioActualizado.username
     );    
     arregloUsuariosActualizado[indice] = usuarioActualizado;
     setArregloUsuarios(arregloUsuariosActualizado);}
+
+
 }
 
 function alertaLoginRequerido(){
@@ -164,10 +172,10 @@ function mostrarAvisoSesion(){
 }
 
 function mostrarMensajeCarritoVacio(contenedorCarrito){
-    let p = document.createElement("p");
-    p.className = "text-muted text-center my-3";
-    p.textContent = "El carrito esta vacio."
-    contenedorCarrito.appendChild(p);
+    let h4 = document.createElement("h4");
+    h4.className = "text-light text-center my-3";
+    h4.textContent = "El carrito esta vacio."
+    contenedorCarrito.appendChild(h4);
 }
 function crearCarrito(contenedorCarrito){
     let carrito = obtenerCarritoCompras();
@@ -357,9 +365,6 @@ export function agregarAlCarrito(producto){
     mostrarConfirmacionCarrito(producto);
 
 }
-//=======================================
-//Merge de seba
-//=======================================
 
 function registrarCompra(){
   let usuario = obtenerUsuarioActivo();
@@ -367,7 +372,7 @@ function registrarCompra(){
   let pedidoNuevo = {
     id : Date.now(),
     comprador : usuario.username,
-    pedido : carritoDeCompras,
+    productos : carritoDeCompras,
     montoTotal : monto
   }
   console.log(pedidoNuevo)
