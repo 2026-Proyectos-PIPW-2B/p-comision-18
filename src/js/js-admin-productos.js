@@ -1,3 +1,5 @@
+import { obtenerListadoProductos } from "./moduloLocalStorage.js";
+
 const nombre = document.getElementById("nombre");
 const precio = document.getElementById("precio");
 const descripcion = document.getElementById("descripcion");
@@ -11,7 +13,7 @@ const tablaProductos = document.getElementById("tablaProductos");
 
 btnImagenes.addEventListener("click", mostrarCatalogoImagenes);
 btnAgregarProducto.addEventListener("click", agregarProducto);
-let listaProductos = JSON.parse(localStorage.getItem("productos")) || [];
+let listaProductos = obtenerListadoProductos();
 mostrarEnTabla();
 let imagenSeleccionada = "";
 
@@ -285,15 +287,15 @@ function mostrarCatalogoImagenes() {
   document.getElementById("errorImagen").textContent = "";
 
   for (let i = 1; i <= cantidadTelefonos; i++) {
-    const rutaImg = `../img/celular-${i}.jpg`;
+    const rutaImg = `../img/celular-${i}.png`;
     crearElementoImagen(rutaImg, `Teléfono ${i}`, contenedor);
   }
   for (let i = 1; i <= cantidadCargadores; i++) {
-    const rutaImg = `../img/cargador-${i}.jpg`;
+    const rutaImg = `../img/cargador-${i}.png`;
     crearElementoImagen(rutaImg, `Cargador ${i}`, contenedor);
   }
   for (let i = 1; i <= cantidadAuriculares; i++) {
-    const rutaImg = `../img/auriculares-${i}.jpg`;
+    const rutaImg = `../img/auriculares-${i}.png`;
     crearElementoImagen(rutaImg, `Auriculares ${i}`, contenedor);
   }
 }
@@ -343,6 +345,7 @@ function eliminarProducto(id) {
 function botonVer(id) {
   const boton = document.createElement("button");
   boton.className = "btn btn-sm btn-info text-white me-2";
+  boton.type = "button"
   boton.textContent = "Ver mas";
   boton.addEventListener("click", () => verMasInfo(id, boton));
   return boton;
@@ -374,7 +377,6 @@ function guardarEdicion(id) {
   const errorPrecio = document.getElementById(`error-edit-precio-${id}`);
   const errorStock = document.getElementById(`error-edit-stock-${id}`);
 
-  // Limpiamos errores visuales previos de edición
   inputPrecio.classList.remove("is-invalid");
   inputStock.classList.remove("is-invalid");
   errorPrecio.textContent = "";
@@ -401,9 +403,5 @@ function guardarEdicion(id) {
 
     actualizarLocalStorage();
     mostrarEnTabla();
-
-    //la fila del producto editado abierta para ver el cambio reflejado
-    const filaNueva = document.getElementById(`detalle-${id}`);
-    if (filaNueva) filaNueva.style.display = "table-row";
   }
 }

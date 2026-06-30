@@ -18,7 +18,6 @@ function iniciarTabla(){
                 mostrarUsuario(user);
         }
     }
-    //aca
 }
 
 function mostrarUsuario(user){

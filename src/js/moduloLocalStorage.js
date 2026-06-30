@@ -17,7 +17,6 @@ export function obtenerUsuarioActivo(){
     }else return null;
 }
 
-
 export function setUsuarioActivo(user){
     localStorage.setItem("usuarioActivo", JSON.stringify(user));
 }
