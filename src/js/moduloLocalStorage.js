@@ -39,20 +39,15 @@ export function obtenerCarritoCompras(){
     }else return []
 }
 
-export function obtenerRegistroPedidos() {
-  let registro = JSON.parse(localStorage.getItem("registroPedidos"));
-
-  if (!registro) {
-    registro = {
-      nroPedido: 0,
-      pedidosHistorial: [],
-    };
-    localStorage.setItem("registroPedidos", JSON.stringify(registro));
+export function obtenerHistorialDePedidos() {
+  let historialDePedidos = JSON.parse(localStorage.getItem("historialPedidos"));
+  if (!historialDePedidos) {
+    historialDePedidos = []
+    localStorage.setItem("historialPedidos", JSON.stringify(historialDePedidos));
   }
-
-  return registro;
+  return historialDePedidos;
 }
 
-export function setRegistroPedidos(registro) {
-  localStorage.setItem("registroPedidos", JSON.stringify(registro));
+export function setHistorialDePedidos(historialDePedidos) {
+  localStorage.setItem("historialPedidos", JSON.stringify(historialDePedidos));
 }

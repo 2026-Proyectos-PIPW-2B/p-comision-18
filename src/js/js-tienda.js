@@ -1,7 +1,9 @@
 
 import { crearCardProductoCarrito, crearProducto } from "./moduloCrearCards.js";
 import { setearBotonPerfil } from "./modulo-botones.js"
-import { obtenerListadoProductos, obtenerUsuarioActivo, obtenerCarritoCompras, setUsuarioActivo, obtenerArregloUsuarios, setArregloUsuarios } from "./moduloLocalStorage.js";
+import { obtenerListadoProductos, obtenerUsuarioActivo, obtenerCarritoCompras, 
+  setUsuarioActivo, obtenerArregloUsuarios, setArregloUsuarios, 
+  obtenerHistorialDePedidos, setHistorialDePedidos } from "./moduloLocalStorage.js";
 
 let listadoProductos;
 let carritoDeCompras;
@@ -46,11 +48,6 @@ function limpiarCarrito() {
     const productosCarrito = document.getElementById("productosCarrito");
     actualizarCarrito();
     productosCarrito.innerText = "";
-}
-
-function registrarCompra(){
-    //IMPLEMENTAR
-    console.log("Aca hay que implementar registrarCompra en el historial");
 }
 
 function mostrarAviso() {
@@ -359,4 +356,35 @@ export function agregarAlCarrito(producto){
     actualizarCarrito();
     mostrarConfirmacionCarrito(producto);
 
+}
+//=======================================
+//Merge de seba
+//=======================================
+
+function registrarCompra(){
+  let usuario = obtenerUsuarioActivo();
+  let monto = CalcularMontoCarrito();
+  let pedidoNuevo = {
+    id : Date.now(),
+    comprador : usuario.username,
+    pedido : carritoDeCompras,
+    montoTotal : monto
+  }
+  console.log(pedidoNuevo)
+  agregarAlHistorialGeneral(pedidoNuevo);
+  
+}
+function agregarAlHistorialGeneral(pedido){
+  let historialDePedidos = obtenerHistorialDePedidos();
+  historialDePedidos.push(pedido);
+  setHistorialDePedidos(historialDePedidos);
+}
+
+function CalcularMontoCarrito(){
+  let monto = 0;
+  for (let producto of carritoDeCompras){
+    monto += (producto.precio * producto.cantidad);
+  }
+  console.log(monto);
+  return monto;
 }

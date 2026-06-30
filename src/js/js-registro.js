@@ -213,7 +213,6 @@ function registrarUsuario() {
     direccion: inputDireccion.value,
     telefono: inputTelefono.value,
     carrito: [],
-    historial: [],
     admin: false,
     activo: true,
   };
