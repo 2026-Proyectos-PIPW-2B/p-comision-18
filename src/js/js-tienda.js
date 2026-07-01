@@ -288,6 +288,7 @@ function crearCardBody(producto){
 }
 function crearInfoContenedor(producto){
     const infoContenedor = document.createElement("div");
+    infoContenedor.className = "d-flex flex-column flex-grow-1";
     let botonTitulo = crearBotonTitulo(producto);
     let precio = crearPrecio(producto);
     infoContenedor.appendChild(botonTitulo);
@@ -308,7 +309,7 @@ function crearBotonTitulo(producto){
     return botonTitulo;
 }
 function crearTitulo(producto){
-    const titulo = document.createElement("h4");
+    const titulo = document.createElement("h5");
     titulo.className = "card-title text-white fw-bold m-0 fs-5";
     
     titulo.appendChild(document.createTextNode(producto.nombre));
@@ -334,7 +335,7 @@ function crearIconoStock(producto){
 }
 function crearPrecio(producto){
     const precio = document.createElement("p");
-    precio.className = "fs-4 text-info fw-bold mb-2";
+    precio.className = "fs-4 text-info fw-bold mb-2 mt-auto";
     precio.textContent = `$${producto.precio.toFixed(2)}`;
     return precio;
 }
