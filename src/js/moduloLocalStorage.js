@@ -1,9 +1,15 @@
 export function obtenerArregloUsuarios() {
   let admin = [{"username":"admin@dcicell","password":"admin123","admin":true}];
   let usuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
+  console.log("ACa se usa obbtenerArregloUsuarios:")
+  console.log(usuarios)
   if (usuarios != null) {
     return usuarios;
-  } else return admin;
+  } else{ 
+    setArregloUsuarios(admin);
+    return admin;
+  }
+
 }
 
 export function setArregloUsuarios(arregloUsuarios) {
@@ -26,7 +32,7 @@ export function obtenerListadoProductos(){
     if (listado != null){
         return JSON.parse(listado);
     }  
-    return null;
+    return [];
 }
 
 export function setListadoProductos(listado){
@@ -59,7 +65,7 @@ export function setHistorialDePedidos(historialDePedidos) {
 export function obtenerCategoriasExtras(){
   let categoriasExtra = JSON.parse(localStorage.getItem("categorias"));
   if (categoriasExtra == null){
-    return null;
+    return [];
   }else return categoriasExtra;
 }
 export function setCategoriasExtras(categoriasExtra){
@@ -69,7 +75,16 @@ export function setCategoriasExtras(categoriasExtra){
 export function obtenerConfiguraciones(){
   let configuraciones = JSON.parse(localStorage.getItem("configuraciones"));
   if (configuraciones == null){
-    return null;
+    let configuraciones = {
+      stockBajo: 1,
+      stockMedio: 5,
+      stockAlto: 10,
+      productosPorPagina : 10,
+      descuentoEfectivo: 10,
+      cuotasSinInteres : 3
+    };
+    setConfiguraciones(configuraciones);
+    return configuraciones;
   }else return configuraciones
 }
 

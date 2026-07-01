@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../css/estilos.css">
   </head>
   <body class="bg-light d-flex flex-column min-vh-100">
-    <header>
+   <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
           <a class="navbar-brand d-flex align-items-center" href="admin-index.html">
@@ -46,7 +46,7 @@
                 <a class="nav-link" href="admin-listado-compras.html">Pedidos</a>
               </li>
               <li class="nav-item">
-                <button class="nav-link" id="botonCerrarSesion">Cerrar Sesion</button>
+                <a class="nav-link" href="admin-config.html">Configuraciones</a>
               </li>
             </ul>
           </div>
@@ -65,8 +65,8 @@
             <div class="mb-4">
               <h5>Umbrales de stock</h5>
               <div class="row g-3">
-                <div class="col-12 col-md-4">
-                  <label for="inputStockBajo" class="form-label">Stock bajo <i class="bi bi-bag-x text-danger fs-5"></i></label>
+                <div class="col-12 col-md-6">
+                  <label for="inputStockBajo" class="form-label">Breakpoint entre Stock Bajo<i class="bi bi-bag-x text-danger fs-5"></i> y Stock Medio<i class="bi bi-bag-dash text-warning fs-5"></i></label>
                   <input
                     type="number"
                     class="form-control"
@@ -74,19 +74,8 @@
                     min="0"
                   />
                 </div>
-
-                <div class="col-12 col-md-4">
-                  <label for="inputStockMedio" class="form-label">Stock medio <i class="bi bi-bag-dash text-warning fs-5"></i></label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="inputStockMedio"
-                    min="0"
-                  />
-                </div>
-
-                <div class="col-12 col-md-4">
-                  <label for="inputStockAlto" class="form-label">Stock alto <i class="bi bi-bag-check text-success fs-5"></i></label>
+                <div class="col-12 col-md-6">
+                  <label for="inputStockAlto" class="form-label">Breakpoint entre Stock Medio<i class="bi bi-bag-dash text-warning fs-5"></i> y Stock Alto<i class="bi bi-bag-check text-success fs-5"></i></label>
                   <input
                     type="number"
                     class="form-control"
@@ -101,8 +90,19 @@
               <h5>Productos mostrados por página</h5>
               <label for="inputProductosPorPagina" class="form-label">Cantidad</label>
               <input
-                type="number" class="form-control" id="inputProductosPorPagina" min="5" max="30" value="12"
+                type="number" class="form-control" id="inputProductosPorPagina" min="5" max="30"
               />
+            </div>
+            <div class="mb-4 row">
+              <h5>Promociones, descuentos y cuotas de la tienda</h5>
+              <div class="col-md-6 col-sm-12">
+                <label for="inputDescuentoEfectivo" class="form-label">Descuento de pago en efectivo o transferencia</label>
+                <input type="number" name="" id="inputDescuentoEfectivo" class="form-control">
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <label for="inputCuotasSinInteres" class="form-label">Cantidad de cuotas sin interes</label>
+                <input type="number" name="" id="inputCuotasSinInteres" class="form-control">
+              </div>
             </div>
 
             <div class="d-flex gap-2">
@@ -110,7 +110,7 @@
                 Guardar configuración
               </button>
             </div>
-            <div id="divConfirmacion" class="text-succes"></div>
+            <div id="divConfirmacion" class="text-success text-center mt-3"></div>
           </form>
         </div>
       </div>

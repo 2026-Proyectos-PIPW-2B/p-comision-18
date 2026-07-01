@@ -31,7 +31,7 @@ function agregarListenerCompra(){
 
 function mostrarCatalogo(){
     limpiarListadoProductos();
-    if (listadoProductos.length === 0){
+    if (listadoProductos === null || listadoProductos.length === 0 ){
         mostrarMensajeSinProductos();
     }else{
        for (let producto of listadoProductos) {
@@ -191,12 +191,18 @@ function cerrarOffCanvasFiltros(){
 }
 
 export function crearModal(producto){
+    let configuracion = obtenerConfiguraciones();
+    let precioDescuento = producto.precio * (100 - configuracion.descuentoEfectivo)/100;
     let imagenProducto = document.getElementById("fotoModal");
     imagenProducto.src = producto.imagen;
     let modalNombreProducto = document.getElementById("modalNombreProducto");
     modalNombreProducto.innerText = producto.nombre;
     let modalPrecio = document.getElementById("modalPrecio");
+    let modalCuotas = document.getElementById("modalCuotas");
+    modalCuotas.innerText = `${configuracion.cuotasSinInteres} cuotas x $${(producto.precio/configuracion.cuotasSinInteres).toLocaleString("es-AR")} sin interes`
     modalPrecio.innerText = "$"+producto.precio.toLocaleString("es-AR")
+    let modalDescuento = document.getElementById("modalDescuento");
+    modalDescuento.innerText = `Con pago en efectivo o transferencia $${(precioDescuento).toLocaleString("es-AR")} (${configuracion.descuentoEfectivo}% de descuento!)`
     let modalStock = document.getElementById("modalStock");
     modalStock.innerText = `Stock restante: ${producto.stock}`;
     let modalDescripcion = document.getElementById("modalDescripcion")
@@ -305,25 +311,26 @@ function crearTitulo(producto){
     const titulo = document.createElement("h4");
     titulo.className = "card-title text-white fw-bold m-0 fs-5";
     
-    titulo.appendChild(document.createTextNode(producto.nombre))
-    titulo.appendChild(crearIconoStock(producto) )
+    titulo.appendChild(document.createTextNode(producto.nombre));
+    titulo.appendChild(crearIconoStock(producto));
     return titulo;
 }
 function crearIconoStock(producto){
+    console.log(producto);
     let icono = document.createElement("i");
     let configuracion = obtenerConfiguraciones()
+    console.log(configuracion)
+    console.log(producto.stock)
     if (producto.stock <= configuracion.stockBajo){
-    icono.className = "bi bi-bag-x text-danger ms-2";
-    return icono;
-    }
-    if(producto.stock <= configuracion.stockMedio){
-        icono.className = "bi bi-bag-dash text-warning ms-2";
+        icono.className = "bi bi-bag-x text-danger ms-2";
         return icono;
     }
-    if (producto.stock >= configuracion.stockAlto){
+    if(producto.stock >= configuracion.stockAlto){
         icono.className = "bi bi-bag-check text-success ms-2"
-        return icono
+        return icono;
     }
+    icono.className = "bi bi-bag-dash text-warning ms-2";
+    return icono
 }
 function crearPrecio(producto){
     const precio = document.createElement("p");

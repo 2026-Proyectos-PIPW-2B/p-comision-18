@@ -58,15 +58,15 @@
         <div
           class="row g-3 mb-4 justify-content-end bg-light p-3 rounded mx-0 shadow-sm"
         >
-          <div class="col-md-4 col-sm-6">
+            <div class="col-md-4 col-sm-12">
             <label
               for="filtrarUsuarios"
               class="form-label small fw-bold text-secondary"
             >
-              <i class="bi bi-person"></i> Filtrar por nombre de usuario</label>
-            <input type="text" name="usuarios" class="form-control" id="filtrarUsuarios" placeholder="Todos los usuarios">
+              <i class="bi bi-person"></i> Filtrar por username</label>
+            <input type="text" name="usuarios" class="form-control border-secondary-subtle" id="filtrarUsuarios" placeholder="Todos los usuarios">
           </div>
-          <div class="col-md-4 col-sm-6">
+          <div class="col-md-4 col-sm-12">
             <label
               for="ordenarMonto"
               class="form-label small fw-bold text-secondary"
@@ -74,7 +74,7 @@
               <i class="bi bi-currency-dollar"></i> Ordenar por Monto
             </label>
             <select
-              class="form-select form-select-sm border-secondary-subtle"
+              class=" form-select border-secondary-subtle"
               id="ordenarMonto"
             >
               <option value="sin-ordenar" selected>
@@ -84,7 +84,7 @@
               <option value="monto-desc">Mayor a Menor monto</option>
             </select>
           </div>
-          <div class="col-md-4 col-sm-6">
+          <div class="col-md-4 col-sm-12">
             <label
               for="ordenarPedidos"
               class="form-label small fw-bold text-secondary"
@@ -92,7 +92,7 @@
               <i class="bi bi-sort-numeric-down"></i> Orden de Pedidos
             </label>
             <select
-              class="form-select form-select-sm border-secondary-subtle"
+              class="form-select border-secondary-subtle"
               id="ordenarPedidos"
             >
               <option value="recientes" selected>Más recientes primero</option>

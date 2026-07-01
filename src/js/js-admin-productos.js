@@ -14,9 +14,10 @@ const tablaProductos = document.getElementById("tablaProductos");
 
 let listaProductos;
 
-const cantidadTelefonos = 4;
+const cantidadTelefonos = 9;
 const cantidadCargadores = 2;
-const cantidadAuriculares = 3;
+const cantidadAuriculares = 7;
+const cantidadFundas = 4;
 let imagenSeleccionada = "";
 
 window.addEventListener("load", function(){
@@ -286,6 +287,10 @@ function mostrarCatalogoImagenes() {
   for (let i = 1; i <= cantidadAuriculares; i++) {
     const rutaImg = `../img/auriculares-${i}.png`;
     crearElementoImagen(rutaImg, `Auriculares ${i}`, contenedor);
+  }
+  for (let i = 1; i <= cantidadFundas; i++) {
+    const rutaImg = `../img/funda-${i}.png`;
+    crearElementoImagen(rutaImg, `Fundas ${i}`, contenedor);
   }
 }
 

@@ -93,7 +93,7 @@ function mostrarTabla(arreglo) {
 function generarParaFilavacia() {
   const filaVacia = document.createElement("tr");
   const celdaVacia = document.createElement("td");
-  celdaVacia.colSpan = 5;
+  celdaVacia.colSpan = document.querySelectorAll("th").length;
   celdaVacia.className = "text-center text-muted py-4";
 
   const icono = document.createElement("i");
