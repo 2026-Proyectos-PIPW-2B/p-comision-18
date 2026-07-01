@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Administración - DCICCELL</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="css/estilos.css">
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="admin-index.html">
+            <i class="bi bi-shield-lock-fill me-2 text-info"></i>
+            <span>Admin Panel</span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto fs-5">
+              <li class="nav-item">
+                <a class="nav-link" href="admin-listado-productos.html">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin-listado-usuario.html">Usuarios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin-listado-compras.html">Pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin-config.html">Configuraciones</a>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" id="botonCerrarSesion">Cerrar Sesion</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container my-5 flex-grow-1">
+      <section class="mb-5">
+        <div
+          class="p-5 text-white rounded-3 shadow"
+          style="background: linear-gradient(135deg, #1e3a8a, #0f172a);"
+        >
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <span class="badge bg-info text-dark mb-2 px-3 py-2 fs-6">Área Administrativa</span>
+              <h1 class="display-5 fw-bold">Panel de Administración</h1>
+              <p class="fs-4 text-white-50 mb-0">
+                Bienvenido al centro de control de DCICCELL. Desde aquí puedes gestionar el inventario, administrar las cuentas de usuario y revisar el historial de pedidos.
+              </p>
+            </div>
+            <div class="col-md-4 text-end d-none d-md-block">
+              <i class="bi bi-speedometer2 text-info" style="font-size: 6rem; opacity: 0.8;"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="h4 mb-4 text-secondary d-flex align-items-center">
+          <i class="bi bi-graph-up-arrow me-2 text-primary"></i> Métricas del Negocio
+        </h2>
+        <div class="row g-4">
+          <div class="col-lg-3 col-sm-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-box bg-primary-subtle text-primary me-3">
+                  <i class="bi bi-box-seam fs-3"></i>
+                </div>
+                <div>
+                  <h6 class="card-subtitle mb-1 text-muted text-uppercase small">Productos</h6>
+                  <h3 class="card-title mb-0 fw-bold" id="metricaProductos">-</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-box bg-success-subtle text-success me-3">
+                  <i class="bi bi-people fs-3"></i>
+                </div>
+                <div>
+                  <h6 class="card-subtitle mb-1 text-muted text-uppercase small">Usuarios</h6>
+                  <h3 class="card-title mb-0 fw-bold" id="metricaUsuarios">-</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-sm-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-box bg-warning-subtle text-warning me-3">
+                  <i class="bi bi-cart-check fs-3"></i>
+                </div>
+                <div>
+                  <h6 class="card-subtitle mb-1 text-muted text-uppercase small">Compras realizadas</h6>
+                  <h3 class="card-title mb-0 fw-bold" id="metricaCompras"></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <div class="card border-0 shadow h-100">
+              <div class="card-body d-flex align-items-center">
+                <div class="icon-box bg-danger-subtle text-danger me-3">
+                  <i class="bi bi-currency-dollar fs-3"></i>
+                </div>
+                <div>
+                  <h6 class="card-subtitle mb-1 text-muted text-uppercase small">Ventas totales</h6>
+                  <h3 class="card-title mb-0 fw-bold" id="metricaVentas"></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="h4 mb-4 text-secondary d-flex align-items-center">
+          <i class="bi bi-grid-3x3-gap-fill me-2 text-primary"></i> Accesos Directos
+        </h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm dashboard-card">
+              <div class="card-body d-flex flex-column p-4">
+                <div class="icon-box bg-primary-subtle text-primary mb-3">
+                  <i class="bi bi-laptop fs-3"></i>
+                </div>
+                <h5 class="card-title fw-bold">Gestionar Productos</h5>
+                <p class="card-text text-muted flex-grow-1">
+                  Agrega nuevos dispositivos al catálogo, actualiza precios, controla el stock disponible y carga imágenes de teléfonos, auriculares y accesorios.
+                </p>
+                <a href="admin-listado-productos.html" class="btn btn-primary mt-3 d-flex align-items-center justify-content-center">
+                  <span>Ir al Inventario</span>
+                  <i class="bi bi-arrow-right-short ms-2 fs-5"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm dashboard-card">
+              <div class="card-body d-flex flex-column p-4">
+                <div class="icon-box bg-success-subtle text-success mb-3">
+                  <i class="bi bi-person-gear fs-3"></i>
+                </div>
+                <h5 class="card-title fw-bold">Control de Usuarios</h5>
+                <p class="card-text text-muted flex-grow-1">
+                  Visualiza el listado de usuarios registrados en el sistema. Habilita o deshabilita cuentas de clientes y administra los permisos y accesos de administración.
+                </p>
+                <a href="admin-listado-usuario.html" class="btn btn-success mt-3 d-flex align-items-center justify-content-center text-white">
+                  <span>Ir a Usuarios</span>
+                  <i class="bi bi-arrow-right-short ms-2 fs-5"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm dashboard-card">
+              <div class="card-body d-flex flex-column p-4">
+                <div class="icon-box bg-warning-subtle text-warning mb-3">
+                  <i class="bi bi-receipt fs-3"></i>
+                </div>
+                <h5 class="card-title fw-bold">Control de Pedidos</h5>
+                <p class="card-text text-muted flex-grow-1">
+                  Administra las órdenes de compra enviadas por los usuarios. Revisa los detalles de facturación, estado de envío y actualiza los pedidos aprobados.
+                </p>
+                <a href="admin-listado-compras.html" class="btn btn-warning mt-3 d-flex align-items-center justify-content-center text-dark">
+                  <span>Ver Pedidos</span>
+                  <i class="bi bi-arrow-right-short ms-2 fs-5"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-auto">
+      <div class="container text-center">
+        <p class="mb-0">&copy; 2026 DCICCELL - Panel de Administración. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="js/js-admin-index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>

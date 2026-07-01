@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda DCICCELL</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body class="bg-dark text-light d-flex flex-column min-vh-100 fondo">
+    <header
+      class="mb-4 shadow border-bottom border-secondary border-opacity-25 sticky-top bg-dark bg-opacity-75"
+      style="backdrop-filter: blur(10px)"
+    >
+      <nav class="navbar navbar-expand-lg navbar-dark py-2">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img
+              src="img/dciccell.png"
+              alt="imagen logo"
+              class="img-fluid"
+              style="max-height: 80px"
+            />
+          </a>
+          <button
+            class="navbar-toggler border-secondary"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto gap-2">
+              <li class="nav-item">
+                <a class="nav-link fw-semibold" href="listado-productos.html"
+                  >Tienda</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link fw-semibold text-light-50"
+                  id="botonPerfil"
+                  href="perfil-usuario.html"
+                  >Perfil</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container my-5 flex-grow-1">
+      <section class="mb-5">
+        <div
+          class="p-5 text-center rounded-4 shadow-sm bg-white border border-light position-relative overflow-hidden"
+        >
+          <div class="position-relative z-1 py-4">
+            <h1 class="display-4 fw-bold text-dark mb-3">
+              Encuentra tu smartphone ideal
+            </h1>
+            <p class="col-lg-8 mx-auto fs-5 text-muted mb-4">
+              Explora nuestra amplia gama de teléfonos móviles de última
+              generación y accesorios originales con la mejor relación
+              calidad-precio y garantía oficial.
+            </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <a
+                href="listado-productos.html"
+                class="btn btn-info btn-lg px-4 gap-3 shadow-sm d-flex align-items-center justify-content-center text-dark fw-semibold"
+              >
+                <span>Explorar Catálogo</span>
+                <i class="bi bi-arrow-right-short ms-1 fs-4"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row g-4 text-center">
+        <div class="col-md-4">
+          <div class="card h-100 border-0 bg-white shadow-sm p-4 rounded-4">
+            <div
+              class="d-inline-flex align-items-center justify-content-center bg-info-subtle text-info rounded-circle mb-3 mx-auto"
+              style="width: 60px; height: 60px"
+            >
+              <i class="bi bi-truck fs-3"></i>
+            </div>
+            <h5 class="fw-bold text-dark">Envíos a Domicilio</h5>
+            <p class="text-muted mb-0">
+              Hacemos entregas rápidas y seguras directo a tu casa.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 bg-white shadow-sm p-4 rounded-4">
+            <div
+              class="d-inline-flex align-items-center justify-content-center bg-success-subtle text-success rounded-circle mb-3 mx-auto"
+              style="width: 60px; height: 60px"
+            >
+              <i class="bi bi-shield-check fs-3"></i>
+            </div>
+            <h5 class="fw-bold text-dark">Garantía Asegurada</h5>
+            <p class="text-muted mb-0">
+              Todos los dispositivos cuentan con garantía oficial de fábrica.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 bg-white shadow-sm p-4 rounded-4">
+            <div
+              class="d-inline-flex align-items-center justify-content-center bg-warning-subtle text-warning rounded-circle mb-3 mx-auto"
+              style="width: 60px; height: 60px"
+            >
+              <i class="bi bi-credit-card fs-3"></i>
+            </div>
+            <h5 class="fw-bold text-dark">Medios de Pago</h5>
+            <p class="text-muted mb-0">
+              Aceptamos transferencias, depósitos y tarjetas con promociones.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="footer" class="bg-dark text-white py-4 mt-auto">
+      <div class="container">
+        <div class="row text-center text-md-start">
+          <div class="col-md-4 mb-3">
+            <h5>DCICCELL</h5>
+            <p>La tienda de celulares mas confiable.</p>
+          </div>
+          <div class="col-md-4 mb-3">
+            <h5>Links</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="index.html" class="text-white text-decoration-none"
+                  >Inicio</a
+                >
+              </li>
+              <li>
+                <a
+                  href="listado-productos.html"
+                  class="text-white text-decoration-none"
+                  >Tienda</a
+                >
+              </li>
+              <li>
+                <a
+                  href="perfil-usuario.html"
+                  class="text-white text-decoration-none"
+                  >Perfil</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Redes Sociales</h5>
+            <div
+              class="d-flex gap-3 justify-content-center justify-content-md-start"
+            >
+              <i class="bi bi-instagram fs-4"></i>
+              <i class="bi bi-facebook fs-4"></i>
+              <i class="bi bi-twitter-x fs-4"></i>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <p class="text-center mb-1">© 2026 DCICCELL</p>
+        <p class="text-center"><a class="btn text-light btn-outline-secondary" id="botonInicializarProyecto">Inicializar proyecto</a>    </p>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/js-index-usuario.js"></script>
+  </body>
+</html>
