@@ -8,7 +8,6 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
     />
-    <!-- Bootstrap Icons -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
@@ -55,8 +54,67 @@
 
     <main class="container my-5 flex-grow-1">
       <div class="container mt-5 shadow p-4 rounded bg-white">
-        <h1 class="h1 text-center">Historial de compras de la pagina</h1>
-          
+        <h1 class="mb-4 h1 text-center">Historial de Compras</h1>
+        <div
+          class="row g-3 mb-4 justify-content-end bg-light p-3 rounded mx-0 shadow-sm"
+        >
+          <div class="col-md-4 col-sm-6">
+            <label
+              for="filtrarUsuarios"
+              class="form-label small fw-bold text-secondary"
+            >
+              <i class="bi bi-person"></i> Filtrar por nombre de usuario</label>
+            <input type="text" name="usuarios" class="form-control" id="filtrarUsuarios" placeholder="Todos los usuarios">
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <label
+              for="ordenarMonto"
+              class="form-label small fw-bold text-secondary"
+            >
+              <i class="bi bi-currency-dollar"></i> Ordenar por Monto
+            </label>
+            <select
+              class="form-select form-select-sm border-secondary-subtle"
+              id="ordenarMonto"
+            >
+              <option value="sin-ordenar" selected>
+                Sin ordenar por monto
+              </option>
+              <option value="monto-asc">Menor a Mayor monto</option>
+              <option value="monto-desc">Mayor a Menor monto</option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <label
+              for="ordenarPedidos"
+              class="form-label small fw-bold text-secondary"
+            >
+              <i class="bi bi-sort-numeric-down"></i> Orden de Pedidos
+            </label>
+            <select
+              class="form-select form-select-sm border-secondary-subtle"
+              id="ordenarPedidos"
+            >
+              <option value="recientes" selected>Más recientes primero</option>
+              <option value="antiguos">Más antiguos primero</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="table-responsive">
+            <table class="table table-striped table-hover border align-middle">
+              <thead class="table-dark">
+                <th>Fecha</th>
+                <th>ID de Compra</th>
+                <th>Cantidad de elementos</th>
+                <th>Total</th>
+                <th>Usuario</th>
+                <th>Detalle</th>
+              </thead>
+              <tbody id="tablaBody"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -68,5 +126,6 @@
 
     <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/js-historialCompras.js"></script>
   </body>
 </html>
