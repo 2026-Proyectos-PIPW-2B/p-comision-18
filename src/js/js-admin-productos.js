@@ -11,15 +11,19 @@ const btnAgregarProducto = document.getElementById("btnAgregarProducto");
 const stock = document.getElementById("stock");
 const tablaProductos = document.getElementById("tablaProductos");
 
-btnImagenes.addEventListener("click", mostrarCatalogoImagenes);
-btnAgregarProducto.addEventListener("click", agregarProducto);
-let listaProductos = obtenerListadoProductos();
-mostrarEnTabla();
-let imagenSeleccionada = "";
+let listaProductos;
 
 const cantidadTelefonos = 4;
 const cantidadCargadores = 1;
 const cantidadAuriculares = 3;
+
+window.addEventListener("load", function(){
+  let imagenSeleccionada = "";
+  btnImagenes.addEventListener("click", mostrarCatalogoImagenes);
+  btnAgregarProducto.addEventListener("click", agregarProducto);
+  listaProductos = obtenerListadoProductos();
+  mostrarEnTabla();
+});
 
 function agregarProducto() {
   let evaluacionProducto = productoValido();
@@ -127,6 +131,7 @@ function crearProducto() {
     precio: precioValue,
     descripcion: descripcionValue,
     categoriaObligatoria: categoriaObligatoriaValue,
+    categoriasExtra: [],
     stock: stockValue,
     id: id,
     imagen: imagenSeleccionada,

@@ -200,12 +200,25 @@ export function crearModal(producto){
     modalPrecio.innerText = "$"+producto.precio.toLocaleString("es-AR")
     let modalDescripcion = document.getElementById("modalDescripcion")
     modalDescripcion.innerText = producto.descripcion;
+    mostrarCategorias(producto);
     let botonCarritoModal = document.getElementById("botonCarritoModal");
      botonCarritoModal.onclick = function(){
             cerrarModalProducto();
             agregarAlCarrito(producto);
         };
 }   
+function mostrarCategorias(producto){
+    let modalCategorias = document.getElementById("modalCategorias");
+    let li;
+    modalCategorias = "";
+    if (producto.categoriasExtra !== null){
+        for (categoria of producto.categoriasExtra){
+            li = document.createElement("li");
+            li.innerText = categoria;
+            modalCategorias.appendChild(li);
+        }
+    }
+}
 function cerrarModalProducto(){
     const modal = bootstrap.Modal.getInstance(document.getElementById("modal-mostrar"));
     if (modal) {
