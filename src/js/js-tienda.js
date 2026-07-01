@@ -210,12 +210,13 @@ export function crearModal(producto){
 function mostrarCategorias(producto){
     let modalCategorias = document.getElementById("modalCategorias");
     let li;
-    modalCategorias = "";
+    modalCategorias.innerText = "";
     if (producto.categoriasExtra !== null){
-        for (categoria of producto.categoriasExtra){
+        for (let categoria of producto.categoriasExtra){
             li = document.createElement("li");
             li.innerText = categoria;
             modalCategorias.appendChild(li);
+            modalCategorias.appendChild(li)
         }
     }
 }

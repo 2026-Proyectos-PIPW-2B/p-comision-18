@@ -190,17 +190,14 @@ function registrarCompra(){
 }
 function disminuirStock(){
     let productos = obtenerListadoProductos();
-    let productoEnCarrito
+    let productoEnCarrito;
     for (let producto of productos){
         productoEnCarrito = getItemCarrito(producto);
         if (productoEnCarrito != null){
-            console.log(producto.stock)
             producto.stock -= productoEnCarrito.cantidad;
-            console.log(producto.stock)
         }
     }
     setListadoProductos(productos);
-    
 }
 function agregarAlHistorialGeneral(pedido){
   let historialDePedidos = obtenerHistorialDePedidos();

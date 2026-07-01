@@ -55,3 +55,13 @@ export function obtenerHistorialDePedidos() {
 export function setHistorialDePedidos(historialDePedidos) {
   localStorage.setItem("historialPedidos", JSON.stringify(historialDePedidos));
 }
+
+export function obtenerCategoriasExtras(){
+  let categoriasExtra = JSON.parse(localStorage.getItem("categorias"));
+  if (categoriasExtra == null){
+    return null;
+  }else return categoriasExtra;
+}
+export function setCategoriasExtras(categoriasExtra){
+  localStorage.setItem("categorias", JSON.stringify(categoriasExtra));
+}
