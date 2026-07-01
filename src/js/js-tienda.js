@@ -1,7 +1,8 @@
 import { setearBotonPerfil } from "./modulo-botones.js"
 import { obtenerListadoProductos, obtenerUsuarioActivo, obtenerCarritoCompras, 
   setUsuarioActivo, obtenerArregloUsuarios, setArregloUsuarios, 
-  obtenerHistorialDePedidos, setHistorialDePedidos } from "./moduloLocalStorage.js";
+  obtenerHistorialDePedidos, setHistorialDePedidos, 
+  obtenerConfiguraciones} from "./moduloLocalStorage.js";
 import { agregarAlCarrito, confirmarCompra, setearCarrito } from "./moduloCarrito.js";
 
 let listadoProductos;
@@ -100,8 +101,7 @@ function filtrarPorPrecio(){
           console.warn("Precio mínimo inválido.");
         }
       }
-    
-      if (inputMax && inputMax.value.trim() !== "") {
+    if (inputMax && inputMax.value.trim() !== "") {
         const valorMax = inputMax.value.trim();
         if (validator.isFloat(valorMax, { min: 0 })) {
           resultado = resultado.filter((p) => p.precio <= Number(valorMax));
@@ -109,7 +109,6 @@ function filtrarPorPrecio(){
           console.warn("Precio máximo inválido.");
         }
       }
-    
       return resultado;
 }
 function filtrarPorCategoria(){
@@ -198,6 +197,8 @@ export function crearModal(producto){
     modalNombreProducto.innerText = producto.nombre;
     let modalPrecio = document.getElementById("modalPrecio");
     modalPrecio.innerText = "$"+producto.precio.toLocaleString("es-AR")
+    let modalStock = document.getElementById("modalStock");
+    modalStock.innerText = `Stock restante: ${producto.stock}`;
     let modalDescripcion = document.getElementById("modalDescripcion")
     modalDescripcion.innerText = producto.descripcion;
     mostrarCategorias(producto);
@@ -294,14 +295,35 @@ function crearBotonTitulo(producto){
     botonTitulo.setAttribute("data-bs-toggle", "modal");
     botonTitulo.setAttribute("data-bs-target", `#modal-${producto.id}`);
     let titulo = crearTitulo(producto);
+    //let stock = crearIconoStock(producto)
+    //botonTitulo.appendChild(stock);
     botonTitulo.appendChild(titulo);
+    
     return botonTitulo;
 }
 function crearTitulo(producto){
     const titulo = document.createElement("h4");
     titulo.className = "card-title text-white fw-bold m-0 fs-5";
-    titulo.textContent = producto.nombre;
+    
+    titulo.appendChild(document.createTextNode(producto.nombre))
+    titulo.appendChild(crearIconoStock(producto) )
     return titulo;
+}
+function crearIconoStock(producto){
+    let icono = document.createElement("i");
+    let configuracion = obtenerConfiguraciones()
+    if (producto.stock <= configuracion.stockBajo){
+    icono.className = "bi bi-bag-x text-danger ms-2";
+    return icono;
+    }
+    if(producto.stock <= configuracion.stockMedio){
+        icono.className = "bi bi-bag-dash text-warning ms-2";
+        return icono;
+    }
+    if (producto.stock >= configuracion.stockAlto){
+        icono.className = "bi bi-bag-check text-success ms-2"
+        return icono
+    }
 }
 function crearPrecio(producto){
     const precio = document.createElement("p");

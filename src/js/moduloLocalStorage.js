@@ -65,3 +65,14 @@ export function obtenerCategoriasExtras(){
 export function setCategoriasExtras(categoriasExtra){
   localStorage.setItem("categorias", JSON.stringify(categoriasExtra));
 }
+
+export function obtenerConfiguraciones(){
+  let configuraciones = JSON.parse(localStorage.getItem("configuraciones"));
+  if (configuraciones == null){
+    return null;
+  }else return configuraciones
+}
+
+export function setConfiguraciones(configuraciones){
+  localStorage.setItem("configuraciones", JSON.stringify(configuraciones));
+}

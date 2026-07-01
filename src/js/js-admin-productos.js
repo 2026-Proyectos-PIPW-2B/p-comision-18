@@ -1,5 +1,5 @@
 import { obtenerCategoriasExtras, obtenerListadoProductos, setListadoProductos } from "./moduloLocalStorage.js";
-import { limpiarEstados } from "./moduloValidacion.js";
+import { controlIngreso, limpiarEstados } from "./moduloValidacion.js";
 
 const inputNombre = document.getElementById("nombre");
 const inputPrecio = document.getElementById("precio");
@@ -20,6 +20,7 @@ const cantidadAuriculares = 3;
 let imagenSeleccionada = "";
 
 window.addEventListener("load", function(){
+  controlIngreso();
   btnImagenes.addEventListener("click", mostrarCatalogoImagenes);
   btnAgregarProducto.addEventListener("click", agregarProducto);
   mostrarCategoriasExtras();
@@ -388,9 +389,13 @@ function guardarEdicion(id) {
   if (edicionValida) {
     producto.precio = nuevoPrecio;
     producto.stock = nuevoStock;
+    inputStock.classList.add("is-valid");
+    inputPrecio.classList.add("is-valid");
 
     setListadoProductos(listaProductos);
-    mostrarEnTabla();
+    const timeoutId = setTimeout(() => {
+      mostrarEnTabla(); 
+    }, 2000); 
   }
 }
 

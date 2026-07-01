@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Administración - DCICCELL</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="../css/estilos.css">
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="admin-index.html">
+            <i class="bi bi-shield-lock-fill me-2 text-info"></i>
+            <span>Admin Panel</span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto fs-5">
+              <li class="nav-item">
+                <a class="nav-link" href="admin-listado-productos.html">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin-listado-usuario.html">Usuarios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin-listado-compras.html">Pedidos</a>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" id="botonCerrarSesion">Cerrar Sesion</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container my-5 flex-grow-1">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+      <div class="card shadow-sm border-secondary border-opacity-25">
+        <div class="card-body">
+          <h1 class="card-title mb-4">Configuración de la tienda</h1>
+
+          <form id="formConfiguracion">
+            <div class="mb-4">
+              <h5>Umbrales de stock</h5>
+              <div class="row g-3">
+                <div class="col-12 col-md-4">
+                  <label for="inputStockBajo" class="form-label">Stock bajo <i class="bi bi-bag-x text-danger fs-5"></i></label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="inputStockBajo"
+                    min="0"
+                  />
+                </div>
+
+                <div class="col-12 col-md-4">
+                  <label for="inputStockMedio" class="form-label">Stock medio <i class="bi bi-bag-dash text-warning fs-5"></i></label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="inputStockMedio"
+                    min="0"
+                  />
+                </div>
+
+                <div class="col-12 col-md-4">
+                  <label for="inputStockAlto" class="form-label">Stock alto <i class="bi bi-bag-check text-success fs-5"></i></label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="inputStockAlto"
+                    min="0"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <h5>Productos mostrados por página</h5>
+              <label for="inputProductosPorPagina" class="form-label">Cantidad</label>
+              <input
+                type="number" class="form-control" id="inputProductosPorPagina" min="5" max="30" value="12"
+              />
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-primary w-100" id="botonGuardarConfig">
+                Guardar configuración
+              </button>
+            </div>
+            <div id="divConfirmacion" class="text-succes"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+    <footer class="bg-dark text-white py-4 mt-auto">
+      <div class="container text-center">
+        <p class="mb-0">&copy; 2026 DCICCELL - Panel de Administración. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="../js/js-admin-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>
