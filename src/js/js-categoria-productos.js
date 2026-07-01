@@ -4,9 +4,14 @@ import { obtenerCategoriasExtras, setCategoriasExtras } from "./moduloLocalStora
 const categoriOpcionalSelect = document.getElementById("categoriaOpcional");
 const btnAgregarCategoria = document.getElementById("btnAgregarCategoria");
 const categoriaInput = document.getElementById("nuevaCategoria");
-let listaCategorias = obtenerCategoriasExtras();
-btnAgregarCategoria.addEventListener("click", agregarCategoria);
-mostrarCategoriaDisponibles();
+let listaCategorias; 
+
+
+window.addEventListener("load", function(){
+  listaCategorias = obtenerCategoriasExtras();
+  btnAgregarCategoria.addEventListener("click", agregarCategoria);
+  mostrarCategoriaDisponibles();
+})
 
 function agregarCategoria() {
   const nuevaCategoria = categoriaInput.value.trim();

@@ -42,7 +42,7 @@ export function setListadoProductos(listado){
 export function obtenerCarritoCompras(){
     let usuario = obtenerUsuarioActivo();
     if (usuario == null){
-        return null;
+        return [];
     }
     if (usuario.carrito != null){
         return usuario.carrito
