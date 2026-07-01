@@ -2,7 +2,8 @@ import { setearBotonPerfil } from "./modulo-botones.js"
 import { obtenerListadoProductos, obtenerUsuarioActivo, obtenerCarritoCompras, 
   setUsuarioActivo, obtenerArregloUsuarios, setArregloUsuarios, 
   obtenerHistorialDePedidos, setHistorialDePedidos, 
-  obtenerConfiguraciones} from "./moduloLocalStorage.js";
+  obtenerConfiguraciones,
+  obtenerCategoriasExtras} from "./moduloLocalStorage.js";
 import { agregarAlCarrito, confirmarCompra, setearCarrito } from "./moduloCarrito.js";
 
 let listadoProductos;
@@ -13,6 +14,7 @@ window.addEventListener("load", function(){
     listadoProductos = obtenerListadoProductos();
     setearCarrito();
     mostrarCatalogo();
+    setFiltrosOpcionales();
     inicializarFiltros();
 });
 
@@ -86,6 +88,7 @@ function aplicarFiltrosYOrden(){
     listadoProductos = filtrarPorPrecio();
     listadoProductos = filtrarPorCategoria();
     listadoProductos = ordenar();
+    listadoProductos = filtrarPorCategoriaOpcional();
     mostrarCatalogo();
     cerrarOffCanvasFiltros();
 }
@@ -104,12 +107,28 @@ function filtrarPorPrecio(){
     if (inputMax && inputMax.value.trim() !== "") {
         const valorMax = inputMax.value.trim();
         if (validator.isFloat(valorMax, { min: 0 })) {
-          resultado = resultado.filter((p) => p.precio <= Number(valorMax));
+            resultado = resultado.filter((p) => p.precio <= Number(valorMax));
         } else {
           console.warn("Precio máximo inválido.");
         }
       }
       return resultado;
+}
+function filtrarPorCategoriaOpcional(){
+    let arregloFiltro = Array.from(document.querySelectorAll(".filtroCategoria"));
+    arregloFiltro = arregloFiltro.filter((input) => input.checked)
+    let listaFiltrada = listadoProductos.filter((producto) => categoriaValida(producto, arregloFiltro));
+    return listaFiltrada;
+}
+function categoriaValida(producto, arregloFiltro){
+    let resultado = true;
+    for(let categoriaOpt of arregloFiltro){
+        if (!producto.categoriasExtra.includes(categoriaOpt.name)){
+            resultado = false;
+            return resultado;
+        }
+    }
+    return resultado;
 }
 function filtrarPorCategoria(){
     const radioCelulares = document.getElementById("inputCelulares");
@@ -178,6 +197,11 @@ function limpiarInputsFiltros(){
     radiosCategorias.forEach((radio) => {
     radio.checked = false;
     });
+    let arregloCategoriasOpcionales = Array.from(document.querySelectorAll(".filtroCategoria"));
+    for (let checkbox of arregloCategoriasOpcionales){
+        checkbox.checked = false;
+    }
+
 }
 function cerrarOffCanvasFiltros(){
     const offcanvasElement = document.getElementById("formularioFiltros");
@@ -302,8 +326,6 @@ function crearBotonTitulo(producto){
     botonTitulo.setAttribute("data-bs-toggle", "modal");
     botonTitulo.setAttribute("data-bs-target", `#modal-${producto.id}`);
     let titulo = crearTitulo(producto);
-    //let stock = crearIconoStock(producto)
-    //botonTitulo.appendChild(stock);
     botonTitulo.appendChild(titulo);
     
     return botonTitulo;
@@ -317,11 +339,8 @@ function crearTitulo(producto){
     return titulo;
 }
 function crearIconoStock(producto){
-    console.log(producto);
     let icono = document.createElement("i");
     let configuracion = obtenerConfiguraciones()
-    console.log(configuracion)
-    console.log(producto.stock)
     if (producto.stock <= configuracion.stockBajo){
         icono.className = "bi bi-bag-x text-danger ms-2";
         return icono;
@@ -361,4 +380,28 @@ function setListeners(boton, producto){
     boton.addEventListener("click", function(){
         agregarAlCarrito(producto);
     })
+}
+
+function setFiltrosOpcionales(){
+    let inputOpcionales = document.getElementById("inputOpcionales");
+    let categoriasExtra = obtenerCategoriasExtras();
+    for (let categoria of categoriasExtra){
+        inputOpcionales.appendChild(crearInputCategoriaOpcional(categoria));
+    }
+}
+
+function crearInputCategoriaOpcional(categoria){
+    let li =  document.createElement("li");
+    let checkBox = document.createElement("input");
+    let label = document.createElement("label");
+    checkBox.type = "checkBox";
+    checkBox.className = "form-check-input bg-dark filtroCategoria";
+    checkBox.name = categoria.nombre;
+    checkBox.id = categoria.id;
+    label.for = categoria.id;
+    label.className = "form-check-label ms-2"
+    label.innerText = categoria.nombre;
+    li.appendChild(checkBox)
+    li.appendChild(label)
+    return li;
 }

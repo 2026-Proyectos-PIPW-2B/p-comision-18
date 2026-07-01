@@ -11,6 +11,7 @@ const btnImagenes = document.getElementById("btnImagenes");
 const btnAgregarProducto = document.getElementById("btnAgregarProducto");
 const inputStock = document.getElementById("stock");
 const tablaProductos = document.getElementById("tablaProductos");
+const divProductoAgregado = document.getElementById("productoAgregado")
 
 let listaProductos;
 
@@ -32,12 +33,13 @@ window.addEventListener("load", function(){
 function agregarProducto() {
  limpiarEstados();
  if (productoValido()){
-
   let producto = crearProducto();
   setListadoProductos(listaProductos);
   mostrarEnTabla();
+  divProductoAgregado.innerText = "Producto correctamente agregado."
   const timeoutId = setTimeout(() => {
     limpiarInputs();
+    divProductoAgregado.innerText = "";
   }, 3000); 
     
  }

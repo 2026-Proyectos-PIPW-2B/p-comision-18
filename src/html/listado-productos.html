@@ -161,110 +161,122 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="offcanvas-body d-flex flex-column justify-content-between">
-          <form
-            class="bg-secondary bg-opacity-10 rounded p-3 flex-grow-1 border border-secondary border-opacity-25"
-          >
-            <div
-              class="mb-4 pb-3 border-bottom border-secondary border-opacity-25"
+        <div class="offcanvas-body d-flex flex-column p-0">
+          <div class="flex-grow-1 overflow-y-auto min-height-0 px-3 py-3">
+            <form
+              class="bg-secondary bg-opacity-10 rounded p-3 border border-secondary border-opacity-25 mb-3"
             >
-              <label
-                for="inputOrdenar"
-                class="form-label fw-semibold text-white"
-                >Ordenar por:</label
-              >
-              <select
-                name="ordenar"
-                id="inputOrdenar"
-                class="form-select bg-dark text-light border-secondary"
-              >
-                <option value="vacio" selected disabled>
-                  Seleccione una opción...
-                </option>
-                <option value="mayorPrecio">Mayor Precio</option>
-                <option value="menorPrecio">Menor Precio</option>
-              </select>
-            </div>
-            <div
-              class="mb-4 pb-3 border-bottom border-secondary border-opacity-25"
-            >
-              <label class="form-label fw-semibold text-white">Precio:</label>
-              <div class="d-flex align-items-center gap-2">
-                <input
-                  type="number"
-                  name="precioMinino"
-                  id="inputPrecioMinimo"
-                  placeholder="Min $"
-                  class="form-control text-center bg-dark text-light border-secondary"
-                />
-                <span class="text-muted">a</span>
-                <input
-                  type="number"
-                  name="precioMaximo"
-                  id="inputPrecioMaximo"
-                  placeholder="Max $"
-                  class="form-control text-center bg-dark text-light border-secondary"
-                />
-              </div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-semibold text-white"
-                >Categorías:</label
-              >
-              <div class="form-check mb-2">
-                <input
-                  type="radio"
-                  class="form-check-input bg-dark border-secondary"
-                  name="radioFiltro"
-                  id="inputCelulares"
-                />
-                <label
-                  for="inputCelulares"
-                  class="form-check-label text-light-50"
-                  >Celulares</label
+              <div>
+                <div
+                  class="mb-4 pb-3 border-bottom border-secondary border-opacity-25"
                 >
-              </div>
-              <div class="form-check mb-2">
-                <input
-                  type="radio"
-                  class="form-check-input bg-dark border-secondary"
-                  name="radioFiltro"
-                  id="inputAuriculares"
-                />
-                <label
-                  for="inputAuriculares"
-                  class="form-check-label text-light-50"
-                  >Auriculares</label
+                  <label
+                    for="inputOrdenar"
+                    class="form-label fw-semibold text-white"
+                    >Ordenar por:</label
+                  >
+                  <select
+                    name="ordenar"
+                    id="inputOrdenar"
+                    class="form-select bg-dark text-light border-secondary"
+                  >
+                    <option value="vacio" selected disabled>
+                      Seleccione una opción...
+                    </option>
+                    <option value="mayorPrecio">Mayor Precio</option>
+                    <option value="menorPrecio">Menor Precio</option>
+                  </select>
+                </div>
+                <div
+                  class="mb-4 pb-3 border-bottom border-secondary border-opacity-25"
                 >
-              </div>
-              <div class="form-check mb-2">
-                <input
-                  type="radio"
-                  class="form-check-input bg-dark border-secondary"
-                  name="radioFiltro"
-                  id="inputCargadores"
-                />
-                <label
-                  for="inputCargadores"
-                  class="form-check-label text-light-50"
-                  >Cargadores</label
+                  <label class="form-label fw-semibold text-white">Precio:</label>
+                  <div class="d-flex align-items-center gap-2">
+                    <input
+                      type="number"
+                      name="precioMinino"
+                      id="inputPrecioMinimo"
+                      placeholder="Min $ :"
+                      class="form-control text-center bg-dark text-light border-secondary"
+                    />
+                    <span class="text-muted">a</span>
+                    <input
+                      type="number"
+                      name="precioMaximo"
+                      id="inputPrecioMaximo"
+                      placeholder="Max $"
+                      class="form-control text-center bg-dark text-light border-secondary"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="mb-4 pb-3 border-bottom border-secondary border-opacity-25"
                 >
+                  <label class="form-label fw-semibold text-white"
+                    >Categorías:</label
+                  >
+                  <div class="form-check mb-2">
+                    <input
+                      type="radio"
+                      class="form-check-input bg-dark border-secondary"
+                      name="radioFiltro"
+                      id="inputCelulares"
+                    />
+                    <label
+                      for="inputCelulares"
+                      class="form-check-label text-light-50"
+                      >Celulares</label
+                    >
+                  </div>
+                  <div class="form-check mb-2">
+                    <input
+                      type="radio"
+                      class="form-check-input bg-dark border-secondary"
+                      name="radioFiltro"
+                      id="inputAuriculares"
+                    />
+                    <label
+                      for="inputAuriculares"
+                      class="form-check-label text-light-50"
+                      >Auriculares</label
+                    >
+                  </div>
+                  <div class="form-check mb-2">
+                    <input
+                      type="radio"
+                      class="form-check-input bg-dark border-secondary"
+                      name="radioFiltro"
+                      id="inputCargadores"
+                    />
+                    <label
+                      for="inputCargadores"
+                      class="form-check-label text-light-50"
+                      >Cargadores</label
+                    >
+                  </div>
+                  <div class="form-check mb-2">
+                    <input
+                      type="radio"
+                      class="form-check-input bg-dark border-secondary"
+                      name="radioFiltro"
+                      id="inputFundas"
+                    />
+                    <label for="inputFundas" class="form-check-label text-light-50"
+                      >Fundas</label
+                    >
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="inputOpcionales">Categorias opcionles:</label>
+                  <ul id="inputOpcionales">
+                    
+                  </ul>
+                </div>
               </div>
-              <div class="form-check mb-2">
-                <input
-                  type="radio"
-                  class="form-check-input bg-dark border-secondary"
-                  name="radioFiltro"
-                  id="inputFundas"
-                />
-                <label for="inputFundas" class="form-check-label text-light-50"
-                  >Fundas</label
-                >
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
           <div
-            class="d-flex gap-2 pt-3 border-top border-secondary border-opacity-50 bg-dark"
+            class="d-flex gap-2 p-3 border-top border-secondary border-opacity-50 bg-dark"
           >
             <button
               type="button"
@@ -553,6 +565,7 @@
       </div>
     </footer>
 
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/js-tienda.js"></script>
     

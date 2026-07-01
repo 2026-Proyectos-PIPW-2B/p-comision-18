@@ -1,8 +1,6 @@
 export function obtenerArregloUsuarios() {
   let admin = [{"username":"admin@dcicell","password":"admin123","admin":true}];
   let usuarios = JSON.parse(localStorage.getItem("arregloUsuarios"));
-  console.log("ACa se usa obbtenerArregloUsuarios:")
-  console.log(usuarios)
   if (usuarios != null) {
     return usuarios;
   } else{ 
@@ -68,6 +66,7 @@ export function obtenerCategoriasExtras(){
     return [];
   }else return categoriasExtra;
 }
+
 export function setCategoriasExtras(categoriasExtra){
   localStorage.setItem("categorias", JSON.stringify(categoriasExtra));
 }
