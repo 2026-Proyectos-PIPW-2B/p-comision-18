@@ -1,7 +1,10 @@
+import { mostrarCategoriasExtras } from "./js-admin-productos.js";
+import { obtenerCategoriasExtras, setCategoriasExtras } from "./moduloLocalStorage.js";
+
 const categoriOpcionalSelect = document.getElementById("categoriaOpcional");
 const btnAgregarCategoria = document.getElementById("btnAgregarCategoria");
 const categoriaInput = document.getElementById("nuevaCategoria");
-let listaCategorias = JSON.parse(localStorage.getItem("categorias")) || [];
+let listaCategorias = obtenerCategoriasExtras();
 btnAgregarCategoria.addEventListener("click", agregarCategoria);
 mostrarCategoriaDisponibles();
 
@@ -11,9 +14,10 @@ function agregarCategoria() {
   let categoriaValida = validarCategoria(nuevaCategoria);
   if (categoriaValida) {
     agregarCategoriaALista(nuevaCategoria);
-    actualizarLocalStorageCategorias();
+    setCategoriasExtras(listaCategorias);
     categoriaInput.value = "";
     mostrarCategoriaDisponibles();
+    mostrarCategoriasExtras();
   }
 }
 function validarCategoria(categoria) {
@@ -41,11 +45,13 @@ function validarCategoria(categoria) {
       mensajeError.textContent = "Categoría agregada correctamente.";
     }
   }
+  const timeout = setTimeout(() => {
+  mensajeError.textContent = "";
+}, 3000)
   return resultado;
 }
 function agregarCategoriaALista(categoria) {
   const objetoCategoria = { id: Date.now().toString(), nombre: categoria };
-
   listaCategorias.push(objetoCategoria);
 }
 function actualizarLocalStorageCategorias() {
@@ -76,4 +82,5 @@ function eliminarCategoria(id) {
   listaCategorias = listaCategorias.filter((cat) => cat.id !== id);
   actualizarLocalStorageCategorias();
   mostrarCategoriaDisponibles();
+  mostrarCategoriasExtras();
 }

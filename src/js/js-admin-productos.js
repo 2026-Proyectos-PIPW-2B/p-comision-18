@@ -1,81 +1,91 @@
-import { obtenerListadoProductos } from "./moduloLocalStorage.js";
+import { obtenerCategoriasExtras, obtenerListadoProductos, setListadoProductos } from "./moduloLocalStorage.js";
+import { controlIngreso, limpiarEstados } from "./moduloValidacion.js";
 
-const nombre = document.getElementById("nombre");
-const precio = document.getElementById("precio");
-const descripcion = document.getElementById("descripcion");
-const categoriaObligatoria = document.getElementById("categoriaObligatoria");
-const categoriaOpcional = document.getElementById("categoriaOpcional");
-const imagen = document.getElementById("imagen");
+const inputNombre = document.getElementById("nombre");
+const inputPrecio = document.getElementById("precio");
+const inputDescripcion = document.getElementById("descripcion");
+const inputCategoriaObligatoria = document.getElementById("categoriaObligatoria");
+const inputCategoriaOpcional = document.getElementById("categoriaOpcional");
+const inputImagen = document.getElementById("imagen");
 const btnImagenes = document.getElementById("btnImagenes");
 const btnAgregarProducto = document.getElementById("btnAgregarProducto");
-const stock = document.getElementById("stock");
+const inputStock = document.getElementById("stock");
 const tablaProductos = document.getElementById("tablaProductos");
 
-btnImagenes.addEventListener("click", mostrarCatalogoImagenes);
-btnAgregarProducto.addEventListener("click", agregarProducto);
-let listaProductos = obtenerListadoProductos();
-mostrarEnTabla();
-let imagenSeleccionada = "";
+let listaProductos;
 
 const cantidadTelefonos = 4;
-const cantidadCargadores = 1;
+const cantidadCargadores = 2;
 const cantidadAuriculares = 3;
+let imagenSeleccionada = "";
+
+window.addEventListener("load", function(){
+  controlIngreso();
+  btnImagenes.addEventListener("click", mostrarCatalogoImagenes);
+  btnAgregarProducto.addEventListener("click", agregarProducto);
+  mostrarCategoriasExtras();
+  listaProductos = obtenerListadoProductos();
+  mostrarEnTabla();
+});
 
 function agregarProducto() {
-  let evaluacionProducto = productoValido();
-  if (evaluacionProducto.valido) {
-    let producto = crearProducto();
-    actualizarLocalStorage();
-    mostrarEnTabla();
+ limpiarEstados();
+ if (productoValido()){
+
+  let producto = crearProducto();
+  setListadoProductos(listaProductos);
+  mostrarEnTabla();
+  const timeoutId = setTimeout(() => {
     limpiarInputs();
-    console.log(producto);
-  } else {
-    mostrarErrores(evaluacionProducto.errores);
-  }
+  }, 3000); 
+    
+ }
 }
 function productoValido() {
-  let resultado = { valido: true, errores: [] };
-  const nombreValue = nombre.value.trim();
-  const precioValue = parseFloat(precio.value.trim());
-  const descripcionValue = descripcion.value.trim();
-  const categoriaObligatoriaValue = categoriaObligatoria.value.trim();
-  const stockValue = parseInt(stock.value.trim());
-  let errores = [];
+  let resultado = true;
 
-  if (nombreValue === "") {
-    resultado.valido = false;
-    errores[0] = "El nombre es obligatorio.";
-  } else if (nombreValue.length < 3 || nombreValue.length > 50) {
-    resultado.valido = false;
-    errores[0] = "El nombre debe tener entre 3 y 50 caracteres.";
-  }
-  if (isNaN(precioValue) || precioValue <= 0) {
-    resultado.valido = false;
-    errores[1] = "El precio debe ser un número positivo.";
-  } else if (precioValue > 10000000) {
-    resultado.valido = false;
-    errores[1] = "El precio no puede exceder $10,000,000.";
-  }
-  if (descripcionValue === "") {
-    resultado.valido = false;
-    errores[2] = "La descripción es obligatoria.";
-  }
-  if (categoriaObligatoriaValue === "") {
-    resultado.valido = false;
-    errores[3] = "La categoría obligatoria es obligatoria.";
-  }
-  if (isNaN(stockValue)) {
-    resultado.valido = false;
-    errores[4] = "Ingrese un numero de stock";
-  } else if (stockValue < 0) {
-    resultado.valido = false;
-    errores[4] = "El stock no puede ser negativo.";
-  }
+  const errorNombre = document.getElementById("errorNombre");
+  const errorPrecio = document.getElementById("errorPrecio");
+  const errorDescripcion = document.getElementById("errorDescripcion");
+  const errorCategoriaObligatoria = document.getElementById("errorCategoriaObligatoria");
+  const errorStock = document.getElementById("errorStock");
+  const errorImagen = document.getElementById("errorImagen")
+
+  if (inputNombre.value == ""){
+    resultado = false;
+    inputNombre.classList.add("is-invalid");
+    errorNombre.innerText = "El nombre no puede ser vacio. Ingrese un nombre"
+  }else if (inputNombre.value.length<3){
+    resultado = false;
+    inputNombre.classList.add("is-invalid");
+    errorNombre.innerText = "El nombre debe tener mas de 3 caracteres."
+  } else inputNombre.classList.add("is-valid");
+  if (!(inputPrecio.value > 0)){
+    resultado = false;
+    inputPrecio.classList.add("is-invalid");
+    errorPrecio.innerText = "El producto debe tener un costo mayor a $0."
+  } else inputPrecio.classList.add("is-valid");
+
+  if (inputDescripcion.value.length == 0){
+    resultado = false;
+    inputDescripcion.classList.add("is-invalid");
+    errorDescripcion.innerText = "La descripcion no puede estar vacia"
+  } else inputDescripcion.classList.add("is-valid");
+  if (inputCategoriaObligatoria.value == ""){
+    resultado = false;
+    inputCategoriaObligatoria.classList.add("is-invalid");
+    errorCategoriaObligatoria.innerText = "Ingrese una categoria."
+  } else inputCategoriaObligatoria.classList.add("is-valid");
   if (imagenSeleccionada === "") {
-    resultado.valido = false;
-    errores[5] = "Debe seleccionar una imagen para el producto.";
-  }
-  resultado.errores = errores;
+    resultado = false;
+    inputImagen.classList.add("is-invalid");
+    errorImagen.innerText = "Debe seleccionar una imagen para el producto.";
+  } else inputImagen.classList.add("is-valid");
+  if (inputStock.value < 1){
+    resultado = false;
+    inputStock.classList.add("is-invalid")
+    errorStock.innerText="Ingrese una cantidad valida de stock"
+  } else inputStock.classList.add("is-valid");
   return resultado;
 }
 
@@ -121,12 +131,14 @@ function crearProducto() {
   const precioValue = parseFloat(precio.value.trim());
   const descripcionValue = descripcion.value.trim();
   const categoriaObligatoriaValue = categoriaObligatoria.value.trim();
+  const categoriasExtra = colectCategoriasExtra();
   const stockValue = parseInt(stock.value.trim());
   const producto = {
     nombre: nombreValue,
     precio: precioValue,
     descripcion: descripcionValue,
     categoriaObligatoria: categoriaObligatoriaValue,
+    categoriasExtra: categoriasExtra,
     stock: stockValue,
     id: id,
     imagen: imagenSeleccionada,
@@ -225,36 +237,16 @@ function filaAmpliadaProducto(producto) {
 }
 
 function limpiarInputs() {
-  const mensajeError = document.getElementById("mensajeError");
-  const errorNombre = document.getElementById("errorNombre");
-  const errorPrecio = document.getElementById("errorPrecio");
-  const errorDescripcion = document.getElementById("errorDescripcion");
-  const errorCategoriaObligatoria = document.getElementById(
-    "errorCategoriaObligatoria",
-  );
-  const errorStock = document.getElementById("errorStock");
-  const errorImagen = document.getElementById("errorImagen");
   nombre.value = "";
   precio.value = "";
   descripcion.value = "";
   categoriaObligatoria.value = "";
   stock.value = "";
-  const inputs = [nombre, precio, descripcion, categoriaObligatoria, stock];
-  inputs.forEach((input) => {
-    input.classList.remove("is-invalid");
-  });
-  const errorElements = [
-    errorNombre,
-    errorPrecio,
-    errorDescripcion,
-    errorCategoriaObligatoria,
-    errorStock,
-    errorImagen,
-  ];
-  errorElements.forEach((errorElement) => {
-    errorElement.textContent = "";
-  });
-
+  let checkboxes = document.querySelectorAll(".form-check-input")
+  for (let input of checkboxes){
+    input.checked = false;
+  }
+  limpiarEstados();
   imagenSeleccionada = "";
   if (imagen) imagen.value = "";
   btnImagenes.classList.remove("is-invalid");
@@ -265,9 +257,6 @@ function limpiarInputs() {
       img.classList.remove("border-primary", "border-3");
     });
   }
-}
-function actualizarLocalStorage() {
-  localStorage.setItem("productos", JSON.stringify(listaProductos));
 }
 
 function mostrarCatalogoImagenes() {
@@ -338,7 +327,7 @@ function botonEliminar(id) {
 
 function eliminarProducto(id) {
   listaProductos = listaProductos.filter((producto) => producto.id !== id);
-  actualizarLocalStorage();
+  setListadoProductos(listaProductos);
   mostrarEnTabla();
 }
 
@@ -400,8 +389,46 @@ function guardarEdicion(id) {
   if (edicionValida) {
     producto.precio = nuevoPrecio;
     producto.stock = nuevoStock;
+    inputStock.classList.add("is-valid");
+    inputPrecio.classList.add("is-valid");
 
-    actualizarLocalStorage();
-    mostrarEnTabla();
+    setListadoProductos(listaProductos);
+    const timeoutId = setTimeout(() => {
+      mostrarEnTabla(); 
+    }, 2000); 
   }
+}
+
+export function mostrarCategoriasExtras(){
+  let categoriasExtras = obtenerCategoriasExtras();
+  let contenedor = document.getElementById("contenedorCategoriasOpcionales");
+  contenedor.innerHTML = "";
+  for (let categoria of categoriasExtras){
+    let div = document.createElement("div");
+    div.className = "form-check";
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.className = "form-check-input";
+    input.value = categoria.nombre;
+    input.name = "categoriasOpcionales";
+
+    const label = document.createElement("label");
+    label.className = "form-check-label";
+    label.textContent = categoria.nombre;
+
+    div.appendChild(input);
+    div.appendChild(label);
+    contenedor.appendChild(div);
+  }
+}
+
+function colectCategoriasExtra(){
+  const seleccionadas = [];
+  const checks = document.querySelectorAll('input[name="categoriasOpcionales"]:checked');
+
+  checks.forEach((check) => {
+    seleccionadas.push(check.value);
+  });
+
+  return seleccionadas;
 }

@@ -2,7 +2,6 @@ import { obtenerHistorialDePedidos, obtenerUsuarioActivo } from "./moduloLocalSt
 
 const tablaCuerpo = document.getElementById("tablaBody");
 
-// Capturamos los inputs de ordenamiento
 const selectMonto = document.getElementById("ordenarMonto");
 const selectPedidos = document.getElementById("ordenarPedidos");
 let inputUsername = null;
@@ -52,25 +51,21 @@ function inicializarPagina() {
 function procesarYMostrarTabla(arreglo) {
   let pedidosProcesados = [...arreglo];
 
-  //suma de productos
   pedidosProcesados.forEach((pedido) => {
     pedido._totalCalculado = pedido.productos.reduce((acum, item) => {
       return acum + item.precio * (item.cantidad || 1);
     }, 0);
   });
 
-  //Filtro por Monto
   if (selectMonto.value === "monto-asc") {
     pedidosProcesados.sort((a, b) => a._totalCalculado - b._totalCalculado);
   } else if (selectMonto.value === "monto-desc") {
     pedidosProcesados.sort((a, b) => b._totalCalculado - a._totalCalculado);
   }
-  //Si no hay orden de monto, aplica el orden cronológico
   else {
     if (selectPedidos.value === "recientes") {
       pedidosProcesados.reverse();
     }
-    // Si es "antiguos", mantenemos el orden natural ascendente de cómo se guardaron
   }
   if (inputUsername !== null){
     let busquedaUsuario = inputUsername.value.toLowerCase();

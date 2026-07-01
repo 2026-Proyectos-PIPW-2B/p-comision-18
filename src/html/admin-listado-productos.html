@@ -15,7 +15,7 @@
     />
   </head>
   <body>
-    <header>
+   <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
           <a class="navbar-brand d-flex align-items-center" href="admin-index.html">
@@ -36,13 +36,16 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto fs-5">
               <li class="nav-item">
-                <a class="nav-link active" href="admin-listado-productos.html">Productos</a>
+                <a class="nav-link" href="admin-listado-productos.html">Productos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="admin-listado-usuario.html">Usuarios</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="admin-listado-compras.html">Pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin-config.html">Configuraciones</a>
               </li>
             </ul>
           </div>
@@ -67,7 +70,7 @@
               name="nombre"
               required
             />
-            <div id="errorNombre" class="form-text text-danger"></div>
+            <div id="errorNombre" class="invalid-feedback"></div>
           </div>
           <div class="mb-3">
             <label for="precio" class="form-label">Precio</label>
@@ -79,7 +82,7 @@
               name="precio"
               required
             />
-            <div id="errorPrecio" class="form-text text-danger"></div>
+            <div id="errorPrecio" class="invalid-feedback"></div>
           </div>
           <div class="mb-3">
             <label for="stock" class="form-label">Stock</label>
@@ -90,7 +93,7 @@
               name="stock"
               required
             />
-            <div id="errorStock" class="form-text text-danger"></div>
+            <div id="errorStock" class="invalid-feedback"></div>
           </div>
           <div class="mb-3">
             <label for="descripcion" class="form-label">Descripción</label>
@@ -100,7 +103,7 @@
               name="descripcion"
               rows="3"
             ></textarea>
-            <div id="errorDescripcion" class="form-text text-danger"></div>
+            <div id="errorDescripcion" class="invalid-feedback"></div>
           </div>
           <div class="mb-3">
             <label for="categoriaObligatoria" class="form-label"
@@ -120,23 +123,14 @@
             </select>
             <div
               id="errorCategoriaObligatoria"
-              class="form-text text-danger"
+              class="invalid-feedback"
             ></div>
           </div>
           <div class="mb-3">
             <label for="categoriaOpcional" class="form-label"
               >Categorías opcionales</label
             >
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="checkDefault"
-              />
-              <label class="form-check-label" for="checkDefault">
-                acaVanLasCategoriasOpcionales</label
-              >
+            <div class="border rounded p-3" id="contenedorCategoriasOpcionales"></div>
             </div>
           </div>
           <div class="mb-3">
@@ -150,7 +144,7 @@
             <input type="hidden" id="imagen" name="imagen" />
             <div id="imagenesDisponibles" class="mt-3 row"></div>
 
-            <div id="errorImagen" class="form-text text-danger"></div>
+            <div id="errorImagen" class="invalid-feedback"></div>
           </div>
 
           <button
@@ -218,6 +212,6 @@
     <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/js-admin-productos.js"></script>
-    <script src="../js/js-categoria-productos.js"></script>
+    <script type="module" src="../js/js-categoria-productos.js"></script>
   </body>
 </html>

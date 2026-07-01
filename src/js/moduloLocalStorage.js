@@ -55,3 +55,24 @@ export function obtenerHistorialDePedidos() {
 export function setHistorialDePedidos(historialDePedidos) {
   localStorage.setItem("historialPedidos", JSON.stringify(historialDePedidos));
 }
+
+export function obtenerCategoriasExtras(){
+  let categoriasExtra = JSON.parse(localStorage.getItem("categorias"));
+  if (categoriasExtra == null){
+    return null;
+  }else return categoriasExtra;
+}
+export function setCategoriasExtras(categoriasExtra){
+  localStorage.setItem("categorias", JSON.stringify(categoriasExtra));
+}
+
+export function obtenerConfiguraciones(){
+  let configuraciones = JSON.parse(localStorage.getItem("configuraciones"));
+  if (configuraciones == null){
+    return null;
+  }else return configuraciones
+}
+
+export function setConfiguraciones(configuraciones){
+  localStorage.setItem("configuraciones", JSON.stringify(configuraciones));
+}
